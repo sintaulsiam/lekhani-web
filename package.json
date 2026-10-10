@@ -1,0 +1,22 @@
+{
+  "name": "lekhani-web",
+  "version": "0.3.0",
+  "description": "Official website for Lekhani (লেখনী) — Ultra-Fast Bengali Input Method Suite",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx -y serve . -p 3000",
+    "dev": "npx -y serve . -p 3000"
+  },
+  "keywords": [
+    "bengali",
+    "keyboard",
+    "ime",
+    "fcitx5",
+    "android",
+    "avro",
+    "lekhani",
+    "rust"
+  ],
+  "author": "Sintatul Siam",
+  "license": "GPL-3.0"
+}

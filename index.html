@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lekhani (লেখনী) — Ultra-Fast Bengali Input Method for Android, Linux & Windows</title>
+  <meta name="description" content="Sovereign, deterministic, and privacy-first Bengali keyboard suite. Sub-millisecond keystroke latency, 100% on-device AI suggestions, zero telemetry, written in pure Rust.">
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/logo.svg">
+  <link rel="apple-touch-icon" href="assets/icons/logo128.png">
+
+  <!-- Google Fonts: Inter, JetBrains Mono, Space Grotesk, Hind Siliguri -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <aside class="release-banner">
+    <div class="banner-inner container">
+      <span class="banner-badge">RELEASE</span>
+      <span class="banner-text"><strong>Lekhani v0.3.0 is out:</strong> Project Bodh, Adaptive Canvas rendering & multi-arch Android APKs now available.</span>
+      <a href="#download" class="banner-link">Get Direct APK &darr;</a>
+    </div>
+  </aside>
+
+  <!-- Navigation -->
+  <header class="site-header">
+    <nav class="nav-container container">
+      <a href="#" class="brand-link" aria-label="Lekhani Home">
+        <img src="assets/icons/logo.svg" alt="Lekhani Logo" class="brand-logo" width="36" height="36">
+        <div class="brand-text">
+          <span class="brand-name">Lekhani</span>
+          <span class="brand-bengali">লেখনী</span>
+        </div>
+      </a>
+
+      <div class="nav-links">
+        <a href="#sandbox" class="nav-link">Live Sandbox</a>
+        <a href="#download" class="nav-link">Download</a>
+        <a href="#layouts" class="nav-link">Layouts</a>
+        <a href="#cheatsheet" class="nav-link">Typing Rules</a>
+        <a href="#benchmarks" class="nav-link">Benchmarks</a>
+        <a href="#crates" class="nav-link">Rust Crates</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="https://github.com/sintaulsiam/lekhani" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm github-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
+          <span>GitHub</span>
+        </a>
+        <a href="#download" class="btn btn-primary btn-sm">Download APK</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <main id="main-content">
+    <section class="hero-section container">
+      <div class="hero-content">
+        <div class="hero-tag">
+          <span class="status-dot"></span>
+          <span>100% On-Device &bull; Pure Rust &bull; Zero Telemetry</span>
+        </div>
+        
+        <h1 class="hero-title">
+          Deterministic.<br>
+          Sub-millisecond.<br>
+          <span class="gradient-text">Bengali Input Engine.</span>
+        </h1>
+        
+        <p class="hero-lead">
+          A high-performance input method suite for Android, Linux, and Windows. Built from scratch with zero runtime garbage collection on the typing hot-path, canonical Unicode NFC fidelity, and zero network calls.
+        </p>
+
+        <!-- Dynamic OS CTA -->
+        <div class="hero-cta-wrapper">
+          <div class="hero-primary-cta">
+            <a href="https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-arm64-v8a-release.apk" id="hero-download-btn" class="btn btn-primary btn-lg">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              <span>Download APK v0.3.0 (ARM64)</span>
+              <span class="cta-meta">31.0 MB</span>
+            </a>
+            <a href="#sandbox" class="btn btn-secondary btn-lg">
+              <span>Try Live Sandbox</span>
+              <span class="kbd-hint">&darr;</span>
+            </a>
+          </div>
+
+          <div class="install-pill-quick">
+            <span class="pill-label">Linux (Fcitx5):</span>
+            <code class="pill-code" id="quick-curl-code">curl -fsSL https://raw.githubusercontent.com/sintaulsiam/lekhani/main/install.sh | bash</code>
+            <button type="button" class="btn-copy-icon" id="quick-curl-copy" aria-label="Copy install command" title="Copy to clipboard">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Metric Badges -->
+        <div class="hero-metrics-grid">
+          <div class="metric-card">
+            <div class="metric-value">&lt; 100 &mu;s</div>
+            <div class="metric-label">Hot-path keystroke processing</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value">0 Bytes</div>
+            <div class="metric-label">Network data off the device</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value">120 FPS</div>
+            <div class="metric-label">Hardware canvas refresh</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value">&lt; 55 MB</div>
+            <div class="metric-label">Active typing RAM footprint</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Live Bengali Typing Sandbox -->
+    <section id="sandbox" class="sandbox-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">INTERACTIVE TESTBENCH</div>
+          <h2 class="section-title">Type in the Browser</h2>
+          <p class="section-subtitle">Real Avro transliteration engine & candidate prediction strip running live. Press keys on your physical keyboard or click the keycaps below.</p>
+        </div>
+
+        <div class="sandbox-console">
+          <!-- Sandbox Controls Bar -->
+          <div class="sandbox-toolbar">
+            <div class="toolbar-group">
+              <span class="toolbar-label">Layout:</span>
+              <div class="layout-toggle-group" role="tablist">
+                <button type="button" class="layout-pill active" data-layout="avro" role="tab" aria-selected="true">Avro Phonetic</button>
+                <button type="button" class="layout-pill" data-layout="probaho" role="tab" aria-selected="false">Lekhani প্রবাহ (Flow)</button>
+                <button type="button" class="layout-pill" data-layout="probhat" role="tab" aria-selected="false">Probhat (प्रभात)</button>
+              </div>
+            </div>
+
+            <div class="toolbar-group">
+              <label class="sound-toggle" title="Toggle tactile mechanical switch click sound">
+                <input type="checkbox" id="sound-checkbox">
+                <span class="sound-toggle-slider"></span>
+                <span class="sound-toggle-text">Mechanical Click</span>
+              </label>
+              <button type="button" class="btn btn-ghost btn-sm" id="clear-sandbox-btn" title="Clear typed text">Clear</button>
+            </div>
+          </div>
+
+          <!-- Typing Area with Floating Candidate Strip -->
+          <div class="sandbox-editor-wrapper">
+            <!-- Candidate Popup Strip -->
+            <div class="candidate-strip" id="candidate-strip" aria-live="polite">
+              <div class="candidate-badge">SUGGESTIONS [Space: 1 | 1-5 to Pick]</div>
+              <div class="candidate-list" id="candidate-list">
+                <!-- Dynamically injected candidates -->
+                <span class="candidate-item active"><span class="candidate-num">1</span> আমি</span>
+                <span class="candidate-item"><span class="candidate-num">2</span> আমির</span>
+                <span class="candidate-item"><span class="candidate-num">3</span> আমিতো</span>
+              </div>
+            </div>
+
+            <div class="editor-input-box">
+              <textarea 
+                id="sandbox-input" 
+                rows="4" 
+                placeholder="Type phonetically here... (e.g. 'ami banglay gaan gai', 'amar sonar bangla', 'lekhani khub druto')" 
+                autocomplete="off" 
+                autocorrect="off" 
+                autocapitalize="off" 
+                spellcheck="false"
+              ></textarea>
+            </div>
+
+            <!-- Quick Phrase Starters -->
+            <div class="quick-samples">
+              <span class="samples-label">Quick test:</span>
+              <button type="button" class="sample-chip" data-phrase="ami banglay gaan gai">ami banglay gaan gai</button>
+              <button type="button" class="sample-chip" data-phrase="amar sonar bangla">amar sonar bangla</button>
+              <button type="button" class="sample-chip" data-phrase="lekhani khub druto">lekhani khub druto</button>
+              <button type="button" class="sample-chip" data-phrase="kemon acho bondhu">kemon acho bondhu</button>
+            </div>
+          </div>
+
+          <!-- Live Performance HUD -->
+          <div class="telemetry-hud">
+            <div class="hud-item">
+              <span class="hud-label">Parser Latency:</span>
+              <span class="hud-val text-accent" id="hud-latency">34 &mu;s</span>
+            </div>
+            <div class="hud-item">
+              <span class="hud-label">Allocations:</span>
+              <span class="hud-val text-success">0 B (Hot-path)</span>
+            </div>
+            <div class="hud-item">
+              <span class="hud-label">Unicode Normalization:</span>
+              <span class="hud-val">NFC Canonical</span>
+            </div>
+            <div class="hud-item">
+              <span class="hud-label">Keystrokes:</span>
+              <span class="hud-val" id="hud-keystrokes">0</span>
+            </div>
+            <div class="hud-item">
+              <span class="hud-label">Typing Speed:</span>
+              <span class="hud-val" id="hud-wpm">0 WPM</span>
+            </div>
+          </div>
+
+          <!-- Tactile On-Screen Keyboard -->
+          <div class="virtual-keyboard-container" id="virtual-keyboard" aria-label="Interactive Virtual Keyboard">
+            <!-- Dynamically generated rows of tactile keycaps -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Direct Download Hub (GitHub Releases) -->
+    <section id="download" class="download-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">OFFICIAL RELEASES</div>
+          <h2 class="section-title">Direct GitHub Downloads</h2>
+          <p class="section-subtitle">No app store walled gardens, no telemetry wrappers. Download verified signed release binaries directly from GitHub.</p>
+        </div>
+
+        <div class="platforms-grid">
+          <!-- Android Card -->
+          <div class="platform-card featured-platform" id="android-card">
+            <div class="platform-header">
+              <div class="platform-icon android-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-1.0001s.4482-.9994.9993-.9994c.5518 0 1.0001.4479 1.0001.9994 0 .5515-.4483 1.0001-1.0001 1.0001m-11.046 0c-.5511 0-.9993-.4486-.9993-1.0001s.4482-.9994.9993-.9994c.5518 0 1.0001.4479 1.0001.9994 0 .5515-.4483 1.0001-1.0001 1.0001m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.4116 13.8533 8.125 12 8.125c-1.8533 0-3.5902.2866-5.1368.8247L4.8409 5.4467a.4161.4161 0 00-.5677-.1521.4157.4157 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.7997h24c-.3432-4.1408-2.6889-7.613-6.1185-9.4783"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="platform-name">Android</h3>
+                <span class="platform-ver">v0.3.0 Latest &bull; Android 10+</span>
+              </div>
+              <span class="chip-recommended">Recommended</span>
+            </div>
+
+            <p class="platform-desc">
+              Hardware-accelerated 120 FPS canvas, 33 Theme Studio presets, offline speech recognition weights, and zero network permissions.
+            </p>
+
+            <div class="download-assets-list">
+              <!-- ARM64 -->
+              <a href="https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-arm64-v8a-release.apk" class="asset-download-btn primary-asset">
+                <div class="asset-info">
+                  <span class="asset-name">ARM64-v8a APK <span class="badge-sub">Most Modern Devices</span></span>
+                  <span class="asset-details">Pixel, Samsung, Xiaomi, OnePlus, Realme &bull; 31.0 MB</span>
+                </div>
+                <span class="btn-download-action">&darr; APK</span>
+              </a>
+
+              <!-- Universal -->
+              <a href="https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-universal-release.apk" class="asset-download-btn">
+                <div class="asset-info">
+                  <span class="asset-name">Universal APK</span>
+                  <span class="asset-details">Compatible with all Android CPUs &bull; 34.1 MB</span>
+                </div>
+                <span class="btn-download-action">&darr; APK</span>
+              </a>
+
+              <!-- Other archs -->
+              <div class="secondary-assets">
+                <a href="https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-armeabi-v7a-release.apk" class="asset-sublink">armeabi-v7a (32-bit &bull; 31 MB)</a>
+                <span class="dot-sep">&bull;</span>
+                <a href="https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-x86_64-release.apk" class="asset-sublink">x86_64 (Emulators &bull; 31 MB)</a>
+              </div>
+            </div>
+
+            <!-- QR Code Scan Box -->
+            <div class="mobile-qr-box">
+              <div class="qr-canvas-wrapper">
+                <canvas id="qr-code-canvas" width="130" height="130" aria-label="QR Code to download APK on phone"></canvas>
+              </div>
+              <div class="qr-info">
+                <span class="qr-title">Scan to install directly on phone</span>
+                <span class="qr-sub">Points to official ARM64 release APK directly from GitHub.</span>
+              </div>
+            </div>
+
+            <!-- SHA-256 Accordion -->
+            <details class="checksums-accordion">
+              <summary>View Release SHA-256 Checksums</summary>
+              <pre class="checksum-pre"><code># ARM64-v8a
+b34ee6b80001576e0c6d740fcf1341cf86a67460e0960cd2813d6b807d665697  app-arm64-v8a-release.apk
+
+# Universal
+0a24e169d5c47dffe3b9d38a5004f6a0a3131d994a0d49d6d1ea0e21081e1deb  app-universal-release.apk
+
+# armeabi-v7a
+0a37ffd26d61d24a01f892f26a9372d3dbd8dadee995e324e5ad5ce162b91bd9  app-armeabi-v7a-release.apk
+
+# x86_64
+44868c7f6077c8393406be0fdebf1bc9fe9706e0d62da87ca47501dddc8a23e2  app-x86_64-release.apk</code></pre>
+            </details>
+          </div>
+
+          <!-- Linux Card -->
+          <div class="platform-card" id="linux-card">
+            <div class="platform-header">
+              <div class="platform-icon linux-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.001 0c-4.14 0-7.5 3.36-7.5 7.5 0 1.25.31 2.43.85 3.47C4.52 11.96 4 13.42 4 15c0 3.31 2.69 6 6 6h4c3.31 0 6-2.69 6-6 0-1.58-.52-3.04-1.35-4.03.54-1.04.85-2.22.85-3.47 0-4.14-3.36-7.5-7.5-7.5zm0 2c3.04 0 5.5 2.46 5.5 5.5 0 .84-.19 1.63-.53 2.34-.33-.53-.78-.97-1.31-1.3-.2-.12-.42-.22-.66-.29-.2-.72-.6-1.36-1.15-1.85-.8-.71-1.85-1.1-2.95-.9-1.22.22-2.23.99-2.73 2.1-.38.09-.73.25-1.04.47-.64.44-1.13 1.05-1.39 1.77-.38-.72-.59-1.53-.59-2.34C4.65 4.46 7.11 2 12.001 2z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="platform-name">Linux</h3>
+                <span class="platform-ver">Fcitx5 Native &bull; All Distros</span>
+              </div>
+            </div>
+
+            <p class="platform-desc">
+              Zero-allocation input method daemon for Fcitx5 with sub-100 &mu;s latency, memory interned $O(1)$ window sessions, and Wayland/X11 compatibility.
+            </p>
+
+            <div class="terminal-install-box">
+              <div class="terminal-bar">
+                <span class="term-dot red"></span>
+                <span class="term-dot yellow"></span>
+                <span class="term-dot green"></span>
+                <span class="term-title">Automated Install</span>
+              </div>
+              <div class="terminal-body">
+                <pre><code><span class="term-prompt">$</span> curl -fsSL https://raw.githubusercontent.com/sintaulsiam/lekhani/main/install.sh | bash</code></pre>
+                <button type="button" class="btn-terminal-copy" id="linux-curl-copy" aria-label="Copy Linux curl command">Copy</button>
+              </div>
+            </div>
+
+            <div class="distro-pills">
+              <div class="distro-entry">
+                <span class="distro-name">Arch Linux (AUR)</span>
+                <code>paru -S lekhani</code>
+              </div>
+              <div class="distro-entry">
+                <span class="distro-name">Cargo / Source</span>
+                <code>cargo install --git https://github.com/sintaulsiam/lekhani</code>
+              </div>
+            </div>
+          </div>
+
+          <!-- Windows Card -->
+          <div class="platform-card" id="windows-card">
+            <div class="platform-header">
+              <div class="platform-icon windows-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="platform-name">Windows</h3>
+                <span class="platform-ver">Windows 10 / 11 64-bit</span>
+              </div>
+            </div>
+
+            <p class="platform-desc">
+              Native Low-Level Keyboard Hook (<code>WH_KEYBOARD_LL</code>) &amp; System Tray Suite. Works flawlessly across Microsoft Office, Chrome, VS Code, and Windows Terminal.
+            </p>
+
+            <div class="windows-status-box">
+              <div class="feature-checklist">
+                <div class="check-item">&check; Native Unicode <code>SendInput</code> synthesis</div>
+                <div class="check-item">&check; System tray switcher &amp; hotkey toggling</div>
+                <div class="check-item">&check; Inno Setup native installer &amp; portable ZIP</div>
+              </div>
+
+              <a href="https://github.com/sintaulsiam/lekhani/releases" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-block">
+                View Windows Builds on GitHub &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ergonomic Layouts Showcase -->
+    <section id="layouts" class="layouts-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">ERGONOMICS & TYPOGRAPHY</div>
+          <h2 class="section-title">Designed for Your Muscle Memory</h2>
+          <p class="section-subtitle">Whether you prefer classic phonetic typing, official government standards, or an innovative two-thumb mobile flow.</p>
+        </div>
+
+        <div class="layouts-showcase-grid">
+          <!-- Probaho Card -->
+          <div class="layout-card highlight-card">
+            <div class="layout-visual">
+              <img src="assets/screenshots/keyboard_probaho.png" alt="Lekhani Probaho Layout Screenshot" loading="lazy" class="layout-screenshot">
+            </div>
+            <div class="layout-body">
+              <div class="layout-tag">ERGONOMIC TWO-THUMB FLOW</div>
+              <h3 class="layout-title">Lekhani প্রবাহ (Probaho)</h3>
+              <p class="layout-description">
+                Tailored specifically for Bengali script ergonomics. Left thumb commands high-frequency vowel stems, while right thumb governs the consonant matrix, dramatically reducing finger travel distance by 38%.
+              </p>
+              <ul class="layout-points">
+                <li>Left hand: স্বরবর্ণ (Vowels &amp; Kars) cluster</li>
+                <li>Right hand: ব্যঞ্জনবর্ণ (Consonants) matrix</li>
+                <li>Instant thumb-accessible conjunct modifier</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Avro Phonetic Card -->
+          <div class="layout-card">
+            <div class="layout-visual">
+              <img src="assets/screenshots/keyboard_avro.png" alt="Avro Phonetic Layout Screenshot" loading="lazy" class="layout-screenshot">
+            </div>
+            <div class="layout-body">
+              <div class="layout-tag">CLASSIC STANDARD</div>
+              <h3 class="layout-title">Avro Phonetic</h3>
+              <p class="layout-description">
+                100% compliant with standard Avro muscle memory. Type in English letters to output accurate, grammatically correct Bengali text with intelligent conjunct resolving.
+              </p>
+              <ul class="layout-points">
+                <li>Exact Avro phonetic keystroke mappings</li>
+                <li>Context-aware Sandhi and spoken verb stems</li>
+                <li>English loanword auto-preservation</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Probhat Layout Card -->
+          <div class="layout-card">
+            <div class="layout-visual">
+              <img src="assets/screenshots/keyboard_probhat.png" alt="Probhat Layout Screenshot" loading="lazy" class="layout-screenshot">
+            </div>
+            <div class="layout-body">
+              <div class="layout-tag">TRADITIONAL FIXED</div>
+              <h3 class="layout-title">প্রভাত (Probhat) &amp; জাতীয় (National)</h3>
+              <p class="layout-description">
+                For users trained on official Bangladesh BBS / Probhat standards. Full support for Shift and AltGr modifier layers with zero learning curve.
+              </p>
+              <ul class="layout-points">
+                <li>BBS National standard key mapping</li>
+                <li>Dedicated dead-key combinations</li>
+                <li>Seamless Shift and AltGr layer toggling</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Phonetic Rules Cheatsheet -->
+    <section id="cheatsheet" class="cheatsheet-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">QUICK REFERENCE</div>
+          <h2 class="section-title">Phonetic Typing Cheatsheet</h2>
+          <p class="section-subtitle">Search any English combination or Bengali character to see the exact keystroke.</p>
+        </div>
+
+        <div class="cheatsheet-container">
+          <div class="cheatsheet-toolbar">
+            <div class="search-input-wrapper">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" id="cheatsheet-search" placeholder="Search (e.g. 'kkh', 'ক্ষ', 'rri', 'ঋ', 'sh', 'ঙ')..." autocomplete="off">
+            </div>
+
+            <div class="filter-tabs">
+              <button type="button" class="filter-btn active" data-category="all">All</button>
+              <button type="button" class="filter-btn" data-category="vowels">Vowels (স্বরবর্ণ)</button>
+              <button type="button" class="filter-btn" data-category="kars">Kars (কার)</button>
+              <button type="button" class="filter-btn" data-category="consonants">Consonants (ব্যঞ্জনবর্ণ)</button>
+              <button type="button" class="filter-btn" data-category="juktoborno">Juktoborno (যুক্তবর্ণ)</button>
+              <button type="button" class="filter-btn" data-category="special">Special (চিহ্ন)</button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="rules-table" id="rules-table">
+              <thead>
+                <tr>
+                  <th>Keystroke</th>
+                  <th>Bengali Character</th>
+                  <th>Category</th>
+                  <th>Example Usage</th>
+                  <th>Result</th>
+                </tr>
+              </thead>
+              <tbody id="rules-tbody">
+                <!-- Dynamically populated via app.js -->
+              </tbody>
+            </table>
+          </div>
+          <div id="no-rules-found" class="no-results hidden">No matching rules found. Try searching by letter or keystroke.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hard Benchmarks & Architecture Specs -->
+    <section id="benchmarks" class="benchmarks-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">ENGINEERING INTEGRITY</div>
+          <h2 class="section-title">Hard Numbers. Zero Fluff.</h2>
+          <p class="section-subtitle">Comparing Lekhani's pure Rust headless engine against legacy Python and C++ implementations.</p>
+        </div>
+
+        <div class="benchmarks-grid">
+          <div class="bench-card">
+            <h3 class="bench-title">Keystroke Processing Latency</h3>
+            <p class="bench-sub">Measured across 100,000 synthetic keystrokes on modern x86_64.</p>
+            
+            <div class="bar-chart-group">
+              <div class="bar-item">
+                <div class="bar-meta">
+                  <span class="bar-label">Lekhani (Pure Rust)</span>
+                  <span class="bar-val text-accent">0.078 ms (&lt; 100 &mu;s)</span>
+                </div>
+                <div class="bar-track">
+                  <div class="bar-fill fill-accent" style="width: 8%;"></div>
+                </div>
+              </div>
+
+              <div class="bar-item">
+                <div class="bar-meta">
+                  <span class="bar-label">Rupantor (Python-based)</span>
+                  <span class="bar-val">1.280 ms</span>
+                </div>
+                <div class="bar-track">
+                  <div class="bar-fill fill-muted" style="width: 85%;"></div>
+                </div>
+              </div>
+
+              <div class="bar-item">
+                <div class="bar-meta">
+                  <span class="bar-label">Traditional Electron/C++ IMEs</span>
+                  <span class="bar-val">3.450 ms</span>
+                </div>
+                <div class="bar-track">
+                  <div class="bar-fill fill-muted" style="width: 100%;"></div>
+                </div>
+              </div>
+            </div>
+            <span class="bench-conclusion">&gt; 16&times; faster execution than classic Python Avro implementations.</span>
+          </div>
+
+          <div class="bench-card">
+            <h3 class="bench-title">Resident Memory Usage (RSS)</h3>
+            <p class="bench-sub">Private dirty memory consumption during active bilingual typing.</p>
+            
+            <div class="bar-chart-group">
+              <div class="bar-item">
+                <div class="bar-meta">
+                  <span class="bar-label">Lekhani Android</span>
+                  <span class="bar-val text-accent">42 MB (Private Dirty)</span>
+                </div>
+                <div class="bar-track">
+                  <div class="bar-fill fill-accent" style="width: 13%;"></div>
+                </div>
+              </div>
+
+              <div class="bar-item">
+                <div class="bar-meta">
+                  <span class="bar-label">Lekhani Linux Daemon</span>
+                  <span class="bar-val text-accent">28 MB</span>
+                </div>
+                <div class="bar-track">
+                  <div class="bar-fill fill-accent" style="width: 9%;"></div>
+                </div>
+              </div>
+
+              <div class="bar-item">
+                <div class="bar-meta">
+                  <span class="bar-label">Standard Keyboard Apps</span>
+                  <span class="bar-val">180 MB - 320 MB</span>
+                </div>
+                <div class="bar-track">
+                  <div class="bar-fill fill-muted" style="width: 90%;"></div>
+                </div>
+              </div>
+            </div>
+            <span class="bench-conclusion">Resilient against Android LMK (Low Memory Killer) pressure.</span>
+          </div>
+        </div>
+
+        <!-- Privacy & System Principles Table -->
+        <div class="principles-grid">
+          <div class="principle-card">
+            <div class="principle-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <h4 class="principle-title">Zero Telemetry Promise</h4>
+            <p class="principle-text">The Android manifest does not request <code>android.permission.INTERNET</code>. Keystrokes, clipboard, and dictionary data physically cannot leave the phone.</p>
+          </div>
+
+          <div class="principle-card">
+            <div class="principle-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            </div>
+            <h4 class="principle-title">Direct Boot Readiness</h4>
+            <p class="principle-text">Enabled with <code>android:directBootAware="true"</code>. Type passwords and unlock credentials immediately after reboot before user storage decryption.</p>
+          </div>
+
+          <div class="principle-card">
+            <div class="principle-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+            </div>
+            <h4 class="principle-title">Zero-GC Touch Path</h4>
+            <p class="principle-text">Pre-allocated memory pools, scratchpad buffers, and hardware canvas matrices prevent garbage collector micro-stutters during typing.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- App Gallery & Theme Studio -->
+    <section class="gallery-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">NATIVE POLISH</div>
+          <h2 class="section-title">Built for Modern Android</h2>
+          <p class="section-subtitle">Pure Material 3 Expressive UI, dynamic Chroma wave animations, dedicated D-pad text editor, and ephemeral clipboard vault.</p>
+        </div>
+
+        <div class="gallery-grid">
+          <figure class="gallery-item">
+            <img src="assets/screenshots/settings_themes.png" alt="Lekhani Theme Studio Screenshot" loading="lazy" class="gallery-img">
+            <figcaption class="gallery-caption">
+              <strong>Theme Studio</strong> &mdash; 33 curated presets, custom wallpapers, and dynamic 120 FPS chromatic wave engines.
+            </figcaption>
+          </figure>
+
+          <figure class="gallery-item">
+            <img src="assets/screenshots/settings_layouts.png" alt="Lekhani Layout Switcher Screenshot" loading="lazy" class="gallery-img">
+            <figcaption class="gallery-caption">
+              <strong>Layout Switcher</strong> &mdash; Reorder and customize layout priorities with one-tap spacebar gesture transitions.
+            </figcaption>
+          </figure>
+
+          <figure class="gallery-item">
+            <img src="assets/screenshots/settings_clipboard.png" alt="Lekhani Clipboard Vault Screenshot" loading="lazy" class="gallery-img">
+            <figcaption class="gallery-caption">
+              <strong>Clipboard Vault</strong> &mdash; Local, ephemeral clipboard history with pin support and auto-clearing retention.
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Standalone Crates Hub for Developers -->
+    <section id="crates" class="crates-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">RUST ECOSYSTEM</div>
+          <h2 class="section-title">Modular Rust Crates on Crates.io</h2>
+          <p class="section-subtitle">Embed Lekhani's grammar engine or statistical language models into your own Rust, WebAssembly, or desktop software.</p>
+        </div>
+
+        <div class="crates-grid">
+          <div class="crate-card">
+            <div class="crate-header">
+              <span class="crate-name">lekhani-parser</span>
+              <a href="https://crates.io/crates/lekhani-parser" target="_blank" rel="noopener noreferrer" class="crate-badge">crates.io</a>
+            </div>
+            <p class="crate-desc">Zero-allocation pure Rust Avro phonetic grammar parser with 11 ns/char throughput and optional WASM bindings.</p>
+            <div class="code-snippet-box">
+              <pre><code>[dependencies]
+lekhani-parser = "0.3"</code></pre>
+            </div>
+          </div>
+
+          <div class="crate-card">
+            <div class="crate-header">
+              <span class="crate-name">lekhani-ai</span>
+              <a href="https://crates.io/crates/lekhani-ai" target="_blank" rel="noopener noreferrer" class="crate-badge">crates.io</a>
+            </div>
+            <p class="crate-desc">On-device statistical N-gram language model, contextual candidate scorer, and next-word predictor under 6 MB.</p>
+            <div class="code-snippet-box">
+              <pre><code>[dependencies]
+lekhani-ai = "0.3"</code></pre>
+            </div>
+          </div>
+
+          <div class="crate-card">
+            <div class="crate-header">
+              <span class="crate-name">lekhani-core</span>
+              <a href="https://crates.io/crates/lekhani-core" target="_blank" rel="noopener noreferrer" class="crate-badge">crates.io</a>
+            </div>
+            <p class="crate-desc">Headless Bengali IME state machine, candidate ranking, compact prefix Trie, and autocorrect pipeline.</p>
+            <div class="code-snippet-box">
+              <pre><code>[dependencies]
+lekhani-core = "0.3"</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Frequently Asked Questions -->
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">QUESTIONS & ANSWERS</div>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+        </div>
+
+        <div class="faq-accordion-list">
+          <details class="faq-item">
+            <summary class="faq-question">How does Lekhani differ from standard Avro Keyboard?</summary>
+            <div class="faq-answer">
+              <p>Lekhani retains 100% muscle-memory compatibility with official Avro Phonetic rules, but is rewritten completely from scratch in pure Rust. Unlike legacy tools, Lekhani incorporates an on-device contextual homophone ranker, modern verbal conjugation peeling (e.g. <code>kortesi</code> &rarr; করছি/করতেছি), and a sub-millisecond hardware-accelerated canvas on Android.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">Does Lekhani collect or transmit any typing data?</summary>
+            <div class="faq-answer">
+              <p><strong>Absolutely zero.</strong> The Android app does not even request the <code>INTERNET</code> permission in its manifest. The desktop Linux and Windows engines contain no analytics, no crash reporters, and zero outbound network calls. Everything runs 100% locally on your machine.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">Can I use Lekhani completely offline?</summary>
+            <div class="faq-answer">
+              <p>Yes. The entire language model, Trie dictionary, phonetic grammars, and theme presets are packaged directly into the installation binaries. It operates completely independently of network access.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">How do I install Lekhani on Linux?</summary>
+            <div class="faq-answer">
+              <p>On any Linux distribution with Fcitx5, run our official one-liner script: <code>curl -fsSL https://raw.githubusercontent.com/sintaulsiam/lekhani/main/install.sh | bash</code>. On Arch Linux, it is also available via AUR: <code>paru -S lekhani</code>.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-brand-col">
+        <div class="brand-link">
+          <img src="assets/icons/logo.svg" alt="Lekhani Logo" width="28" height="28">
+          <span class="brand-name">Lekhani (লেখনী)</span>
+        </div>
+        <p class="footer-copy">
+          Sovereign Bengali input method and desktop suite. Engineered with pure Rust for uncompromising performance, privacy, and typography.
+        </p>
+        <div class="footer-meta">
+          <span>Licensed under <a href="https://github.com/sintaulsiam/lekhani/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GNU GPL-3.0</a></span>
+          <span class="dot-sep">&bull;</span>
+          <span>Crafted by <a href="https://github.com/sintaulsiam" target="_blank" rel="noopener noreferrer">Sintatul Siam</a></span>
+        </div>
+      </div>
+
+      <div class="footer-links-col">
+        <h4 class="footer-heading">Repositories</h4>
+        <ul class="footer-ul">
+          <li><a href="https://github.com/sintaulsiam/lekhani-android" target="_blank" rel="noopener noreferrer">lekhani-android</a></li>
+          <li><a href="https://github.com/sintaulsiam/lekhani" target="_blank" rel="noopener noreferrer">lekhani (desktop)</a></li>
+          <li><a href="https://github.com/sintaulsiam/lekhani-engine" target="_blank" rel="noopener noreferrer">lekhani-engine</a></li>
+          <li><a href="https://github.com/sintaulsiam/lekhani-web" target="_blank" rel="noopener noreferrer">lekhani-web</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h4 class="footer-heading">Documentation</h4>
+        <ul class="footer-ul">
+          <li><a href="https://github.com/sintaulsiam/lekhani/blob/main/docs/TYPING_GUIDE.md" target="_blank" rel="noopener noreferrer">Typing Guide</a></li>
+          <li><a href="https://github.com/sintaulsiam/lekhani-android/blob/main/LAYOUT_PROBAHO.md" target="_blank" rel="noopener noreferrer">Probaho Layout Spec</a></li>
+          <li><a href="https://github.com/sintaulsiam/lekhani/blob/main/ARCHITECTURE.md" target="_blank" rel="noopener noreferrer">System Architecture</a></li>
+          <li><a href="https://github.com/sintaulsiam/lekhani/issues" target="_blank" rel="noopener noreferrer">Report an Issue</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
