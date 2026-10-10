@@ -79,7 +79,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--bg-base);
   color: var(--text-main);
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
@@ -92,9 +92,13 @@ body {
     linear-gradient(to bottom, transparent, rgba(9, 11, 14, 0.8));
   background-attachment: fixed;
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow-x: clip;
   position: relative;
   width: 100%;
+}
+
+section[id] {
+  scroll-margin-top: 5rem;
 }
 
 a {
@@ -263,12 +267,13 @@ pre, code {
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 100;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  background-color: rgba(9, 11, 14, 0.9);
+  z-index: 1000;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background-color: rgba(9, 11, 14, 0.94);
   border-bottom: 1px solid var(--border-subtle);
   transition: border-color var(--transition-fast);
+  width: 100%;
 }
 
 .nav-container {
@@ -1023,42 +1028,58 @@ pre, code {
    ========================================================================== */
 
 .download-section {
-  padding: 5.5rem 0;
+  padding: 5rem 0;
 }
 
-.platforms-grid {
-  display: grid;
-  grid-template-columns: 1.35fr 1fr 1fr;
-  gap: 1.5rem;
-  align-items: stretch;
-}
-
-.platform-card {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+/* Featured Primary Release: Android Card */
+.featured-release-card {
+  background: linear-gradient(180deg, #131924 0%, #0d121b 100%);
+  border: 1px solid rgba(0, 229, 184, 0.35);
   border-radius: var(--radius-lg);
-  padding: 2rem;
+  padding: 2.25rem;
+  box-shadow: 0 8px 36px rgba(0, 229, 184, 0.08), 0 20px 40px rgba(0, 0, 0, 0.4);
+  margin-bottom: 1.75rem;
+  width: 100%;
+}
+
+.featured-release-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.featured-release-left {
   display: flex;
   flex-direction: column;
-  transition: transform var(--transition-normal), border-color var(--transition-normal);
+  min-width: 0;
 }
 
-.platform-card:hover {
-  border-color: var(--border-medium);
-  transform: translateY(-2px);
+.platform-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
 }
 
-.platform-card.featured-platform {
-  background: linear-gradient(180deg, #161d28 0%, #121721 100%);
-  border-color: rgba(0, 229, 184, 0.4);
-  box-shadow: 0 8px 32px rgba(0, 229, 184, 0.08);
+.chip-recommended {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #071c15;
+  background-color: var(--brand-mint);
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
 }
 
 .platform-header {
   display: flex;
   align-items: center;
   gap: 0.85rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
 }
 
 .platform-icon {
@@ -1088,33 +1109,20 @@ pre, code {
 
 .platform-name {
   font-family: var(--font-display);
-  font-size: 1.35rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: #ffffff;
 }
 
 .platform-ver {
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: var(--text-dim);
-}
-
-.chip-recommended {
-  margin-left: auto;
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  padding: 0.2rem 0.5rem;
-  background-color: var(--brand-glow-subtle);
-  border: 1px solid var(--brand-mint);
-  color: var(--brand-mint);
-  border-radius: var(--radius-full);
 }
 
 .platform-desc {
   font-size: 0.92rem;
   color: var(--text-muted);
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.5rem;
   line-height: 1.5;
 }
 
@@ -1122,45 +1130,56 @@ pre, code {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .asset-download-btn {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.85rem 1.1rem;
+  padding: 0.85rem 1.15rem;
   background-color: var(--bg-surface);
   border: 1px solid var(--border-medium);
   border-radius: var(--radius-sm);
   transition: all var(--transition-fast);
+  min-width: 0;
 }
 
 .asset-download-btn:hover {
   border-color: var(--brand-mint);
   background-color: var(--bg-card-hover);
+  transform: translateY(-1px);
 }
 
 .asset-download-btn.primary-asset {
   background: linear-gradient(180deg, #192723 0%, #111e1b 100%);
   border-color: var(--brand-mint);
+  box-shadow: 0 4px 18px rgba(0, 229, 184, 0.15);
 }
 
 .asset-info {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .asset-name {
   font-size: 0.95rem;
   font-weight: 600;
   color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .badge-sub {
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   color: var(--brand-mint);
   font-weight: 500;
+  background: rgba(0, 229, 184, 0.1);
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
 }
 
 .asset-details {
@@ -1173,20 +1192,27 @@ pre, code {
   font-size: 0.82rem;
   font-weight: 700;
   color: var(--brand-mint);
-  background-color: rgba(0, 229, 184, 0.1);
-  padding: 0.35rem 0.65rem;
+  background-color: rgba(0, 229, 184, 0.12);
+  border: 1px solid rgba(0, 229, 184, 0.25);
+  padding: 0.35rem 0.75rem;
   border-radius: var(--radius-xs);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .secondary-assets {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 0.6rem;
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   color: var(--text-dim);
   padding-top: 0.25rem;
   flex-wrap: wrap;
+}
+
+.arch-label {
+  font-weight: 500;
+  color: var(--text-dim);
 }
 
 .asset-sublink {
@@ -1199,44 +1225,77 @@ pre, code {
   color: var(--brand-mint);
 }
 
-/* Mobile QR Code Box */
-.mobile-qr-box {
+/* Dedicated Phone Install QR Card */
+.featured-release-right {
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+}
+
+.qr-install-card {
+  background: rgba(14, 20, 29, 0.85);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 320px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.qr-install-header {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  background-color: rgba(0, 0, 0, 0.3);
-  border: 1px dashed var(--border-medium);
-  border-radius: var(--radius-sm);
-  padding: 0.85rem;
-  margin-top: auto;
-  margin-bottom: 1.25rem;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 1rem;
 }
 
 .qr-canvas-wrapper {
   background-color: #ffffff;
-  padding: 6px;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  padding: 8px;
+  border-radius: 6px;
+  display: inline-flex;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  margin-bottom: 1rem;
 }
 
-.qr-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.qr-title {
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: #ffffff;
+.qr-svg-img {
+  display: block;
+  border-radius: 2px;
 }
 
 .qr-sub {
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  line-height: 1.3;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.qr-badge-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--brand-mint);
+  background: rgba(0, 229, 184, 0.08);
+  border: 1px solid rgba(0, 229, 184, 0.2);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-pill);
+}
+
+.status-indicator-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--brand-mint);
+  box-shadow: 0 0 8px var(--brand-mint);
 }
 
 /* SHA-256 Details Accordion */
@@ -1256,13 +1315,17 @@ pre, code {
   justify-content: space-between;
 }
 
+.checksums-accordion summary:hover {
+  color: var(--brand-mint);
+}
+
 .btn-copy-checksum {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   background-color: var(--bg-card);
   border: 1px solid var(--border-subtle);
   color: var(--text-muted);
-  padding: 0.15rem 0.5rem;
+  padding: 0.2rem 0.6rem;
   border-radius: var(--radius-xs);
   transition: all var(--transition-fast);
   cursor: pointer;
@@ -1272,10 +1335,6 @@ pre, code {
   background-color: var(--brand-mint);
   color: #071c15;
   border-color: var(--brand-mint);
-}
-
-.checksums-accordion summary:hover {
-  color: var(--brand-mint);
 }
 
 .checksum-pre {
@@ -1288,6 +1347,31 @@ pre, code {
   color: var(--text-muted);
 }
 
+/* 2. Desktop Platforms: Linux & Windows (Balanced 2-Column Grid) */
+.desktop-platforms-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  align-items: stretch;
+  width: 100%;
+}
+
+.platform-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  transition: transform var(--transition-normal), border-color var(--transition-normal);
+}
+
+.platform-card:hover {
+  border-color: var(--border-medium);
+  transform: translateY(-2px);
+}
+
 /* Linux Terminal Box */
 .terminal-install-box {
   background-color: #0b0e14;
@@ -1295,6 +1379,7 @@ pre, code {
   border-radius: var(--radius-sm);
   overflow: hidden;
   margin-bottom: 1.5rem;
+  width: 100%;
 }
 
 .terminal-bar {
@@ -1329,6 +1414,7 @@ pre, code {
   justify-content: space-between;
   gap: 0.5rem;
   overflow-x: auto;
+  width: 100%;
 }
 
 .terminal-body pre {
@@ -1336,6 +1422,7 @@ pre, code {
   flex: 1;
   min-width: 0;
   overflow-x: auto;
+  white-space: nowrap;
 }
 
 .term-prompt {
@@ -1377,16 +1464,21 @@ pre, code {
   border-radius: var(--radius-xs);
   padding: 0.6rem 0.85rem;
   font-size: 0.82rem;
+  gap: 0.75rem;
+  min-width: 0;
 }
 
 .distro-name {
   color: var(--text-muted);
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .distro-entry code {
   color: var(--brand-mint);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 
 /* Windows Status Box */
@@ -2062,7 +2154,7 @@ pre, code {
    ========================================================================== */
 
 @media (max-width: 1024px) {
-  .platforms-grid { grid-template-columns: 1fr; }
+  .featured-release-grid { grid-template-columns: 1fr; gap: 2rem; } .desktop-platforms-grid { grid-template-columns: 1fr; }
   .hero-metrics-grid { grid-template-columns: repeat(2, 1fr); }
   .layouts-showcase-grid { grid-template-columns: 1fr; }
   .benchmarks-grid { grid-template-columns: 1fr; }

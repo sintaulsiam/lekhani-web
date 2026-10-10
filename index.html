@@ -282,71 +282,64 @@
           <p class="section-subtitle">No app store walled gardens, no telemetry wrappers. Download verified signed release binaries directly from GitHub.</p>
         </div>
 
-        <div class="platforms-grid">
-          <!-- Android Card -->
-          <div class="platform-card featured-platform" id="android-card">
-            <div class="platform-header">
-              <div class="platform-icon android-icon">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-1.0001s.4482-.9994.9993-.9994c.5518 0 1.0001.4479 1.0001.9994 0 .5515-.4483 1.0001-1.0001 1.0001m-11.046 0c-.5511 0-.9993-.4486-.9993-1.0001s.4482-.9994.9993-.9994c.5518 0 1.0001.4479 1.0001.9994 0 .5515-.4483 1.0001-1.0001 1.0001m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.4116 13.8533 8.125 12 8.125c-1.8533 0-3.5902.2866-5.1368.8247L4.8409 5.4467a.4161.4161 0 00-.5677-.1521.4157.4157 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.7997h24c-.3432-4.1408-2.6889-7.613-6.1185-9.4783"/>
-                </svg>
-              </div>
-              <div>
-                <h3 class="platform-name">Android</h3>
-                <span class="platform-ver">v0.3.0 Latest &bull; Android 10+</span>
-              </div>
-              <span class="chip-recommended">Recommended</span>
-            </div>
-
-            <p class="platform-desc">
-              Hardware-accelerated 120 FPS canvas, 33 Theme Studio presets, offline speech recognition weights, and zero network permissions.
-            </p>
-
-            <div class="download-assets-list">
-              <!-- ARM64 -->
-              <a href="https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-arm64-v8a-release.apk" class="asset-download-btn primary-asset">
-                <div class="asset-info">
-                  <span class="asset-name">ARM64-v8a APK <span class="badge-sub">Most Modern Devices</span></span>
-                  <span class="asset-details">Pixel, Samsung, Xiaomi, OnePlus, Realme &bull; 31.0 MB</span>
+        <!-- 1. Featured Primary Release: Android v0.3.0 -->
+        <div class="featured-release-card" id="android-card">
+          <div class="featured-release-grid">
+            <div class="featured-release-left">
+              <div class="platform-header">
+                <div class="platform-icon android-icon">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-1.0001s.4482-.9994.9993-.9994c.5518 0 1.0001.4479 1.0001.9994 0 .5515-.4483 1.0001-1.0001 1.0001m-11.046 0c-.5511 0-.9993-.4486-.9993-1.0001s.4482-.9994.9993-.9994c.5518 0 1.0001.4479 1.0001.9994 0 .5515-.4483 1.0001-1.0001 1.0001m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.4116 13.8533 8.125 12 8.125c-1.8533 0-3.5902.2866-5.1368.8247L4.8409 5.4467a.4161.4161 0 00-.5677-.1521.4157.4157 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.7997h24c-.3432-4.1408-2.6889-7.613-6.1185-9.4783"/>
+                  </svg>
                 </div>
-                <span class="btn-download-action">&darr; APK</span>
-              </a>
-
-              <!-- Universal -->
-              <a href="https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-universal-release.apk" class="asset-download-btn">
-                <div class="asset-info">
-                  <span class="asset-name">Universal APK</span>
-                  <span class="asset-details">Compatible with all Android CPUs &bull; 34.1 MB</span>
+                <div>
+                  <div class="platform-title-row">
+                    <h3 class="platform-name">Android</h3>
+                    <span class="chip-recommended">Production Ready &bull; Recommended</span>
+                  </div>
+                  <span class="platform-ver">v0.3.0 Latest &bull; Android 10+ (API 29+)</span>
                 </div>
-                <span class="btn-download-action">&darr; APK</span>
-              </a>
-
-              <!-- Other archs -->
-              <div class="secondary-assets">
-                <a href="https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-armeabi-v7a-release.apk" class="asset-sublink">armeabi-v7a (32-bit &bull; 31 MB)</a>
-                <span class="dot-sep">&bull;</span>
-                <a href="https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-x86_64-release.apk" class="asset-sublink">x86_64 (Emulators &bull; 31 MB)</a>
               </div>
-            </div>
 
-            <!-- Standard Verified QR Code -->
-            <div class="mobile-qr-box">
-              <div class="qr-canvas-wrapper">
-                <img src="assets/icons/apk-qr.svg" alt="Direct APK Download QR Code" width="118" height="118" class="qr-svg-img">
-              </div>
-              <div class="qr-info">
-                <span class="qr-title">Scan to install directly on phone</span>
-                <span class="qr-sub">Scans directly to signed GitHub ARM64 release APK (31 MB).</span>
-              </div>
-            </div>
+              <p class="platform-desc">
+                Hardware-accelerated 120 FPS canvas, 33 Theme Studio presets, offline speech recognition weights, and zero network permissions.
+              </p>
 
-            <!-- SHA-256 Accordion -->
-            <details class="checksums-accordion">
-              <summary>
-                <span>View Release SHA-256 Checksums</span>
-                <button type="button" class="btn-copy-checksum" id="copy-checksums-btn" aria-label="Copy SHA-256 checksums">Copy All</button>
-              </summary>
-              <pre class="checksum-pre"><code id="release-checksums-code"># ARM64-v8a
+              <div class="download-assets-list">
+                <!-- ARM64 -->
+                <a href="https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-arm64-v8a-release.apk" class="asset-download-btn primary-asset">
+                  <div class="asset-info">
+                    <span class="asset-name">ARM64-v8a APK <span class="badge-sub">Most Modern Phones</span></span>
+                    <span class="asset-details">Pixel, Samsung, Xiaomi, OnePlus, Realme &bull; 31.0 MB</span>
+                  </div>
+                  <span class="btn-download-action">&darr; Download APK</span>
+                </a>
+
+                <!-- Universal -->
+                <a href="https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-universal-release.apk" class="asset-download-btn">
+                  <div class="asset-info">
+                    <span class="asset-name">Universal APK</span>
+                    <span class="asset-details">Compatible with all Android CPUs &bull; 34.1 MB</span>
+                  </div>
+                  <span class="btn-download-action">&darr; Download APK</span>
+                </a>
+
+                <!-- Other archs -->
+                <div class="secondary-assets">
+                  <span class="arch-label">Other Architectures:</span>
+                  <a href="https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-armeabi-v7a-release.apk" class="asset-sublink">armeabi-v7a (32-bit &bull; 31 MB)</a>
+                  <span class="dot-sep">&bull;</span>
+                  <a href="https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-x86_64-release.apk" class="asset-sublink">x86_64 (Emulators &bull; 31 MB)</a>
+                </div>
+              </div>
+
+              <!-- SHA-256 Accordion -->
+              <details class="checksums-accordion">
+                <summary>
+                  <span>Release SHA-256 Checksums</span>
+                  <button type="button" class="btn-copy-checksum" id="copy-checksums-btn" aria-label="Copy SHA-256 checksums">Copy All</button>
+                </summary>
+                <pre class="checksum-pre"><code id="release-checksums-code"># ARM64-v8a
 b34ee6b80001576e0c6d740fcf1341cf86a67460e0960cd2813d6b807d665697  app-arm64-v8a-release.apk
 
 # Universal
@@ -357,9 +350,34 @@ b34ee6b80001576e0c6d740fcf1341cf86a67460e0960cd2813d6b807d665697  app-arm64-v8a-
 
 # x86_64
 44868c7f6077c8393406be0fdebf1bc9fe9706e0d62da87ca47501dddc8a23e2  app-x86_64-release.apk</code></pre>
-            </details>
-          </div>
+              </details>
+            </div>
 
+            <!-- Right Column: Dedicated Phone Install Card with QR Code -->
+            <div class="featured-release-right">
+              <div class="qr-install-card">
+                <div class="qr-install-header">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                    <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                  </svg>
+                  <span>Scan to Install on Phone</span>
+                </div>
+                <div class="qr-canvas-wrapper">
+                  <img src="assets/icons/apk-qr.svg" alt="Direct APK Download QR Code" width="140" height="140" class="qr-svg-img">
+                </div>
+                <p class="qr-sub">Open your phone camera to download the verified signed ARM64 APK directly (31 MB).</p>
+                <div class="qr-badge-status">
+                  <span class="status-indicator-dot"></span>
+                  <span>Direct GitHub Release CDN</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Desktop Platforms: Linux & Windows (Balanced 2-Column Grid) -->
+        <div class="desktop-platforms-grid">
           <!-- Linux Card -->
           <div class="platform-card" id="linux-card">
             <div class="platform-header">
