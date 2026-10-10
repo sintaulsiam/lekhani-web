@@ -342,8 +342,11 @@
 
             <!-- SHA-256 Accordion -->
             <details class="checksums-accordion">
-              <summary>View Release SHA-256 Checksums</summary>
-              <pre class="checksum-pre"><code># ARM64-v8a
+              <summary>
+                <span>View Release SHA-256 Checksums</span>
+                <button type="button" class="btn-copy-checksum" id="copy-checksums-btn" aria-label="Copy SHA-256 checksums">Copy All</button>
+              </summary>
+              <pre class="checksum-pre"><code id="release-checksums-code"># ARM64-v8a
 b34ee6b80001576e0c6d740fcf1341cf86a67460e0960cd2813d6b807d665697  app-arm64-v8a-release.apk
 
 # Universal
@@ -720,6 +723,7 @@ b34ee6b80001576e0c6d740fcf1341cf86a67460e0960cd2813d6b807d665697  app-arm64-v8a-
             <div class="code-snippet-box">
               <pre><code>[dependencies]
 lekhani-parser = "0.3"</code></pre>
+              <button type="button" class="btn-terminal-copy btn-crate-copy" data-copy='lekhani-parser = "0.3"' aria-label="Copy Cargo dependency snippet">Copy</button>
             </div>
           </div>
 
@@ -732,6 +736,7 @@ lekhani-parser = "0.3"</code></pre>
             <div class="code-snippet-box">
               <pre><code>[dependencies]
 lekhani-ai = "0.3"</code></pre>
+              <button type="button" class="btn-terminal-copy btn-crate-copy" data-copy='lekhani-ai = "0.3"' aria-label="Copy Cargo dependency snippet">Copy</button>
             </div>
           </div>
 
@@ -744,6 +749,7 @@ lekhani-ai = "0.3"</code></pre>
             <div class="code-snippet-box">
               <pre><code>[dependencies]
 lekhani-core = "0.3"</code></pre>
+              <button type="button" class="btn-terminal-copy btn-crate-copy" data-copy='lekhani-core = "0.3"' aria-label="Copy Cargo dependency snippet">Copy</button>
             </div>
           </div>
         </div>

@@ -1251,6 +1251,27 @@ pre, code {
   color: var(--text-dim);
   font-weight: 500;
   user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn-copy-checksum {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-xs);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.btn-copy-checksum:hover {
+  background-color: var(--brand-mint);
+  color: #071c15;
+  border-color: var(--brand-mint);
 }
 
 .checksums-accordion summary:hover {
@@ -1901,6 +1922,10 @@ pre, code {
   padding: 0.75rem;
   font-size: 0.78rem;
   color: var(--brand-mint);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
 }
 
 /* ==========================================================================
@@ -2202,6 +2227,23 @@ pre, code {
     gap: 0.5rem;
   }
 
+  .kb-row {
+    gap: 3px;
+  }
+
+  .keycap {
+    height: 40px;
+    padding: 0.1rem 0;
+  }
+
+  .key-primary {
+    font-size: 0.85rem;
+  }
+
+  .key-secondary {
+    font-size: 0.5rem;
+  }
+
   .platform-card {
     padding: 1.25rem;
   }
@@ -2228,5 +2270,35 @@ pre, code {
   .rules-table td {
     padding: 0.6rem 0.75rem;
     font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    padding-left: 0.65rem;
+    padding-right: 0.65rem;
+  }
+
+  .kb-row {
+    gap: 2px;
+  }
+
+  .keycap {
+    height: 36px;
+    padding: 0.05rem 0;
+  }
+
+  .key-primary {
+    font-size: 0.76rem;
+  }
+
+  .key-secondary {
+    display: none;
+  }
+
+  .telemetry-hud {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
   }
 }

@@ -25,6 +25,14 @@
     }
   }
 
+  if (soundCheckbox) {
+    const saved = localStorage.getItem('lekhani_click_sound');
+    soundCheckbox.checked = saved !== null ? saved === 'true' : true;
+    soundCheckbox.addEventListener('change', () => {
+      localStorage.setItem('lekhani_click_sound', soundCheckbox.checked);
+    });
+  }
+
   function playMechanicalClick() {
     if (!soundCheckbox || !soundCheckbox.checked) return;
     try {
@@ -58,77 +66,859 @@
 
   // Comprehensive Bengali dictionary words & homophones
   const BENGALI_DICTIONARY = {
-    'ami': ['আমি', 'আমী', 'আমিতো'],
-    'amar': ['আমার', 'আমারই'],
-    'amra': ['আমরা', 'আমরাই'],
-    'apni': ['আপনি', 'আপনার'],
-    'apnar': ['আপনার', 'আপনারই'],
-    'tumi': ['তুমি', 'তুমিও'],
-    'tomar': ['তোমার', 'তোমারই'],
-    'bangla': ['বাংলা', 'বাঙলা'],
-    'bangladesh': ['বাংলাদেশ', 'বাংলাদেশে'],
-    'lekhani': ['লেখনী', 'লেখনি'],
-    'bhalobashi': ['ভালোবাসি', 'ভালবাসি'],
-    'bhalo': ['ভালো', 'ভাল'],
-    'kemon': ['কেমন', 'কেমনটা'],
-    'acho': ['আছো', 'আছেন'],
-    'achen': ['আছেন'],
-    'dhonnobad': ['ধন্যবাদ', 'ধন্যবাদান্তে'],
-    'shadhinota': ['স্বাধীনতা'],
-    'desh': ['দেশ', 'দেশে'],
-    'shomoy': ['সময়', 'সময়ে'],
-    'bortoman': ['বর্তমান'],
-    'muktijuddho': ['মুক্তিযুদ্ধ'],
-    'shundor': ['সুন্দর', 'সুন্দরী'],
-    'bondhu': ['বন্ধু', 'বন্ধুরা'],
-    'shurjo': ['সূর্য', 'সূর্যের'],
-    'surjo': ['সূর্য', 'সূর্যের'],
-    'shokal': ['সকাল', 'সকালে'],
-    'rat': ['রাত', 'রাতে'],
-    'gaan': ['গান', 'গানে'],
-    'khub': ['খুব', 'খুবই'],
-    'druto': ['দ্রুত'],
-    'porikkha': ['পরীক্ষা', 'পরীক্ষায়'],
-    'shobar': ['সবার', 'সবারে'],
-    'ghor': ['ঘর', 'ঘরে'],
-    'manush': ['মানুষ', 'মানুষের'],
-    'shanti': ['শান্তি'],
-    'shob': ['সব', 'সবই'],
-    'kaj': ['কাজ', 'কাজে'],
-    'notun': ['নতুন'],
-    'puraton': ['পুরাতন'],
-    'ekhon': ['এখন', 'এখনো'],
-    'tokhon': ['তখন'],
-    'she': ['সে', 'সেই'],
-    'tini': ['তিনি'],
-    'ki': ['কি', 'কী'],
-    'keno': ['কেন'],
-    'kothay': ['কোথায়'],
-    'biddut': ['বিদ্যুৎ'],
-    'orthonoitik': ['অর্থনৈতিক'],
-    'durniti': ['দুর্নীতি'],
-    'chithi': ['চিঠি'],
-    'kotha': ['কথা', 'কথায়'],
-    'pani': ['পানি', 'পানির'],
-    'jol': ['জল', 'জলে'],
-    'boi': ['বই'],
-    'kobi': ['কবি'],
-    'kobita': ['কবিতা'],
-    'lekha': ['লেখা'],
-    'porha': ['পড়া', 'পড়া'],
-    'khabar': ['খাবার'],
-    'kormo': ['কর্ম'],
-    'dhormo': ['ধর্ম'],
-    'barna': ['বর্ণ'],
-    'purna': ['পূর্ণ'],
-    'sattyo': ['সত্য'],
-    'oikyo': ['ঐক্য'],
-    'bakyo': ['বাক্য'],
-    'gram': ['গ্রাম'],
-    'prothom': ['প্রথম'],
-    'utshob': ['উৎসব'],
-    'shomporke': ['সম্পর্কে']
-  };
+  "ami": [
+    "আমি",
+    "আমী"
+  ],
+  "amar": [
+    "আমার",
+    "আমারই"
+  ],
+  "amra": [
+    "আমরা",
+    "আমরাই"
+  ],
+  "amader": [
+    "আমাদের"
+  ],
+  "apni": [
+    "আপনি"
+  ],
+  "apnar": [
+    "আপনার",
+    "আপনারই"
+  ],
+  "apnara": [
+    "আপনারা"
+  ],
+  "tumi": [
+    "তুমি",
+    "তুমিও"
+  ],
+  "tomar": [
+    "তোমার",
+    "তোমারই"
+  ],
+  "tomra": [
+    "তোমরা"
+  ],
+  "tomader": [
+    "তোমাদের"
+  ],
+  "she": [
+    "সে",
+    "সেই"
+  ],
+  "tar": [
+    "তার",
+    "তারই"
+  ],
+  "tara": [
+    "তারা"
+  ],
+  "tini": [
+    "তিনি"
+  ],
+  "eita": [
+    "এইটা"
+  ],
+  "oita": [
+    "ওইটা"
+  ],
+  "eta": [
+    "এটা"
+  ],
+  "ota": [
+    "ওটা"
+  ],
+  "ki": [
+    "কী",
+    "কি"
+  ],
+  "keno": [
+    "কেন"
+  ],
+  "kothay": [
+    "কোথায়"
+  ],
+  "kokhon": [
+    "কখন"
+  ],
+  "kivabe": [
+    "কিভাবে"
+  ],
+  "ke": [
+    "কে"
+  ],
+  "kara": [
+    "কারা"
+  ],
+  "koto": [
+    "কত"
+  ],
+  "kortesi": [
+    "করছি",
+    "করতেছি"
+  ],
+  "korechi": [
+    "করেছি"
+  ],
+  "korbo": [
+    "করব",
+    "করবো"
+  ],
+  "koro": [
+    "করো"
+  ],
+  "korun": [
+    "করুন"
+  ],
+  "koren": [
+    "করেন"
+  ],
+  "kori": [
+    "করি"
+  ],
+  "korte": [
+    "করতে"
+  ],
+  "jaitasi": [
+    "যাচ্ছি",
+    "যাইতেছি"
+  ],
+  "gechi": [
+    "গেছি"
+  ],
+  "jabo": [
+    "যাব",
+    "যাবো"
+  ],
+  "jan": [
+    "যান"
+  ],
+  "jao": [
+    "যাও"
+  ],
+  "jai": [
+    "যাই"
+  ],
+  "jete": [
+    "যেতে"
+  ],
+  "ashtasi": [
+    "আসছি",
+    "আসতেছি"
+  ],
+  "eshechi": [
+    "এসেছি"
+  ],
+  "ashbo": [
+    "আসব",
+    "আসবো"
+  ],
+  "ashun": [
+    "আসুন"
+  ],
+  "asho": [
+    "আসো"
+  ],
+  "ashi": [
+    "আসি"
+  ],
+  "ashte": [
+    "আসতে"
+  ],
+  "likhsi": [
+    "লিখছি"
+  ],
+  "likhechi": [
+    "লিখেছি"
+  ],
+  "likhbo": [
+    "লিখব",
+    "লিখবো"
+  ],
+  "likhi": [
+    "লিখি"
+  ],
+  "likhun": [
+    "লিখুন"
+  ],
+  "likhte": [
+    "লিখতে"
+  ],
+  "bolsi": [
+    "বলছি"
+  ],
+  "bolechi": [
+    "বলেছি"
+  ],
+  "bolbo": [
+    "বলব",
+    "বলবো"
+  ],
+  "bolo": [
+    "বলো"
+  ],
+  "bolun": [
+    "বলুন"
+  ],
+  "boli": [
+    "বলি"
+  ],
+  "shunsi": [
+    "শুনছি"
+  ],
+  "shunechi": [
+    "শুনেছি"
+  ],
+  "shunbo": [
+    "শুনব",
+    "শুনবো"
+  ],
+  "shuno": [
+    "শুনো"
+  ],
+  "shunun": [
+    "শুনুন"
+  ],
+  "dekhesi": [
+    "দেখেছি"
+  ],
+  "dekhbo": [
+    "দেখব",
+    "দেখবো"
+  ],
+  "dekho": [
+    "দেখো"
+  ],
+  "dekhun": [
+    "দেখুন"
+  ],
+  "dekhi": [
+    "দেখি"
+  ],
+  "bujhsi": [
+    "বুঝছি"
+  ],
+  "bujhechi": [
+    "বুঝেছি"
+  ],
+  "bujhi": [
+    "বুঝি"
+  ],
+  "bujhen": [
+    "বুঝেন"
+  ],
+  "bujhte": [
+    "বুঝতে"
+  ],
+  "jani": [
+    "জানি"
+  ],
+  "janen": [
+    "জানেন"
+  ],
+  "jante": [
+    "জানতে"
+  ],
+  "janbo": [
+    "জানব",
+    "জানবো"
+  ],
+  "kheyesi": [
+    "খেয়েছি"
+  ],
+  "khabo": [
+    "খাব",
+    "খাবো"
+  ],
+  "khao": [
+    "খাও"
+  ],
+  "khan": [
+    "খান"
+  ],
+  "khai": [
+    "খাই"
+  ],
+  "thaki": [
+    "থাকি"
+  ],
+  "thaken": [
+    "থাকেন"
+  ],
+  "thakbo": [
+    "থাকব",
+    "থাকবো"
+  ],
+  "thaka": [
+    "থাকা"
+  ],
+  "shikhi": [
+    "শিখি"
+  ],
+  "shikhbo": [
+    "শিখব",
+    "শিখবো"
+  ],
+  "shikhechi": [
+    "শিখেছি"
+  ],
+  "bangla": [
+    "বাংলা",
+    "বাঙলা"
+  ],
+  "bangladesh": [
+    "বাংলাদেশ",
+    "বাংলাদেশে"
+  ],
+  "dhaka": [
+    "ঢাকা",
+    "ঢাকায়"
+  ],
+  "chittagong": [
+    "চট্টগ্রাম"
+  ],
+  "rajshahi": [
+    "রাজশাহী"
+  ],
+  "khulna": [
+    "খুলনা"
+  ],
+  "sylhet": [
+    "সিলেট"
+  ],
+  "barishal": [
+    "বরিশাল"
+  ],
+  "rangpur": [
+    "রংপুর"
+  ],
+  "mymensingh": [
+    "ময়মনসিংহ"
+  ],
+  "comilla": [
+    "কুমিল্লা"
+  ],
+  "bogra": [
+    "বগুড়া"
+  ],
+  "desh": [
+    "দেশ",
+    "দেশে"
+  ],
+  "shadhinota": [
+    "স্বাধীনতা"
+  ],
+  "muktijuddho": [
+    "মুক্তিযুদ্ধ"
+  ],
+  "muktijoddha": [
+    "মুক্তিযোদ্ধা"
+  ],
+  "bhasha": [
+    "ভাষা",
+    "ভাষায়"
+  ],
+  "matribhasha": [
+    "মাতৃভাষা"
+  ],
+  "ekushey": [
+    "একুশে"
+  ],
+  "february": [
+    "ফেব্রুয়ারি"
+  ],
+  "boishakh": [
+    "বৈশাখ"
+  ],
+  "noboborsho": [
+    "নববর্ষ"
+  ],
+  "shongbidhan": [
+    "সংবিধান"
+  ],
+  "jonogon": [
+    "জনগণ"
+  ],
+  "shorkar": [
+    "সরকার"
+  ],
+  "bhalo": [
+    "ভালো",
+    "ভাল"
+  ],
+  "kharap": [
+    "খারাপ"
+  ],
+  "bhalobashi": [
+    "ভালোবাসি",
+    "ভালবাসি"
+  ],
+  "bhalobasha": [
+    "ভালোবাসা"
+  ],
+  "dhonnobad": [
+    "ধন্যবাদ",
+    "ধন্যবাদান্তে"
+  ],
+  "kemon": [
+    "কেমন"
+  ],
+  "acho": [
+    "আছো"
+  ],
+  "achen": [
+    "আছেন"
+  ],
+  "achi": [
+    "আছি"
+  ],
+  "shundor": [
+    "সুন্দর",
+    "সুন্দরী"
+  ],
+  "shanti": [
+    "শান্তি"
+  ],
+  "khushi": [
+    "খুশি"
+  ],
+  "dukho": [
+    "দুঃখ"
+  ],
+  "koshtho": [
+    "কষ্ট"
+  ],
+  "anondo": [
+    "আনন্দ",
+    "আনন্দে"
+  ],
+  "shobai": [
+    "সবাই"
+  ],
+  "shobar": [
+    "সবার"
+  ],
+  "bondhu": [
+    "বন্ধু",
+    "বন্ধুরা"
+  ],
+  "bondhutto": [
+    "বন্ধুত্ব"
+  ],
+  "priyo": [
+    "প্রিয়"
+  ],
+  "shotti": [
+    "সত্যি"
+  ],
+  "shuvo": [
+    "শুভ"
+  ],
+  "shubho": [
+    "শুভ"
+  ],
+  "shokal": [
+    "সকাল",
+    "সকালে"
+  ],
+  "dupur": [
+    "দুপুর",
+    "দুপুরে"
+  ],
+  "shondha": [
+    "সন্ধ্যা",
+    "সন্ধ্যায়"
+  ],
+  "rat": [
+    "রাত",
+    "রাতে"
+  ],
+  "bhor": [
+    "ভোর",
+    "ভোরে"
+  ],
+  "aaj": [
+    "আজ",
+    "আজকে"
+  ],
+  "kal": [
+    "কাল",
+    "কালকে"
+  ],
+  "gotokal": [
+    "গতকাল"
+  ],
+  "agami": [
+    "আগামী"
+  ],
+  "shomoy": [
+    "সময়",
+    "সময়ে"
+  ],
+  "karon": [
+    "কারণ"
+  ],
+  "kintu": [
+    "কিন্তু"
+  ],
+  "ebong": [
+    "এবং"
+  ],
+  "othoba": [
+    "অথবা"
+  ],
+  "jodi": [
+    "যদি"
+  ],
+  "tobu": [
+    "তবু"
+  ],
+  "tobuo": [
+    "তবুও"
+  ],
+  "tahole": [
+    "তাহলে"
+  ],
+  "tai": [
+    "তাই"
+  ],
+  "shothik": [
+    "সঠিক"
+  ],
+  "bhul": [
+    "ভুল"
+  ],
+  "shohoj": [
+    "সহজ"
+  ],
+  "kothin": [
+    "কঠিন"
+  ],
+  "onek": [
+    "অনেক"
+  ],
+  "olpo": [
+    "অল্প"
+  ],
+  "beshi": [
+    "বেশি",
+    "বেশী"
+  ],
+  "kom": [
+    "কম"
+  ],
+  "boro": [
+    "বড়",
+    "বড়"
+  ],
+  "choto": [
+    "ছোট"
+  ],
+  "notun": [
+    "নতুন"
+  ],
+  "puraton": [
+    "পুরাতন"
+  ],
+  "druto": [
+    "দ্রুত"
+  ],
+  "shob": [
+    "সব",
+    "সবই"
+  ],
+  "manush": [
+    "মানুষ",
+    "মানুষের"
+  ],
+  "kaj": [
+    "কাজ",
+    "কাজে"
+  ],
+  "ekhon": [
+    "এখন",
+    "এখনো"
+  ],
+  "tokhon": [
+    "তখন"
+  ],
+  "jibon": [
+    "জীবন",
+    "জীবনে"
+  ],
+  "mrittu": [
+    "মৃত্যু"
+  ],
+  "baba": [
+    "বাবা"
+  ],
+  "ma": [
+    "মা"
+  ],
+  "bhai": [
+    "ভাই"
+  ],
+  "bon": [
+    "বোন"
+  ],
+  "chele": [
+    "ছেলে"
+  ],
+  "meye": [
+    "মেয়ে"
+  ],
+  "shontan": [
+    "সন্তান"
+  ],
+  "poribar": [
+    "পরিবার",
+    "পরিবারে"
+  ],
+  "bari": [
+    "বাড়ি",
+    "বাড়ি"
+  ],
+  "ghor": [
+    "ঘর",
+    "ঘরে"
+  ],
+  "rasta": [
+    "রাস্তা",
+    "রাস্তায়"
+  ],
+  "shohor": [
+    "শহর",
+    "শহরে"
+  ],
+  "gram": [
+    "গ্রাম",
+    "গ্রামে"
+  ],
+  "nodi": [
+    "নদী"
+  ],
+  "nodir": [
+    "নদীর"
+  ],
+  "pahar": [
+    "পাহাড়",
+    "পাহাড়"
+  ],
+  "akash": [
+    "আকাশ",
+    "আকাশে"
+  ],
+  "batash": [
+    "বাতাস"
+  ],
+  "bristi": [
+    "বৃষ্টি"
+  ],
+  "megh": [
+    "মেঘ"
+  ],
+  "rod": [
+    "রোদ"
+  ],
+  "chad": [
+    "চাঁদ"
+  ],
+  "shobuj": [
+    "সবুজ"
+  ],
+  "lal": [
+    "লাল"
+  ],
+  "nil": [
+    "নীল"
+  ],
+  "holud": [
+    "হলুদ"
+  ],
+  "shada": [
+    "সাদা"
+  ],
+  "kalo": [
+    "কালো"
+  ],
+  "boi": [
+    "বই"
+  ],
+  "khata": [
+    "খাতা"
+  ],
+  "kolom": [
+    "কলম"
+  ],
+  "shobdo": [
+    "শব্দ"
+  ],
+  "bakyo": [
+    "বাক্য"
+  ],
+  "shikkha": [
+    "শিক্ষা"
+  ],
+  "shikkhok": [
+    "শিক্ষক"
+  ],
+  "chhatro": [
+    "ছাত্র"
+  ],
+  "chhatri": [
+    "ছাত্রী"
+  ],
+  "skul": [
+    "স্কুল"
+  ],
+  "college": [
+    "কলেজ"
+  ],
+  "university": [
+    "বিশ্ববিদ্যালয়",
+    "বিশ্ববিদ্যালয়"
+  ],
+  "biddut": [
+    "বিদ্যুৎ"
+  ],
+  "pani": [
+    "পানি",
+    "পানির"
+  ],
+  "jol": [
+    "জল",
+    "জলে"
+  ],
+  "khabar": [
+    "খাবার"
+  ],
+  "bhat": [
+    "ভাত"
+  ],
+  "ruti": [
+    "রুটি"
+  ],
+  "mach": [
+    "মাছ"
+  ],
+  "mangsho": [
+    "মাংস"
+  ],
+  "cha": [
+    "চা"
+  ],
+  "dudh": [
+    "দুধ"
+  ],
+  "misty": [
+    "মিষ্টি"
+  ],
+  "kormo": [
+    "কর্ম"
+  ],
+  "dhormo": [
+    "ধর্ম"
+  ],
+  "sattyo": [
+    "সত্য"
+  ],
+  "barna": [
+    "বর্ণ"
+  ],
+  "purna": [
+    "পূর্ণ"
+  ],
+  "oikyo": [
+    "ঐক্য"
+  ],
+  "utshob": [
+    "উৎসব"
+  ],
+  "shomporke": [
+    "সম্পর্কে"
+  ],
+  "lekhani": [
+    "লেখনী",
+    "লেখনি"
+  ],
+  "mobile": [
+    "মোবাইল"
+  ],
+  "phone": [
+    "ফোন"
+  ],
+  "computer": [
+    "কম্পিউটার"
+  ],
+  "internet": [
+    "ইন্টারনেট"
+  ],
+  "keyboard": [
+    "কীবোর্ড",
+    "কিবোর্ড"
+  ],
+  "gari": [
+    "গাড়ি",
+    "গাড়ি"
+  ],
+  "taka": [
+    "টাকা"
+  ],
+  "poisha": [
+    "পয়সা",
+    "পয়সা"
+  ],
+  "shadhona": [
+    "সাধনা"
+  ],
+  "surjo": [
+    "সূর্য",
+    "সূর্যের"
+  ],
+  "shurjo": [
+    "সূর্য",
+    "সূর্যের"
+  ],
+  "porikkha": [
+    "পরীক্ষা",
+    "পরীক্ষায়"
+  ],
+  "bortoman": [
+    "বর্তমান"
+  ],
+  "orthonoitik": [
+    "অর্থনৈতিক"
+  ],
+  "durniti": [
+    "দুর্নীতি"
+  ],
+  "chithi": [
+    "চিঠি"
+  ],
+  "kotha": [
+    "কথা",
+    "কথায়"
+  ],
+  "kobi": [
+    "কবি"
+  ],
+  "kobita": [
+    "কবিতা"
+  ],
+  "lekha": [
+    "লেখা"
+  ],
+  "porha": [
+    "পড়া",
+    "পড়া"
+  ],
+  "prothom": [
+    "প্রথম"
+  ]
+};
 
   // Spoken Continuous Verbal Conjugation Patterns
   const SPOKEN_CONJUGATIONS = [
@@ -443,18 +1233,84 @@
     });
   }
 
-  function commitCandidate(cand) {
-    const text = sandboxInput.value;
-    const words = text.split(/(\s+)/);
-    for (let k = words.length - 1; k >= 0; k--) {
-      if (words[k].trim().length > 0) {
-        words[k] = cand;
-        break;
-      }
+  // Helper to insert text at current cursor position
+  function insertTextAtCursor(input, text) {
+    if (!input) return;
+    const start = input.selectionStart || 0;
+    const end = input.selectionEnd || 0;
+    const val = input.value;
+    input.value = val.substring(0, start) + text + val.substring(end);
+    input.selectionStart = input.selectionEnd = start + text.length;
+  }
+
+  // Helper to delete character before cursor
+  function deleteCharBeforeCursor(input) {
+    if (!input) return;
+    const start = input.selectionStart || 0;
+    const end = input.selectionEnd || 0;
+    const val = input.value;
+    if (start !== end) {
+      input.value = val.substring(0, start) + val.substring(end);
+      input.selectionStart = input.selectionEnd = start;
+    } else if (start > 0) {
+      input.value = val.substring(0, start - 1) + val.substring(start);
+      input.selectionStart = input.selectionEnd = start - 1;
     }
-    sandboxInput.value = words.join('') + ' ';
+  }
+
+  // Hardware keyboard mapping for Probaho and Probhat layouts
+  const PROBAHO_KEYMAP = {
+    '1': 'অ', '2': 'আ', '3': 'ই', '4': 'ঈ', '5': 'উ',
+    '6': 'ক', '7': 'খ', '8': 'গ', '9': 'ঘ', '0': 'ঙ',
+    'q': 'া', 'w': 'ি', 'e': 'ী', 'r': 'ু', 't': 'ে',
+    'y': 'ত', 'u': 'থ', 'i': 'দ', 'o': 'ধ', 'p': 'ন',
+    'a': 'ৈ', 's': 'ো', 'd': 'ৌ', 'f': 'ৃ', 'g': '্',
+    'h': 'প', 'j': 'ফ', 'k': 'ব', 'l': 'ভ', ';': 'ম',
+    'z': 'ট', 'x': 'ঠ', 'c': 'ড', 'v': 'ঢ', 'b': 'ণ',
+    'n': 'র', 'm': 'ল', ',': 'স', '.': '।', '/': '?'
+  };
+
+  const PROBHAT_KEYMAP = {
+    'q': 'দ', 'w': 'ধ', 'e': 'ে', 'r': 'র', 't': 'ট',
+    'y': 'ঠ', 'u': 'ু', 'i': 'ি', 'o': 'ো', 'p': 'প',
+    'a': 'া', 's': 'স', 'd': 'ড', 'f': 'ঢ', 'g': 'গ',
+    'h': 'হ', 'j': 'জ', 'k': 'ক', 'l': 'ল', ';': ';',
+    'z': 'য', 'x': 'শ', 'c': 'চ', 'v': 'ভ', 'b': 'ব',
+    'n': 'ন', 'm': 'ম', ',': ',', '.': '।',
+    'Q': 'ধ', 'W': 'দ', 'E': 'ৈ', 'R': 'ড়', 'T': 'ঠ',
+    'Y': 'ট', 'U': 'ূ', 'I': 'ী', 'O': 'ৌ', 'P': 'ফ',
+    'A': 'অ', 'S': 'ষ', 'D': 'ঢ', 'F': 'ড', 'G': 'ঘ',
+    'H': 'ঃ', 'J': 'ঝ', 'K': 'খ', 'L': 'ঋ', ':': ':',
+    'Z': 'য়', 'X': 'ষ', 'C': 'ছ', 'V': 'ভ', 'B': 'ভ',
+    'N': 'ণ', 'M': 'ঙ'
+  };
+
+  function commitCandidate(cand) {
+    if (!sandboxInput) return;
+    const text = sandboxInput.value;
+    const pos = sandboxInput.selectionStart || text.length;
+    const before = text.substring(0, pos);
+    const match = before.match(/([a-zA-Z`^$]+)$/);
+
+    if (match) {
+      const wordStart = match.index;
+      const prefix = before.substring(0, wordStart);
+      const after = text.substring(pos);
+      sandboxInput.value = prefix + cand + ' ' + after;
+      sandboxInput.selectionStart = sandboxInput.selectionEnd = prefix.length + cand.length + 1;
+    } else {
+      const words = text.split(/(\s+)/);
+      for (let k = words.length - 1; k >= 0; k--) {
+        if (words[k].trim().length > 0) {
+          words[k] = cand;
+          break;
+        }
+      }
+      sandboxInput.value = words.join('') + ' ';
+    }
     renderCandidates([]);
     playMechanicalClick();
+    handleTyping();
   }
 
   function handleTyping() {
@@ -465,7 +1321,9 @@
 
     if (currentEngineMode === 'avro') {
       const text = sandboxInput.value;
-      const match = text.match(/([a-zA-Z`^$]+)$/);
+      const pos = sandboxInput.selectionStart !== null ? sandboxInput.selectionStart : text.length;
+      const before = text.substring(0, pos);
+      const match = before.match(/([a-zA-Z`^$]+)$/);
 
       if (match) {
         const currentWord = match[1];
@@ -501,6 +1359,18 @@
           e.preventDefault();
           const pickIdx = parseInt(e.key, 10) - 1;
           commitCandidate(currentCandidates[pickIdx]);
+        }
+      } else {
+        // In Probaho / Probhat mode: map hardware keys directly
+        if (!e.ctrlKey && !e.altKey && !e.metaKey && e.key.length === 1 && e.key !== ' ') {
+          const map = currentEngineMode === 'probaho' ? PROBAHO_KEYMAP : PROBHAT_KEYMAP;
+          const mapped = map[e.key] || map[e.key.toLowerCase()];
+          if (mapped) {
+            e.preventDefault();
+            insertTextAtCursor(sandboxInput, mapped);
+            handleTyping();
+            highlightKeycap(e.key);
+          }
         }
       }
     });
@@ -700,31 +1570,27 @@
 
           if (item.key === 'Backspace') {
             if (sandboxInput) {
-              sandboxInput.value = sandboxInput.value.slice(0, -1);
+              deleteCharBeforeCursor(sandboxInput);
               handleTyping();
             }
           } else if (item.key === 'Enter') {
             if (sandboxInput) {
-              sandboxInput.value += '\n';
+              insertTextAtCursor(sandboxInput, '\n');
               handleTyping();
             }
           } else if (item.key === ' ') {
-            if (currentCandidates.length > 0) {
+            if (currentEngineMode === 'avro' && currentCandidates.length > 0) {
               commitCandidate(currentCandidates[0]);
             } else if (sandboxInput) {
-              sandboxInput.value += ' ';
+              insertTextAtCursor(sandboxInput, ' ');
               handleTyping();
             }
           } else if (item.key === 'Shift') {
             // Shift modifier
           } else {
             if (sandboxInput) {
-              // In fixed layouts, insert direct Bengali character
-              if (currentEngineMode !== 'avro') {
-                sandboxInput.value += item.bn;
-              } else {
-                sandboxInput.value += item.key;
-              }
+              const charToInsert = currentEngineMode !== 'avro' ? item.bn : item.key;
+              insertTextAtCursor(sandboxInput, charToInsert);
               handleTyping();
             }
           }
@@ -753,12 +1619,22 @@
     if (btn) btn.classList.remove('pressed');
   }
 
+  const LAYOUT_PLACEHOLDERS = {
+    avro: "Type phonetically in English (e.g. 'ami banglay gaan gai' or 'amra shobai shadhin'). Press Space or 1-5 to commit...",
+    probaho: "Lekhani Flow (প্রবাহ) layout active: type using physical keys or on-screen keycaps...",
+    probhat: "Probhat (प्रभात) layout active: type using physical keys or on-screen keycaps..."
+  };
+
   document.querySelectorAll('.layout-pill').forEach(pill => {
     pill.addEventListener('click', () => {
       document.querySelectorAll('.layout-pill').forEach(p => p.classList.remove('active'));
       pill.classList.add('active');
       const layout = pill.getAttribute('data-layout');
       renderVirtualKeyboard(layout);
+      if (sandboxInput && LAYOUT_PLACEHOLDERS[layout]) {
+        sandboxInput.placeholder = LAYOUT_PLACEHOLDERS[layout];
+      }
+      renderCandidates([]);
     });
   });
 
@@ -976,6 +1852,43 @@
         });
       });
     }
+
+    const checksumCopyBtn = document.getElementById('copy-checksums-btn');
+    if (checksumCopyBtn) {
+      checksumCopyBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const codeElem = document.getElementById('release-checksums-code');
+        const text = codeElem ? codeElem.textContent : '';
+        navigator.clipboard.writeText(text).then(() => {
+          checksumCopyBtn.textContent = 'Copied!';
+          checksumCopyBtn.style.color = '#00e5b8';
+          setTimeout(() => {
+            checksumCopyBtn.textContent = 'Copy All';
+            checksumCopyBtn.style.color = '';
+          }, 2000);
+        });
+      });
+    }
+
+    document.querySelectorAll('.btn-crate-copy').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const snippet = btn.getAttribute('data-copy');
+        if (snippet) {
+          navigator.clipboard.writeText(snippet).then(() => {
+            const originalText = btn.textContent;
+            btn.textContent = 'Copied!';
+            btn.style.backgroundColor = '#00e5b8';
+            btn.style.color = '#071c15';
+            setTimeout(() => {
+              btn.textContent = originalText;
+              btn.style.backgroundColor = '';
+              btn.style.color = '';
+            }, 2000);
+          });
+        }
+      });
+    });
   }
 
   /* ==========================================================================
