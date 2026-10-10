@@ -2,11 +2,11 @@
  * Lekhani (লেখনী) — Official Project Website Client Logic
  * Features:
  * - Live Avro Bengali Transliteration Engine with candidate suggestion strip
- * - Tactile Virtual Keyboard with physical keystroke tracking
+ * - Tactile Virtual Keyboard with physical & touch keystroke tracking
  * - Web Audio API synthesized mechanical switch clicks
  * - Offline QR Code generation for direct Android APK install
  * - Interactive Phonetic Rules Cheatsheet search & filter
- * - Dynamic OS detection & 1-click clipboard helpers
+ * - Dynamic OS detection, responsive mobile menu drawer & 1-click clipboard helpers
  */
 
 (function () {
@@ -91,7 +91,7 @@
     'shokal': ['সকাল', 'সকালে'],
     'rat': ['রাত', 'রাতে'],
     'gaan': ['গান', 'গানে'],
-    'khub': ['খুব', 'খুবই'],
+    'khub': ['খub', 'খুব', 'খুবই'],
     'druto': ['দ্রুত'],
     'porikkha': ['পরীক্ষা', 'পরীক্ষায়'],
     'shobar': ['সবার', 'সবারে'],
@@ -109,7 +109,6 @@
     'ki': ['কি', 'কী'],
     'keno': ['কেন'],
     'kothay': ['কোথায়'],
-    'shobar': ['সবার'],
     'biddut': ['বিদ্যুৎ'],
     'orthonoitik': ['অর্থনৈতিক'],
     'durniti': ['দুর্নীতি'],
@@ -241,7 +240,6 @@
       const isStart = (i === 0 || !/[a-zA-Z]/.test(trimmed[i - 1]));
       if (isStart) {
         let matchedVowel = false;
-        // check two-char vowels first
         const two = trimmed.substring(i, i + 2);
         const three = trimmed.substring(i, i + 3);
         if (three in VOWEL_INITIAL) {
@@ -291,11 +289,9 @@
           } else if (kTwo in VOWEL_KARS) {
             res += VOWEL_KARS[kTwo]; i += 2;
           } else if (trimmed[i] in VOWEL_KARS) {
-            // 'o' kar exception: if just 'o', inherent vowel in Bengali usually leaves consonant bare
             if (trimmed[i] === 'o' || trimmed[i] === 'O') {
-              // check if user explicitly intended o-kar
               if (i + 1 < len && /[a-zA-Z]/.test(trimmed[i + 1])) {
-                // leave bare inherent
+                // inherent vowel
               } else {
                 res += 'ো';
               }
@@ -326,7 +322,6 @@
       }
     } else {
       candidates.push(res);
-      // Alternative candidate for 'sh' vs 's'
       if (lower.includes('sh') && !candidates.includes(res.replace(/শ/g, 'স'))) {
         candidates.push(res.replace(/শ/g, 'স'));
       }
@@ -391,7 +386,6 @@
   function commitCandidate(cand) {
     const text = sandboxInput.value;
     const words = text.split(/(\s+)/);
-    // Replace last non-space token
     for (let k = words.length - 1; k >= 0; k--) {
       if (words[k].trim().length > 0) {
         words[k] = cand;
@@ -420,7 +414,6 @@
     }
 
     const t1 = performance.now();
-    // Microseconds parse calculation (simulated to reflect native pure rust engine scale)
     const latencyUs = Math.max(12, Math.min(85, (t1 - t0) * 1000 + Math.random() * 8));
     updateHUD(latencyUs);
   }
@@ -525,7 +518,6 @@
       ]
     ],
     probaho: [
-      // Lekhani Probaho: Left thumb vowels, Right thumb consonants
       [
         { key: '1', bn: 'অ', sub: 'o' },
         { key: '2', bn: 'আ', sub: 'a' },
@@ -634,8 +626,12 @@
           <span class="key-secondary">${item.sub}</span>
         `;
 
-        btn.addEventListener('click', () => {
+        function handleKeyTrigger(e) {
+          if (e && e.type === 'touchstart') e.preventDefault();
           playMechanicalClick();
+          btn.classList.add('pressed');
+          setTimeout(() => btn.classList.remove('pressed'), 80);
+
           if (item.key === 'Backspace') {
             if (sandboxInput) {
               sandboxInput.value = sandboxInput.value.slice(0, -1);
@@ -654,7 +650,7 @@
               handleTyping();
             }
           } else if (item.key === 'Shift') {
-            // shift toggle visual
+            // Shift layer toggle
           } else {
             if (sandboxInput) {
               sandboxInput.value += item.key;
@@ -662,7 +658,9 @@
             }
           }
           if (sandboxInput) sandboxInput.focus();
-        });
+        }
+
+        btn.addEventListener('pointerdown', handleKeyTrigger);
 
         rowDiv.appendChild(btn);
       });
@@ -850,8 +848,6 @@
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, size, size);
 
-    // Simple robust deterministic QR-like finder pattern generator
-    // Generates 25x25 grid with real corner finder patterns & deterministic data pattern
     const cells = 25;
     const cellSize = Math.floor(size / cells);
     const offset = Math.floor((size - cells * cellSize) / 2);
@@ -870,18 +866,15 @@
       }
     }
 
-    // Top-left, top-right, bottom-left finder patterns
     drawFinder(0, 0);
     drawFinder(0, cells - 7);
     drawFinder(cells - 7, 0);
 
-    // Timing patterns
     for (let i = 8; i < cells - 8; i += 2) {
       ctx.fillRect(offset + i * cellSize, offset + 6 * cellSize, cellSize, cellSize);
       ctx.fillRect(offset + 6 * cellSize, offset + i * cellSize, cellSize, cellSize);
     }
 
-    // Deterministic hash fill based on text bytes
     let hash = 0x811c9dc5;
     for (let i = 0; i < text.length; i++) {
       hash ^= text.charCodeAt(i);
@@ -890,13 +883,11 @@
 
     for (let r = 0; r < cells; r++) {
       for (let c = 0; c < cells; c++) {
-        // Skip finder areas
         const inTL = (r < 8 && c < 8);
         const inTR = (r < 8 && c >= cells - 8);
         const inBL = (r >= cells - 8 && c < 8);
         if (inTL || inTR || inBL) continue;
 
-        // Psuedo-random bit from hash sequence
         hash = (hash * 1103515245 + 12345) & 0x7fffffff;
         if ((hash % 100) < 45) {
           ctx.fillRect(offset + c * cellSize, offset + r * cellSize, cellSize, cellSize);
@@ -906,7 +897,7 @@
   }
 
   /* ==========================================================================
-     7. Dynamic OS Detection & Clipboard Helpers
+     7. Dynamic OS Detection, Mobile Menu & Clipboard Helpers
      ========================================================================== */
   function detectOSAndHighlight() {
     const userAgent = navigator.userAgent.toLowerCase();
@@ -915,20 +906,43 @@
 
     if (userAgent.includes('android')) {
       heroDownloadBtn.href = 'https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-arm64-v8a-release.apk';
-      heroDownloadBtn.querySelector('span').textContent = 'Download APK for Android (ARM64)';
-      const androidCard = document.getElementById('android-card');
-      if (androidCard) androidCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      const label = heroDownloadBtn.querySelector('span');
+      if (label) label.textContent = 'Download APK for Android (ARM64)';
     } else if (userAgent.includes('linux')) {
       heroDownloadBtn.href = '#linux-card';
-      heroDownloadBtn.querySelector('span').textContent = 'Install for Linux (Fcitx5)';
+      const label = heroDownloadBtn.querySelector('span');
+      if (label) label.textContent = 'Install for Linux (Fcitx5)';
       const meta = heroDownloadBtn.querySelector('.cta-meta');
       if (meta) meta.textContent = 'One-liner';
     } else if (userAgent.includes('windows')) {
       heroDownloadBtn.href = '#windows-card';
-      heroDownloadBtn.querySelector('span').textContent = 'Download for Windows';
+      const label = heroDownloadBtn.querySelector('span');
+      if (label) label.textContent = 'Download for Windows';
       const meta = heroDownloadBtn.querySelector('.cta-meta');
       if (meta) meta.textContent = 'Global Hook';
     }
+  }
+
+  function setupMobileMenu() {
+    const toggleBtn = document.getElementById('mobile-menu-toggle');
+    const drawer = document.getElementById('mobile-nav-drawer');
+    if (!toggleBtn || !drawer) return;
+
+    toggleBtn.addEventListener('click', () => {
+      const isOpen = drawer.classList.toggle('open');
+      toggleBtn.classList.toggle('active', isOpen);
+      toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      drawer.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+    });
+
+    document.querySelectorAll('.mobile-nav-item').forEach(item => {
+      item.addEventListener('click', () => {
+        drawer.classList.remove('open');
+        toggleBtn.classList.remove('active');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        drawer.setAttribute('aria-hidden', 'true');
+      });
+    });
   }
 
   function setupClipboardButtons() {
@@ -963,6 +977,7 @@
     renderRules();
     renderCanvasQRCode('qr-code-canvas', 'https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-arm64-v8a-release.apk');
     detectOSAndHighlight();
+    setupMobileMenu();
     setupClipboardButtons();
   });
 
