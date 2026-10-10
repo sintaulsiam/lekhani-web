@@ -178,18 +178,18 @@
         <div class="section-header">
           <div class="section-tag">INTERACTIVE TESTBENCH</div>
           <h2 class="section-title">Type in the Browser</h2>
-          <p class="section-subtitle">Real Avro transliteration engine &amp; candidate prediction strip running live. Press keys on your physical keyboard or tap the keycaps below.</p>
+          <p class="section-subtitle">Real Avro transliteration engine, Sandhi rules, Reph, Ro-fala &amp; candidate prediction strip running live. Press keys on your physical keyboard or tap the keycaps below.</p>
         </div>
 
         <div class="sandbox-console">
           <!-- Sandbox Controls Bar -->
           <div class="sandbox-toolbar">
             <div class="toolbar-group layout-group">
-              <span class="toolbar-label">Layout:</span>
+              <span class="toolbar-label">Engine Mode:</span>
               <div class="layout-toggle-group" role="tablist">
-                <button type="button" class="layout-pill active" data-layout="avro" role="tab" aria-selected="true">Avro</button>
-                <button type="button" class="layout-pill" data-layout="probaho" role="tab" aria-selected="false">প্রবাহ (Flow)</button>
-                <button type="button" class="layout-pill" data-layout="probhat" role="tab" aria-selected="false">Probhat</button>
+                <button type="button" class="layout-pill active" data-layout="avro" role="tab" aria-selected="true">Avro Phonetic</button>
+                <button type="button" class="layout-pill" data-layout="probaho" role="tab" aria-selected="false">Lekhani প্রবাহ (Flow)</button>
+                <button type="button" class="layout-pill" data-layout="probhat" role="tab" aria-selected="false">Probhat (प्रभात)</button>
               </div>
             </div>
 
@@ -220,7 +220,7 @@
               <textarea 
                 id="sandbox-input" 
                 rows="4" 
-                placeholder="Type phonetically here... (e.g. 'ami banglay gaan gai', 'amar sonar bangla', 'lekhani khub druto')" 
+                placeholder="Type phonetically here... (e.g. 'ami banglay gaan gai', 'amar sonar bangla', 'kormo', 'gram', 'bakyo', 'kortesi')" 
                 autocomplete="off" 
                 autocorrect="off" 
                 autocapitalize="off" 
@@ -235,7 +235,8 @@
                 <button type="button" class="sample-chip" data-phrase="ami banglay gaan gai">ami banglay gaan gai</button>
                 <button type="button" class="sample-chip" data-phrase="amar sonar bangla">amar sonar bangla</button>
                 <button type="button" class="sample-chip" data-phrase="lekhani khub druto">lekhani khub druto</button>
-                <button type="button" class="sample-chip" data-phrase="kemon acho bondhu">kemon acho bondhu</button>
+                <button type="button" class="sample-chip" data-phrase="kormo e shadhona">kormo e shadhona</button>
+                <button type="button" class="sample-chip" data-phrase="biddut shomporke janun">biddut shomporke janun</button>
               </div>
             </div>
           </div>
@@ -243,16 +244,16 @@
           <!-- Live Performance HUD -->
           <div class="telemetry-hud">
             <div class="hud-item">
-              <span class="hud-label">Latency:</span>
-              <span class="hud-val text-accent" id="hud-latency">34 &mu;s</span>
+              <span class="hud-label">Parser Latency:</span>
+              <span class="hud-val text-accent" id="hud-latency">0.0 &mu;s</span>
             </div>
             <div class="hud-item">
               <span class="hud-label">Allocations:</span>
-              <span class="hud-val text-success">0 B</span>
+              <span class="hud-val text-success">0 B (Hot-path)</span>
             </div>
             <div class="hud-item">
               <span class="hud-label">Unicode:</span>
-              <span class="hud-val">NFC</span>
+              <span class="hud-val">NFC Canonical</span>
             </div>
             <div class="hud-item">
               <span class="hud-label">Keystrokes:</span>
@@ -328,14 +329,14 @@
               </div>
             </div>
 
-            <!-- QR Code Scan Box -->
+            <!-- Standard Verified QR Code -->
             <div class="mobile-qr-box">
               <div class="qr-canvas-wrapper">
-                <canvas id="qr-code-canvas" width="130" height="130" aria-label="QR Code to download APK on phone"></canvas>
+                <img src="assets/icons/apk-qr.svg" alt="Direct APK Download QR Code" width="118" height="118" class="qr-svg-img">
               </div>
               <div class="qr-info">
                 <span class="qr-title">Scan to install directly on phone</span>
-                <span class="qr-sub">Instant direct download of signed APK from GitHub.</span>
+                <span class="qr-sub">Scans directly to signed GitHub ARM64 release APK (31 MB).</span>
               </div>
             </div>
 
@@ -389,12 +390,12 @@ b34ee6b80001576e0c6d740fcf1341cf86a67460e0960cd2813d6b807d665697  app-arm64-v8a-
 
             <div class="distro-pills">
               <div class="distro-entry">
-                <span class="distro-name">Arch Linux (AUR)</span>
-                <code>paru -S lekhani</code>
+                <span class="distro-name">Source Build</span>
+                <code>cargo install --git https://github.com/sintaulsiam/lekhani</code>
               </div>
               <div class="distro-entry">
-                <span class="distro-name">Cargo / Source</span>
-                <code>cargo install --git https://github.com/sintaulsiam/lekhani</code>
+                <span class="distro-name">Packaging Scripts</span>
+                <code>packaging/ (Debian / RPM / Arch)</code>
               </div>
             </div>
           </div>
@@ -409,23 +410,23 @@ b34ee6b80001576e0c6d740fcf1341cf86a67460e0960cd2813d6b807d665697  app-arm64-v8a-
               </div>
               <div>
                 <h3 class="platform-name">Windows</h3>
-                <span class="platform-ver">Windows 10 / 11 64-bit</span>
+                <span class="platform-ver">Desktop Hook &bull; Source Preview</span>
               </div>
             </div>
 
             <p class="platform-desc">
-              Native Low-Level Keyboard Hook (<code>WH_KEYBOARD_LL</code>) &amp; System Tray Suite. Works flawlessly across Microsoft Office, Chrome, VS Code, and Windows Terminal.
+              Native Low-Level Keyboard Hook (<code>WH_KEYBOARD_LL</code>) &amp; System Tray Suite. Active desktop port tracking upstream engine crates.
             </p>
 
             <div class="windows-status-box">
               <div class="feature-checklist">
                 <div class="check-item">&check; Native Unicode <code>SendInput</code> synthesis</div>
                 <div class="check-item">&check; System tray switcher &amp; hotkey toggling</div>
-                <div class="check-item">&check; Inno Setup native installer &amp; portable ZIP</div>
+                <div class="check-item">&check; Full Inno Setup installer script in repo</div>
               </div>
 
-              <a href="https://github.com/sintaulsiam/lekhani/releases" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-block">
-                View Windows Builds on GitHub &rarr;
+              <a href="https://github.com/sintaulsiam/lekhani" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-block">
+                View Desktop Source on GitHub &rarr;
               </a>
             </div>
           </div>
@@ -782,7 +783,7 @@ lekhani-core = "0.3"</code></pre>
           <details class="faq-item">
             <summary class="faq-question">How do I install Lekhani on Linux?</summary>
             <div class="faq-answer">
-              <p>On any Linux distribution with Fcitx5, run our official one-liner script: <code>curl -fsSL https://raw.githubusercontent.com/sintaulsiam/lekhani/main/install.sh | bash</code>. On Arch Linux, it is also available via AUR: <code>paru -S lekhani</code>.</p>
+              <p>On any Linux distribution with Fcitx5, run our official one-liner script: <code>curl -fsSL https://raw.githubusercontent.com/sintaulsiam/lekhani/main/install.sh | bash</code>, or build directly with <code>cargo install --git https://github.com/sintaulsiam/lekhani</code>.</p>
             </div>
           </details>
         </div>

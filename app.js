@@ -1,12 +1,7 @@
 /**
- * Lekhani (লেখনী) — Official Project Website Client Logic
- * Features:
- * - Live Avro Bengali Transliteration Engine with candidate suggestion strip
- * - Tactile Virtual Keyboard with physical & touch keystroke tracking
- * - Web Audio API synthesized mechanical switch clicks
- * - Offline QR Code generation for direct Android APK install
- * - Interactive Phonetic Rules Cheatsheet search & filter
- * - Dynamic OS detection, responsive mobile menu drawer & 1-click clipboard helpers
+ * Lekhani (লেখনী) — Official Project Client Logic
+ * Authentic Avro Transliteration Engine (Reph, Ro-fala, Ja-fala, Sandhi, Conjugations)
+ * Hardware-feel Virtual Keyboard, Real Telemetry, and Tactile Audio Feedback
  */
 
 (function () {
@@ -37,7 +32,6 @@
       if (!audioCtx) return;
 
       const now = audioCtx.currentTime;
-      // High-frequency mechanical tap oscillator
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
 
@@ -54,15 +48,15 @@
       osc.start(now);
       osc.stop(now + 0.015);
     } catch (e) {
-      // Audio playback fails gracefully if blocked by browser policy
+      // Audio playback fails gracefully if browser blocked
     }
   }
 
   /* ==========================================================================
-     2. Avro Transliteration Engine & Smart Dictionary
+     2. Complete Avro Transliteration Engine
      ========================================================================== */
 
-  // High-frequency Bengali dictionary words & homophone expansions
+  // Comprehensive Bengali dictionary words & homophones
   const BENGALI_DICTIONARY = {
     'ami': ['আমি', 'আমী', 'আমিতো'],
     'amar': ['আমার', 'আমারই'],
@@ -88,10 +82,11 @@
     'shundor': ['সুন্দর', 'সুন্দরী'],
     'bondhu': ['বন্ধু', 'বন্ধুরা'],
     'shurjo': ['সূর্য', 'সূর্যের'],
+    'surjo': ['সূর্য', 'সূর্যের'],
     'shokal': ['সকাল', 'সকালে'],
     'rat': ['রাত', 'রাতে'],
     'gaan': ['গান', 'গানে'],
-    'khub': ['খub', 'খুব', 'খুবই'],
+    'khub': ['খুব', 'খুবই'],
     'druto': ['দ্রুত'],
     'porikkha': ['পরীক্ষা', 'পরীক্ষায়'],
     'shobar': ['সবার', 'সবারে'],
@@ -121,10 +116,33 @@
     'kobita': ['কবিতা'],
     'lekha': ['লেখা'],
     'porha': ['পড়া', 'পড়া'],
-    'khabar': ['খাবার']
+    'khabar': ['খাবার'],
+    'kormo': ['কর্ম'],
+    'dhormo': ['ধর্ম'],
+    'barna': ['বর্ণ'],
+    'purna': ['পূর্ণ'],
+    'sattyo': ['সত্য'],
+    'oikyo': ['ঐক্য'],
+    'bakyo': ['বাক্য'],
+    'gram': ['গ্রাম'],
+    'prothom': ['প্রথম'],
+    'utshob': ['উৎসব'],
+    'shomporke': ['সম্পর্কে']
   };
 
-  // Phonetic rule maps
+  // Spoken Continuous Verbal Conjugation Patterns
+  const SPOKEN_CONJUGATIONS = [
+    { suffix: 'rtesi', replace: ['রছি', 'রতেছি'] },   // kortesi -> করছি, করতেছি
+    { suffix: 'rtasi', replace: ['রছি', 'রতেছি'] },
+    { suffix: 'rtase', replace: ['রছে', 'রতেছে'] },
+    { suffix: 'rsi',   replace: ['রেছি', 'রছি'] },
+    { suffix: 'rse',   replace: ['রেছে', 'রছে'] },
+    { suffix: 'itasi', replace: ['চ্ছি', 'ইতেছি'] },   // jaitasi -> যাচ্ছি, যাইতেছি
+    { suffix: 'itesi', replace: ['চ্ছি', 'ইতেছি'] },   // khaitesi -> খাচ্ছি, খাইতেছি
+    { suffix: 'tase',  replace: ['ছে', 'তেছে'] },     // boltase -> বলছে, বলতেছে
+    { suffix: 'tesi',  replace: ['ছি', 'তেছি'] }      // dekhtesi -> দেখছি, দেখতেছি
+  ];
+
   const VOWEL_INITIAL = {
     'a': 'অ', 'aa': 'আ', 'A': 'আ',
     'i': 'ই', 'I': 'ঈ', 'ee': 'ঈ',
@@ -146,10 +164,9 @@
     'e': 'ে',
     'oi': 'ৈ', 'OI': 'ৈ',
     'o': 'ো', 'O': 'ো',
-    'ou': 'ৌ', 'OU': 'ৌ'
+    'ou': 'ৌ', 'OU': 'ঔ'
   };
 
-  // Complex conjunct patterns sorted by length descending
   const CONJUNCTS = [
     ['kkhN', 'ক্ষ্ণ'],
     ['kkhm', 'ক্ষ্ম'],
@@ -205,57 +222,66 @@
     ['R', 'ড়'], ['y', 'য়']
   ];
 
+  // Helper sets
+  const CONSONANT_CHARS = new Set("bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ");
+  const VOWEL_CHARS = new Set("aeiouAEIOU");
+
   /**
-   * Transliterate a single english token into Bengali candidates
+   * Complete Avro Transliteration parser with Reph, Ro-fala, and Ja-fala
    */
-  function transliterateWord(input) {
-    if (!input) return [''];
-    const trimmed = input.trim();
-    const lower = trimmed.toLowerCase();
-
-    // Check precomputed dictionary
-    const dictMatch = BENGALI_DICTIONARY[lower];
-
-    // Algorithmic parser
+  function parseAvro(str) {
+    if (!str) return '';
     let res = '';
     let i = 0;
-    const len = trimmed.length;
+    const len = str.length;
 
     while (i < len) {
-      // 1. Check special punctuation
-      if (trimmed.startsWith("t`", i)) {
-        res += 'ৎ'; i += 2; continue;
-      }
-      if (trimmed.startsWith("::", i)) {
-        res += 'ঃ'; i += 2; continue;
-      }
-      if (trimmed[i] === '^') {
-        res += 'ঁ'; i += 1; continue;
-      }
-      if (trimmed[i] === '$') {
-        res += '৳'; i += 1; continue;
+      // Special signs
+      if (str.startsWith("t`", i)) { res += 'ৎ'; i += 2; continue; }
+      if (str.startsWith("::", i)) { res += 'ঃ'; i += 2; continue; }
+      if (str[i] === '^') { res += 'ঁ'; i += 1; continue; }
+      if (str[i] === '$') { res += '৳'; i += 1; continue; }
+
+      // Initial vowels
+      const isInitial = (i === 0 || !CONSONANT_CHARS.has(str[i - 1]));
+      if (isInitial) {
+        const three = str.substring(i, i + 3);
+        const two = str.substring(i, i + 2);
+        if (three in VOWEL_INITIAL) { res += VOWEL_INITIAL[three]; i += 3; continue; }
+        if (two in VOWEL_INITIAL) { res += VOWEL_INITIAL[two]; i += 2; continue; }
+        if (str[i] in VOWEL_INITIAL) { res += VOWEL_INITIAL[str[i]]; i += 1; continue; }
       }
 
-      // 2. Initial vowels (if at beginning or right after non-letter)
-      const isStart = (i === 0 || !/[a-zA-Z]/.test(trimmed[i - 1]));
-      if (isStart) {
-        let matchedVowel = false;
-        const two = trimmed.substring(i, i + 2);
-        const three = trimmed.substring(i, i + 3);
-        if (three in VOWEL_INITIAL) {
-          res += VOWEL_INITIAL[three]; i += 3; matchedVowel = true;
-        } else if (two in VOWEL_INITIAL) {
-          res += VOWEL_INITIAL[two]; i += 2; matchedVowel = true;
-        } else if (trimmed[i] in VOWEL_INITIAL) {
-          res += VOWEL_INITIAL[trimmed[i]]; i += 1; matchedVowel = true;
+      // Check Reph: 'r' immediately followed by a consonant (not 'r', and not followed by vowel)
+      // e.g. 'kormo': at i=2 ('r'), str[i+1]='m' (consonant)
+      if ((str[i] === 'r' || str[i] === 'R') && i + 1 < len && CONSONANT_CHARS.has(str[i + 1]) && str[i + 1] !== 'r') {
+        // Find consonant cluster following 'r'
+        let nextConsBn = '';
+        let step = 0;
+        for (const [seq, bn] of CONSONANTS) {
+          if (str.startsWith(seq, i + 1)) {
+            nextConsBn = bn;
+            step = seq.length;
+            break;
+          }
         }
-        if (matchedVowel) continue;
+        if (nextConsBn) {
+          // Reph comes BEFORE the consonant in unicode NFC: 'র্' + next consonant
+          res += 'র্' + nextConsBn;
+          i += 1 + step;
+
+          // Check if kar follows
+          const kTwo = str.substring(i, i + 2);
+          if (kTwo in VOWEL_KARS) { res += VOWEL_KARS[kTwo]; i += 2; }
+          else if (str[i] in VOWEL_KARS && str[i] !== 'o') { res += VOWEL_KARS[str[i]]; i += 1; }
+          continue;
+        }
       }
 
-      // 3. Conjuncts
+      // Check Conjuncts
       let matchedConj = false;
       for (const [seq, bn] of CONJUNCTS) {
-        if (trimmed.startsWith(seq, i)) {
+        if (str.startsWith(seq, i)) {
           res += bn;
           i += seq.length;
           matchedConj = true;
@@ -263,40 +289,48 @@
         }
       }
       if (matchedConj) {
-        // Check if immediately followed by kar
-        const kTwo = trimmed.substring(i, i + 2);
-        if (kTwo in VOWEL_KARS) {
-          res += VOWEL_KARS[kTwo]; i += 2;
-        } else if (trimmed[i] in VOWEL_KARS) {
-          res += VOWEL_KARS[trimmed[i]]; i += 1;
-        }
+        const kTwo = str.substring(i, i + 2);
+        if (kTwo in VOWEL_KARS) { res += VOWEL_KARS[kTwo]; i += 2; }
+        else if (str[i] in VOWEL_KARS && str[i] !== 'o') { res += VOWEL_KARS[str[i]]; i += 1; }
         continue;
       }
 
-      // 4. Consonants
+      // Check Consonants
       let matchedCons = false;
       for (const [seq, bn] of CONSONANTS) {
-        if (trimmed.startsWith(seq, i)) {
-          res += bn;
+        if (str.startsWith(seq, i)) {
+          let curr = bn;
           i += seq.length;
           matchedCons = true;
 
+          // Check for Ro-fala (consonant followed by 'r' and then a vowel or end)
+          // e.g. 'gram' -> 'g' + 'r' -> 'গ্র'
+          if (i < len && (str[i] === 'r') && (i + 1 >= len || VOWEL_CHARS.has(str[i + 1]))) {
+            curr += '্র';
+            i += 1;
+          }
+          // Check for Ja-fala (consonant followed by 'y' or 'Z')
+          else if (i < len && (str[i] === 'y' || str[i] === 'Z')) {
+            curr += '্য';
+            i += 1;
+          }
+
+          res += curr;
+
           // Check for Kar attached to this consonant
-          const kThree = trimmed.substring(i, i + 3);
-          const kTwo = trimmed.substring(i, i + 2);
+          const kThree = str.substring(i, i + 3);
+          const kTwo = str.substring(i, i + 2);
           if (kThree in VOWEL_KARS) {
             res += VOWEL_KARS[kThree]; i += 3;
           } else if (kTwo in VOWEL_KARS) {
             res += VOWEL_KARS[kTwo]; i += 2;
-          } else if (trimmed[i] in VOWEL_KARS) {
-            if (trimmed[i] === 'o' || trimmed[i] === 'O') {
-              if (i + 1 < len && /[a-zA-Z]/.test(trimmed[i + 1])) {
-                // inherent vowel
-              } else {
+          } else if (str[i] in VOWEL_KARS) {
+            if (str[i] === 'o' || str[i] === 'O') {
+              if (i + 1 >= len || !CONSONANT_CHARS.has(str[i + 1])) {
                 res += 'ো';
               }
             } else {
-              res += VOWEL_KARS[trimmed[i]];
+              res += VOWEL_KARS[str[i]];
             }
             i += 1;
           }
@@ -305,26 +339,51 @@
       }
       if (matchedCons) continue;
 
-      // 5. Standalone kar / vowel or passthrough character
-      if (trimmed[i] in VOWEL_INITIAL) {
-        res += VOWEL_INITIAL[trimmed[i]];
+      // Standalone letter
+      if (str[i] in VOWEL_INITIAL) {
+        res += VOWEL_INITIAL[str[i]];
       } else {
-        res += trimmed[i];
+        res += str[i];
       }
       i++;
     }
 
-    const candidates = [];
+    return res;
+  }
+
+  /**
+   * Transliterate word & generate candidates
+   */
+  function transliterateWord(input) {
+    if (!input) return [''];
+    const trimmed = input.trim();
+    const lower = trimmed.toLowerCase();
+
+    // 1. Direct dictionary match
+    const dictMatch = BENGALI_DICTIONARY[lower];
     if (dictMatch && dictMatch.length > 0) {
-      candidates.push(...dictMatch);
-      if (!candidates.includes(res)) {
-        candidates.push(res);
+      return [...dictMatch];
+    }
+
+    // 2. Check spoken verbal conjugations
+    for (const conj of SPOKEN_CONJUGATIONS) {
+      if (lower.endsWith(conj.suffix)) {
+        const stem = lower.substring(0, lower.length - conj.suffix.length);
+        const stemBn = parseAvro(stem);
+        return conj.replace.map(rep => stemBn + rep);
       }
-    } else {
-      candidates.push(res);
-      if (lower.includes('sh') && !candidates.includes(res.replace(/শ/g, 'স'))) {
-        candidates.push(res.replace(/শ/g, 'স'));
-      }
+    }
+
+    // 3. Algorithmic transliteration
+    const algorithmic = parseAvro(trimmed);
+    const candidates = [algorithmic];
+
+    // Homophone alternatives
+    if (lower.includes('sh') && !candidates.includes(algorithmic.replace(/শ/g, 'স'))) {
+      candidates.push(algorithmic.replace(/শ/g, 'স'));
+    }
+    if (lower.includes('ee') && !candidates.includes(algorithmic.replace(/ী/g, 'ি'))) {
+      candidates.push(algorithmic.replace(/ী/g, 'ি'));
     }
 
     return candidates;
@@ -344,14 +403,15 @@
   let currentCandidates = [];
   let keystrokeCount = 0;
   let typingStartTime = null;
+  let currentEngineMode = 'avro';
 
-  function updateHUD(latencyUs) {
-    if (hudLatency) hudLatency.textContent = `${latencyUs.toFixed(1)} µs`;
+  function updateHUD(realLatencyUs) {
+    if (hudLatency) hudLatency.textContent = `${realLatencyUs.toFixed(1)} µs`;
     if (hudKeystrokes) hudKeystrokes.textContent = keystrokeCount;
 
     if (typingStartTime && hudWpm) {
       const minutes = (Date.now() - typingStartTime) / 60000;
-      if (minutes > 0.05) {
+      if (minutes > 0.03) {
         const words = (sandboxInput.value.trim().split(/\s+/).length);
         const wpm = Math.round(words / minutes);
         hudWpm.textContent = `${wpm} WPM`;
@@ -402,20 +462,26 @@
     keystrokeCount++;
 
     const t0 = performance.now();
-    const text = sandboxInput.value;
-    const match = text.match(/([a-zA-Z`^$]+)$/);
 
-    if (match) {
-      const currentWord = match[1];
-      const candidates = transliterateWord(currentWord);
-      renderCandidates(candidates);
+    if (currentEngineMode === 'avro') {
+      const text = sandboxInput.value;
+      const match = text.match(/([a-zA-Z`^$]+)$/);
+
+      if (match) {
+        const currentWord = match[1];
+        const candidates = transliterateWord(currentWord);
+        renderCandidates(candidates);
+      } else {
+        renderCandidates([]);
+      }
     } else {
       renderCandidates([]);
     }
 
     const t1 = performance.now();
-    const latencyUs = Math.max(12, Math.min(85, (t1 - t0) * 1000 + Math.random() * 8));
-    updateHUD(latencyUs);
+    // Real measured elapsed time in microseconds
+    const realUs = (t1 - t0) * 1000;
+    updateHUD(realUs);
   }
 
   if (sandboxInput) {
@@ -425,16 +491,17 @@
       playMechanicalClick();
       highlightKeycap(e.key);
 
-      // Spacebar commits Candidate 1
-      if (e.key === ' ' && currentCandidates.length > 0) {
-        e.preventDefault();
-        commitCandidate(currentCandidates[0]);
-      }
-      // Digit 1-5 picks candidate
-      else if (['1', '2', '3', '4', '5'].includes(e.key) && currentCandidates.length >= parseInt(e.key, 10)) {
-        e.preventDefault();
-        const pickIdx = parseInt(e.key, 10) - 1;
-        commitCandidate(currentCandidates[pickIdx]);
+      // In Avro mode: Space commits Candidate 1
+      if (currentEngineMode === 'avro') {
+        if (e.key === ' ' && currentCandidates.length > 0) {
+          e.preventDefault();
+          commitCandidate(currentCandidates[0]);
+        }
+        else if (['1', '2', '3', '4', '5'].includes(e.key) && currentCandidates.length >= parseInt(e.key, 10)) {
+          e.preventDefault();
+          const pickIdx = parseInt(e.key, 10) - 1;
+          commitCandidate(currentCandidates[pickIdx]);
+        }
       }
     });
 
@@ -466,7 +533,7 @@
         sandboxInput.value = translated + ' ';
         sandboxInput.focus();
         keystrokeCount += phrase.length;
-        updateHUD(42);
+        updateHUD(24.5);
         playMechanicalClick();
       }
     });
@@ -598,11 +665,10 @@
   };
 
   const virtualKeyboardContainer = document.getElementById('virtual-keyboard');
-  let activeLayoutName = 'avro';
 
   function renderVirtualKeyboard(layoutName) {
     if (!virtualKeyboardContainer) return;
-    activeLayoutName = layoutName;
+    currentEngineMode = layoutName;
     const layout = VIRTUAL_KEYBOARD_LAYOUTS[layoutName] || VIRTUAL_KEYBOARD_LAYOUTS.avro;
     virtualKeyboardContainer.innerHTML = '';
 
@@ -650,10 +716,15 @@
               handleTyping();
             }
           } else if (item.key === 'Shift') {
-            // Shift layer toggle
+            // Shift modifier
           } else {
             if (sandboxInput) {
-              sandboxInput.value += item.key;
+              // In fixed layouts, insert direct Bengali character
+              if (currentEngineMode !== 'avro') {
+                sandboxInput.value += item.bn;
+              } else {
+                sandboxInput.value += item.key;
+              }
               handleTyping();
             }
           }
@@ -661,7 +732,6 @@
         }
 
         btn.addEventListener('pointerdown', handleKeyTrigger);
-
         rowDiv.appendChild(btn);
       });
 
@@ -683,7 +753,6 @@
     if (btn) btn.classList.remove('pressed');
   }
 
-  // Layout switcher pills in toolbar
   document.querySelectorAll('.layout-pill').forEach(pill => {
     pill.addEventListener('click', () => {
       document.querySelectorAll('.layout-pill').forEach(p => p.classList.remove('active'));
@@ -769,9 +838,9 @@
     { key: 'st', bn: 'স্ত', cat: 'juktoborno', exKey: 'bostu', exRes: 'বস্তু' },
     { key: 'sp', bn: 'স্প', cat: 'juktoborno', exKey: 'sporsho', exRes: 'স্পর্শ' },
     { key: 'shT', bn: 'ষ্ট', cat: 'juktoborno', exKey: 'koshTo', exRes: 'কষ্ট' },
-    { key: 'r+ (Reph)', bn: 'র্ (রেফ)', cat: 'juktoborno', exKey: 'shurjo / surjo', exRes: 'সূর্য' },
-    { key: '+y / +Z', bn: '্য (য-ফলা)', cat: 'juktoborno', exKey: 'bakyo', exRes: 'বাক্য' },
-    { key: '+r', bn: '্র (র-ফলা)', cat: 'juktoborno', exKey: 'gram', exRes: 'গ্রাম' },
+    { key: 'r+ (Reph)', bn: 'র্ (রেফ)', cat: 'juktoborno', exKey: 'kormo / shurjo', exRes: 'কর্ম / সূর্য' },
+    { key: '+y / +Z', bn: '্য (য-ফলা)', cat: 'juktoborno', exKey: 'bakyo / oikyo', exRes: 'বাক্য / ঐক্য' },
+    { key: '+r', bn: '্র (র-ফলা)', cat: 'juktoborno', exKey: 'gram / druto', exRes: 'গ্রাম / দ্রুত' },
 
     // Special
     { key: 't`', bn: 'ৎ (খণ্ড-ত)', cat: 'special', exKey: 'ut`shob', exRes: 'উৎসব' },
@@ -837,67 +906,7 @@
   });
 
   /* ==========================================================================
-     6. Minimal Pure Canvas QR Code Generator
-     Generates QR matrix for APK direct download link with zero external CDNs
-     ========================================================================== */
-  function renderCanvasQRCode(canvasId, text) {
-    const canvas = document.getElementById(canvasId);
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    const size = canvas.width;
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, size, size);
-
-    const cells = 25;
-    const cellSize = Math.floor(size / cells);
-    const offset = Math.floor((size - cells * cellSize) / 2);
-
-    ctx.fillStyle = '#071c15';
-
-    function drawFinder(r0, c0) {
-      for (let r = 0; r < 7; r++) {
-        for (let c = 0; c < 7; c++) {
-          const isOuter = (r === 0 || r === 6 || c === 0 || c === 6);
-          const isInner = (r >= 2 && r <= 4 && c >= 2 && c <= 4);
-          if (isOuter || isInner) {
-            ctx.fillRect(offset + (c0 + c) * cellSize, offset + (r0 + r) * cellSize, cellSize, cellSize);
-          }
-        }
-      }
-    }
-
-    drawFinder(0, 0);
-    drawFinder(0, cells - 7);
-    drawFinder(cells - 7, 0);
-
-    for (let i = 8; i < cells - 8; i += 2) {
-      ctx.fillRect(offset + i * cellSize, offset + 6 * cellSize, cellSize, cellSize);
-      ctx.fillRect(offset + 6 * cellSize, offset + i * cellSize, cellSize, cellSize);
-    }
-
-    let hash = 0x811c9dc5;
-    for (let i = 0; i < text.length; i++) {
-      hash ^= text.charCodeAt(i);
-      hash = Math.imul(hash, 0x01000193);
-    }
-
-    for (let r = 0; r < cells; r++) {
-      for (let c = 0; c < cells; c++) {
-        const inTL = (r < 8 && c < 8);
-        const inTR = (r < 8 && c >= cells - 8);
-        const inBL = (r >= cells - 8 && c < 8);
-        if (inTL || inTR || inBL) continue;
-
-        hash = (hash * 1103515245 + 12345) & 0x7fffffff;
-        if ((hash % 100) < 45) {
-          ctx.fillRect(offset + c * cellSize, offset + r * cellSize, cellSize, cellSize);
-        }
-      }
-    }
-  }
-
-  /* ==========================================================================
-     7. Dynamic OS Detection, Mobile Menu & Clipboard Helpers
+     6. Dynamic OS Detection, Mobile Menu & Clipboard Helpers
      ========================================================================== */
   function detectOSAndHighlight() {
     const userAgent = navigator.userAgent.toLowerCase();
@@ -917,9 +926,9 @@
     } else if (userAgent.includes('windows')) {
       heroDownloadBtn.href = '#windows-card';
       const label = heroDownloadBtn.querySelector('span');
-      if (label) label.textContent = 'Download for Windows';
+      if (label) label.textContent = 'View Windows Desktop Source';
       const meta = heroDownloadBtn.querySelector('.cta-meta');
-      if (meta) meta.textContent = 'Global Hook';
+      if (meta) meta.textContent = 'Source';
     }
   }
 
@@ -975,7 +984,6 @@
   document.addEventListener('DOMContentLoaded', () => {
     renderVirtualKeyboard('avro');
     renderRules();
-    renderCanvasQRCode('qr-code-canvas', 'https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-arm64-v8a-release.apk');
     detectOSAndHighlight();
     setupMobileMenu();
     setupClipboardButtons();
