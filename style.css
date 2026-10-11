@@ -438,6 +438,7 @@ ul {
 }
 
 /* Theme Toggle Button */
+.theme-toggle-btn,
 .btn-theme-toggle {
   width: 38px;
   height: 38px;
@@ -449,11 +450,25 @@ ul {
   border: 1px solid var(--border-medium);
   color: var(--text-secondary);
   transition: all var(--t-fast);
+  cursor: pointer;
+  flex-shrink: 0;
 }
 
+.theme-toggle-btn:hover,
 .btn-theme-toggle:hover {
   color: var(--mint);
   border-color: var(--border-accent);
+}
+
+.github-btn {
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
 }
 
 .icon-moon { display: none; }
@@ -2355,6 +2370,10 @@ ul {
   }
   .mobile-nav-drawer {
     display: none !important;
+  }
+  .github-btn {
+    width: auto;
+    padding: 0.45rem 0.85rem;
   }
   .nav-links {
     display: flex;
