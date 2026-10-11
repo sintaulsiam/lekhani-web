@@ -49,6 +49,10 @@
       </div>
 
       <div class="nav-actions">
+        <button type="button" class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle Color Theme" title="Toggle dark/light theme">
+          <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
         <a href="https://github.com/sintaulsiam/lekhani" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm github-btn">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
@@ -105,68 +109,105 @@
   <!-- Hero Section -->
   <main id="main-content">
     <section class="hero-section container">
-      <div class="hero-content">
-        <div class="hero-tag">
-          <span class="status-dot"></span>
-          <span>100% On-Device &bull; Pure Rust &bull; Zero Telemetry</span>
-        </div>
-        
-        <h1 class="hero-title">
-          Deterministic.<br>
-          Sub-millisecond.<br>
-          <span class="gradient-text">Bengali Input Engine.</span>
-        </h1>
-        
-        <p class="hero-lead">
-          A high-performance input method suite for Android, Linux, and Windows. Built from scratch with zero runtime garbage collection on the typing hot-path, canonical Unicode NFC fidelity, and zero network calls.
-        </p>
-
-        <!-- Dynamic OS CTA -->
-        <div class="hero-cta-wrapper">
-          <div class="hero-primary-cta">
-            <a href="https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-arm64-v8a-release.apk" id="hero-download-btn" class="btn btn-primary btn-lg">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                <polyline points="7 10 12 15 17 10"/>
-                <line x1="12" y1="15" x2="12" y2="3"/>
-              </svg>
-              <span>Download APK v0.3.0 (ARM64)</span>
-              <span class="cta-meta">31.0 MB</span>
-            </a>
-            <a href="#sandbox" class="btn btn-secondary btn-lg">
-              <span>Try Live Sandbox</span>
-              <span class="kbd-hint">&darr;</span>
-            </a>
+      <div class="hero-layout">
+        <div class="hero-content">
+          <div class="hero-tag">
+            <span class="status-dot"></span>
+            <span>100% On-Device &bull; Pure Rust &bull; Zero Telemetry</span>
           </div>
+          
+          <h1 class="hero-title">
+            Deterministic.<br>
+            Sub-millisecond.<br>
+            <span class="gradient-text">Bengali Input Engine.</span>
+          </h1>
+          
+          <p class="hero-lead">
+            A high-performance input method suite for Android, Linux, and Windows. Built from scratch with zero runtime garbage collection on the typing hot-path, canonical Unicode NFC fidelity, and zero network calls.
+          </p>
 
-          <div class="install-pill-quick">
-            <span class="pill-label">Linux:</span>
-            <div class="pill-code-scroll">
-              <code class="pill-code" id="quick-curl-code">curl -fsSL https://raw.githubusercontent.com/sintaulsiam/lekhani/main/install.sh | bash</code>
+          <!-- Dynamic OS CTA -->
+          <div class="hero-cta-wrapper">
+            <div class="hero-primary-cta">
+              <a href="https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-arm64-v8a-release.apk" id="hero-download-btn" class="btn btn-primary btn-lg">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                <span>Download APK v0.3.0 (ARM64)</span>
+                <span class="cta-meta">31.0 MB</span>
+              </a>
+              <a href="#sandbox" class="btn btn-secondary btn-lg">
+                <span>Try Live Sandbox</span>
+                <span class="kbd-hint">&darr;</span>
+              </a>
             </div>
-            <button type="button" class="btn-copy-icon" id="quick-curl-copy" aria-label="Copy install command" title="Copy to clipboard">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-            </button>
+
+            <div class="install-pill-quick">
+              <span class="pill-label">Linux:</span>
+              <div class="pill-code-scroll">
+                <code class="pill-code" id="quick-curl-code">curl -fsSL https://raw.githubusercontent.com/sintaulsiam/lekhani/main/install.sh | bash</code>
+              </div>
+              <button type="button" class="btn-copy-icon" id="quick-curl-copy" aria-label="Copy install command" title="Copy to clipboard">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Metric Badges -->
+          <div class="hero-metrics-grid">
+            <div class="metric-card">
+              <div class="metric-value">&lt; 100 &mu;s</div>
+              <div class="metric-label">Hot-path keystroke processing</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value">0 Bytes</div>
+              <div class="metric-label">Network data off the device</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value">120 FPS</div>
+              <div class="metric-label">Hardware canvas refresh</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value">&lt; 55 MB</div>
+              <div class="metric-label">Active typing RAM footprint</div>
+            </div>
           </div>
         </div>
 
-        <!-- Metric Badges -->
-        <div class="hero-metrics-grid">
-          <div class="metric-card">
-            <div class="metric-value">&lt; 100 &mu;s</div>
-            <div class="metric-label">Hot-path keystroke processing</div>
+        <!-- 3D Tactile Keycap Matrix Plate Showcase -->
+        <div class="hero-keycaps-showcase" id="hero-keycaps-showcase">
+          <div class="plate-header">
+            <div class="plate-brand">
+              <span class="plate-led"></span>
+              <span class="plate-title">LEKHANI SWITCH PLATE &bull; 60%</span>
+            </div>
+            <span class="plate-layout-badge">PROBAHO &bull; FLOW</span>
           </div>
-          <div class="metric-card">
-            <div class="metric-value">0 Bytes</div>
-            <div class="metric-label">Network data off the device</div>
+          
+          <div class="hero-keycaps-grid">
+            <button type="button" class="hero-keycap" data-char="অ" data-rom="o" title="Key অ (o)"><span class="hk-bn">অ</span><span class="hk-rom">O</span></button>
+            <button type="button" class="hero-keycap" data-char="আ" data-rom="a" title="Key আ (a)"><span class="hk-bn">আ</span><span class="hk-rom">A</span></button>
+            <button type="button" class="hero-keycap" data-char="ই" data-rom="i" title="Key ই (i)"><span class="hk-bn">ই</span><span class="hk-rom">I</span></button>
+            <button type="button" class="hero-keycap" data-char="উ" data-rom="u" title="Key উ (u)"><span class="hk-bn">উ</span><span class="hk-rom">U</span></button>
+            <button type="button" class="hero-keycap" data-char="ক" data-rom="k" title="Key ক (k)"><span class="hk-bn">ক</span><span class="hk-rom">K</span></button>
+            <button type="button" class="hero-keycap" data-char="খ" data-rom="kh" title="Key খ (kh)"><span class="hk-bn">খ</span><span class="hk-rom">KH</span></button>
+            <button type="button" class="hero-keycap" data-char="গ" data-rom="g" title="Key গ (g)"><span class="hk-bn">গ</span><span class="hk-rom">G</span></button>
+            <button type="button" class="hero-keycap" data-char="ঘ" data-rom="gh" title="Key ঘ (gh)"><span class="hk-bn">ঘ</span><span class="hk-rom">GH</span></button>
+            <button type="button" class="hero-keycap" data-char="চ" data-rom="c" title="Key চ (c)"><span class="hk-bn">চ</span><span class="hk-rom">C</span></button>
+            <button type="button" class="hero-keycap" data-char="ত" data-rom="t" title="Key ত (t)"><span class="hk-bn">ত</span><span class="hk-rom">T</span></button>
+            <button type="button" class="hero-keycap" data-char="দ" data-rom="d" title="Key দ (d)"><span class="hk-bn">দ</span><span class="hk-rom">D</span></button>
+            <button type="button" class="hero-keycap" data-char="ন" data-rom="n" title="Key ন (n)"><span class="hk-bn">ন</span><span class="hk-rom">N</span></button>
+            <button type="button" class="hero-keycap" data-char="প" data-rom="p" title="Key প (p)"><span class="hk-bn">প</span><span class="hk-rom">P</span></button>
+            <button type="button" class="hero-keycap" data-char="ব" data-rom="b" title="Key ব (b)"><span class="hk-bn">ব</span><span class="hk-rom">B</span></button>
+            <button type="button" class="hero-keycap" data-char="ম" data-rom="m" title="Key ম (m)"><span class="hk-bn">ম</span><span class="hk-rom">M</span></button>
+            <button type="button" class="hero-keycap" data-char="র" data-rom="r" title="Key র (r)"><span class="hk-bn">র</span><span class="hk-rom">R</span></button>
           </div>
-          <div class="metric-card">
-            <div class="metric-value">120 FPS</div>
-            <div class="metric-label">Hardware canvas refresh</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-value">&lt; 55 MB</div>
-            <div class="metric-label">Active typing RAM footprint</div>
+
+          <div class="plate-footer">
+            <span>TACTILE PBT DOUBLE-SHOT</span>
+            <span>CLICK TO TEST SWITCH</span>
           </div>
         </div>
       </div>

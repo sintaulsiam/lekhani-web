@@ -1891,10 +1891,48 @@
     });
   }
 
+  function setupThemeToggle() {
+    const themeBtn = document.getElementById('theme-toggle-btn');
+    const savedTheme = localStorage.getItem('lekhani-theme');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+
+    document.documentElement.setAttribute('data-theme', initialTheme);
+
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        playMechanicalClick();
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', nextTheme);
+        localStorage.setItem('lekhani-theme', nextTheme);
+      });
+    }
+  }
+
+  function setupHeroKeycaps() {
+    const heroKeycaps = document.querySelectorAll('.hero-keycap');
+    heroKeycaps.forEach(cap => {
+      cap.addEventListener('click', () => {
+        playMechanicalClick();
+        cap.classList.add('pressed');
+        setTimeout(() => cap.classList.remove('pressed'), 120);
+
+        const char = cap.getAttribute('data-char');
+        if (sandboxInput && char) {
+          insertTextAtCursor(sandboxInput, char);
+          handleTyping();
+        }
+      });
+    });
+  }
+
   /* ==========================================================================
      Initialize on DOM Ready
      ========================================================================== */
   document.addEventListener('DOMContentLoaded', () => {
+    setupThemeToggle();
+    setupHeroKeycaps();
     renderVirtualKeyboard('avro');
     renderRules();
     detectOSAndHighlight();
