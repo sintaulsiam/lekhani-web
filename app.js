@@ -1789,22 +1789,22 @@
     const heroDownloadBtn = document.getElementById('hero-download-btn');
     if (!heroDownloadBtn) return;
 
-    if (userAgent.includes('android')) {
+    const label = heroDownloadBtn.querySelector('.btn-text') || heroDownloadBtn.querySelector('span');
+    const meta = heroDownloadBtn.querySelector('.cta-meta');
+    const isMobile = window.innerWidth <= 768 || /android|iphone|ipad|ipod|mobile/.test(userAgent);
+
+    if (isMobile || userAgent.includes('android')) {
       heroDownloadBtn.href = 'https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-arm64-v8a-release.apk';
-      const label = heroDownloadBtn.querySelector('span');
-      if (label) label.textContent = 'Download APK for Android (ARM64)';
+      if (label) label.textContent = 'Download Android APK';
+      if (meta) meta.textContent = 'v0.3.0 \u2022 31 MB';
     } else if (userAgent.includes('linux')) {
       heroDownloadBtn.href = '#linux-card';
-      const label = heroDownloadBtn.querySelector('span');
       if (label) label.textContent = 'Install for Linux (Fcitx5)';
-      const meta = heroDownloadBtn.querySelector('.cta-meta');
       if (meta) meta.textContent = 'One-liner';
     } else if (userAgent.includes('windows')) {
       heroDownloadBtn.href = '#windows-card';
-      const label = heroDownloadBtn.querySelector('span');
-      if (label) label.textContent = 'View Windows Desktop Source';
-      const meta = heroDownloadBtn.querySelector('.cta-meta');
-      if (meta) meta.textContent = 'Source';
+      if (label) label.textContent = 'Download for Windows';
+      if (meta) meta.textContent = 'v0.3.0';
     }
   }
 
@@ -1928,6 +1928,83 @@
   }
 
   /* ==========================================================================
+     20. Scroll-Reveal IntersectionObserver
+     ========================================================================== */
+  function setupScrollReveal() {
+    // Pre-cache bar widths before adding reveal class (avoid CSS !important racing)
+    document.querySelectorAll('.bar-fill').forEach((bar) => {
+      const w = bar.style.width || '0%';
+      bar.setAttribute('data-w', w);
+      bar.style.width = '0%';
+    });
+
+    // Add reveal class to section children that should animate
+    const revealTargets = document.querySelectorAll(
+      '.section-header, .bench-card, .benchmark-card, .layout-card, .gallery-item, ' +
+      '.crate-card, .principle-card, .platform-card, .featured-release-card, ' +
+      '.faq-item, .metric-card, .sandbox-console, .cheatsheet-container'
+    );
+
+    revealTargets.forEach((el) => {
+      if (!el.classList.contains('reveal')) {
+        el.classList.add('reveal');
+      }
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          // Animate benchmark bars to their real target width
+          const bars = entry.target.querySelectorAll('.bar-fill');
+          bars.forEach((bar) => {
+            const targetW = bar.getAttribute('data-w') || '0%';
+            // Small delay so the element has faded in first
+            setTimeout(() => { bar.style.width = targetW; }, 200);
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -60px 0px'
+    });
+
+    revealTargets.forEach((el) => observer.observe(el));
+    staggerParents.forEach((parent) => {
+      observer.observe(parent);
+      Array.from(parent.children).forEach((child) => observer.observe(child));
+    });
+  }
+
+  /* ==========================================================================
+     21. Active Nav Link Scroll Spy
+     ========================================================================== */
+  function setupScrollSpy() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    if (!sections.length || !navLinks.length) return;
+
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          navLinks.forEach((link) => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + id) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }, {
+      rootMargin: '-50% 0px -50% 0px'
+    });
+
+    sections.forEach((section) => spy.observe(section));
+  }
+
+  /* ==========================================================================
      Initialize on DOM Ready
      ========================================================================== */
   document.addEventListener('DOMContentLoaded', () => {
@@ -1938,6 +2015,8 @@
     detectOSAndHighlight();
     setupMobileMenu();
     setupClipboardButtons();
+    setupScrollReveal();
+    setupScrollSpy();
   });
 
 })();

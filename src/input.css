@@ -1,0 +1,433 @@
+@import "tailwindcss";
+@source "../index.html";
+@source "../app.js";
+
+@theme {
+  --color-mint: #00E5B8;
+  --color-mint-hover: #18ebd3;
+  --color-mint-dim: rgba(0, 229, 184, 0.1);
+  --color-mint-glow: rgba(0, 229, 184, 0.25);
+  
+  --font-bengali: 'Hind Siliguri', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+:root {
+  --bg-app: #080A0F;
+  --bg-surface: #0E121A;
+  --bg-surface-elevated: #141A26;
+  --bg-input: #07090D;
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-medium: rgba(255, 255, 255, 0.12);
+  --border-accent: rgba(0, 229, 184, 0.4);
+  --text-primary: #F0F4FC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --mint: #00E5B8;
+  --mint-dim: rgba(0, 229, 184, 0.12);
+  --plate-chassis: #0C0F17;
+  --plate-border: #1E2538;
+  --key-face: #141A26;
+  --key-face-hover: #1B2436;
+  --key-face-active: #00E5B8;
+  --key-border: #232D42;
+  --key-shadow: 0 3px 0 #090C12, 0 4px 6px rgba(0,0,0,0.5);
+  --key-shadow-pressed: 0 1px 0 #090C12, 0 1px 2px rgba(0,0,0,0.5);
+}
+
+[data-theme="light"] {
+  --bg-app: #F8FAFC;
+  --bg-surface: #FFFFFF;
+  --bg-surface-elevated: #F1F5F9;
+  --bg-input: #FFFFFF;
+  --border-subtle: rgba(0, 0, 0, 0.06);
+  --border-medium: rgba(0, 0, 0, 0.12);
+  --border-accent: rgba(0, 168, 128, 0.45);
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #64748B;
+  --mint: #00A880;
+  --mint-dim: rgba(0, 168, 128, 0.12);
+  --plate-chassis: #E2E8F0;
+  --plate-border: #CBD5E1;
+  --key-face: #FFFFFF;
+  --key-face-hover: #F8FAFC;
+  --key-face-active: #00A880;
+  --key-border: #CBD5E1;
+  --key-shadow: 0 3px 0 #94A3B8, 0 3px 5px rgba(0,0,0,0.1);
+  --key-shadow-pressed: 0 1px 0 #94A3B8, 0 1px 2px rgba(0,0,0,0.1);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ── Typography & Gradients ──────────────────────────────────────────────── */
+.font-bengali { font-family: var(--font-bengali); }
+.font-display { font-family: var(--font-display); }
+.font-mono { font-family: var(--font-mono); }
+
+.gradient-text {
+  background: linear-gradient(135deg, #00E5B8 0%, #00B4D8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline;
+}
+
+[data-theme="light"] .gradient-text {
+  background: linear-gradient(135deg, #008767 0%, #007799 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Background Grid Pattern */
+.bg-grid-pattern {
+  background-size: 32px 32px;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+}
+
+[data-theme="light"] .bg-grid-pattern {
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Status Pulsing Dot */
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--mint);
+  box-shadow: 0 0 8px var(--mint);
+  animation: pulse-dot 2.5s infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(1.2); }
+}
+
+/* Theme Moon / Sun Toggle */
+.icon-moon { display: none; }
+.icon-sun { display: block; }
+[data-theme="light"] .icon-moon { display: block; }
+[data-theme="light"] .icon-sun { display: none; }
+
+/* ── Mobile Nav Drawer State ─────────────────────────────────────────────── */
+.mobile-nav-drawer {
+  display: none;
+}
+.mobile-nav-drawer.open {
+  display: block;
+}
+
+/* ── Virtual Keyboard Keycaps (Hardware Tactile Styling) ──────────────────── */
+.virtual-keyboard-container {
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.keycap {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 42px;
+  background: var(--key-face);
+  border: 1px solid var(--key-border);
+  border-top-color: rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  box-shadow: var(--key-shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: transform 70ms ease, box-shadow 70ms ease, background 70ms ease;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.keycap::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  height: 35%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.08), transparent);
+  border-radius: 4px 4px 0 0;
+  pointer-events: none;
+}
+
+.keycap:hover {
+  background: var(--key-face-hover);
+  transform: translateY(-1px);
+}
+
+.keycap:active, .keycap.pressed {
+  background: var(--mint) !important;
+  transform: translateY(2px) !important;
+  box-shadow: var(--key-shadow-pressed) !important;
+  color: #000 !important;
+}
+
+.keycap:active .key-primary, .keycap.pressed .key-primary,
+.keycap:active .key-secondary, .keycap.pressed .key-secondary {
+  color: #000 !important;
+}
+
+.key-primary {
+  font-family: var(--font-bengali);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--text-primary);
+}
+
+.key-secondary {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  line-height: 1;
+}
+
+/* Key flex sizes */
+.key-space { flex: 4 1 0; }
+.key-backspace { flex: 1.6 1 0; }
+.key-tab { flex: 1.3 1 0; }
+.key-enter { flex: 1.6 1 0; }
+.key-shift { flex: 1.8 1 0; }
+.key-caps { flex: 1.5 1 0; }
+
+.key-shift.shift-active {
+  background: rgba(0, 229, 184, 0.18);
+  border-color: var(--mint);
+  color: var(--mint);
+}
+
+/* ── Hero Tactile Keycap Switch Plate ────────────────────────────────────── */
+.hero-keycap {
+  background: var(--key-face);
+  border: 1px solid var(--key-border);
+  border-top-color: rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  box-shadow: var(--key-shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 0.6rem 0.3rem;
+  min-height: 48px;
+  cursor: pointer;
+  transition: all 80ms ease;
+  user-select: none;
+}
+
+.hero-keycap:hover {
+  background: var(--key-face-hover);
+  transform: translateY(-1.5px);
+  border-color: var(--border-accent);
+}
+
+.hero-keycap:active, .hero-keycap.pressed {
+  background: var(--mint);
+  color: #000;
+  transform: translateY(2px);
+  box-shadow: var(--key-shadow-pressed);
+}
+
+.hero-keycap .hk-bn {
+  font-family: var(--font-bengali);
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.hero-keycap .hk-rom {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.hero-keycap:active .hk-rom, .hero-keycap.pressed .hk-rom {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+/* ── Floating Candidate Strip ────────────────────────────────────────────── */
+.candidate-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-bengali);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 0.25rem 0.6rem;
+  cursor: pointer;
+  transition: all 100ms ease;
+  white-space: nowrap;
+}
+
+.candidate-item.active, .candidate-item:hover {
+  background: rgba(0, 229, 184, 0.15);
+  border-color: var(--mint);
+  color: var(--mint);
+}
+
+.candidate-num {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  line-height: 1;
+}
+
+/* ── Sound Toggle Switch ─────────────────────────────────────────────────── */
+.sound-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+}
+.sound-toggle input { display: none; }
+.sound-toggle-slider {
+  width: 32px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-medium);
+  border-radius: 9999px;
+  position: relative;
+  transition: all 150ms ease;
+}
+.sound-toggle-slider::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  transition: transform 150ms ease, background 150ms ease;
+}
+.sound-toggle input:checked + .sound-toggle-slider {
+  background: var(--mint);
+  border-color: var(--mint);
+}
+.sound-toggle input:checked + .sound-toggle-slider::after {
+  transform: translateX(14px);
+  background: #000;
+}
+
+/* ── Active States for Interactive Pills & Filters ───────────────────────── */
+.layout-pill.active {
+  background: var(--mint) !important;
+  color: #000 !important;
+  font-weight: 600;
+  box-shadow: 0 0 12px var(--color-mint-glow);
+}
+
+.filter-btn.active {
+  background: var(--mint) !important;
+  color: #000 !important;
+  border-color: var(--mint) !important;
+  font-weight: 600;
+}
+
+/* ── Benchmark Bar Animation ─────────────────────────────────────────────── */
+.bar-fill {
+  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Phonetic Cheatsheet Table ───────────────────────────────────────────── */
+.rules-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+.rules-table th {
+  padding: 0.75rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-subtle);
+  white-space: nowrap;
+}
+.rules-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* ── Accordion FAQ ───────────────────────────────────────────────────────── */
+details.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+}
+details.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+details[open].faq-item .faq-icon {
+  transform: rotate(180deg);
+}
+
+/* ── Scroll Reveal ───────────────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

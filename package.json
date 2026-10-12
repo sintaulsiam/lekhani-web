@@ -4,8 +4,11 @@
   "description": "Official website for Lekhani (লেখনী) — Ultra-Fast Bengali Input Method Suite",
   "main": "index.html",
   "scripts": {
-    "start": "npx -y serve . -p 3000",
-    "dev": "npx -y serve . -p 3000"
+    "build": "tailwindcss -i src/input.css -o style.css --minify",
+    "build:css": "tailwindcss -i src/input.css -o style.css --minify",
+    "watch:css": "tailwindcss -i src/input.css -o style.css --watch",
+    "dev": "tailwindcss -i src/input.css -o style.css --watch",
+    "serve": "npx -y serve . -p 3000"
   },
   "keywords": [
     "bengali",
@@ -18,5 +21,9 @@
     "rust"
   ],
   "author": "Sintatul Siam",
-  "license": "GPL-3.0"
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3"
+  }
 }
