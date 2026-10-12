@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Lekhani (লেখনী) — Ultra-Fast Bengali Input Method for Android, Linux &amp; Windows</title>
+  <title>Lekhani (লেখনী) — Ultra-Fast Bengali Input Method for Android, Linux & Windows</title>
   <meta name="description" content="Sovereign, deterministic, and privacy-first Bengali keyboard suite. Sub-millisecond keystroke latency, 100% on-device AI suggestions, zero telemetry, written in pure Rust.">
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
   <link rel="icon" type="image/svg+xml" href="assets/icons/logo.svg">
@@ -16,298 +16,251 @@
 
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-[#080A0F] text-[#F0F4FC] font-sans antialiased selection:bg-emerald-400 selection:text-black min-h-screen flex flex-col overflow-x-hidden">
+<body>
 
   <!-- Top Announcement Bar -->
-  <aside class="w-full bg-gradient-to-r from-emerald-500/10 via-slate-900/50 to-emerald-500/5 border-b border-emerald-500/20 py-2 px-4 transition-colors">
-    <a href="#download" class="max-w-7xl mx-auto flex items-center justify-center gap-2.5 text-xs text-slate-300 hover:text-white transition group">
-      <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-emerald-400/15 text-emerald-400 border border-emerald-400/30">v0.3.0</span>
-      <span class="truncate"><strong>Project Bodh:</strong> Multi-arch Android APKs &amp; 120 FPS Canvas live</span>
-      <span class="text-emerald-400 font-mono font-semibold group-hover:translate-x-0.5 transition-transform">&rarr;</span>
-    </a>
+  <aside class="release-banner">
+    <div class="banner-inner container">
+      <span class="banner-badge">RELEASE</span>
+      <span class="banner-text"><strong>Lekhani v0.3.0:</strong> Project Bodh, Adaptive Canvas rendering &amp; multi-arch Android APKs now live.</span>
+      <a href="#download" class="banner-link">Get APK &darr;</a>
+    </div>
   </aside>
 
-  <!-- Sticky Navigation Header -->
-  <header class="sticky top-0 z-50 w-full backdrop-blur-xl bg-[#080A0F]/85 border-b border-white/5 transition-colors">
-    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-4">
-      <a href="#" class="flex items-center gap-3 shrink-0" aria-label="Lekhani Home">
-        <img src="assets/icons/logo.svg" alt="Lekhani Logo" class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg drop-shadow-[0_2px_8px_rgba(0,229,184,0.3)]" width="36" height="36">
-        <div class="flex flex-col leading-none">
-          <span class="font-display font-bold text-base sm:text-lg text-white tracking-tight">Lekhani</span>
-          <span class="font-bengali text-xs text-emerald-400 font-semibold">লেখনী</span>
+  <!-- Navigation -->
+  <header class="site-header">
+    <nav class="nav-container container">
+      <a href="#" class="brand-link" aria-label="Lekhani Home">
+        <img src="assets/icons/logo.svg" alt="Lekhani Logo" class="brand-logo" width="36" height="36">
+        <div class="brand-text">
+          <span class="brand-name">Lekhani</span>
+          <span class="brand-bengali">লেখনী</span>
         </div>
       </a>
 
       <!-- Desktop Nav Links -->
-      <div class="hidden lg:flex items-center gap-1">
-        <a href="#sandbox" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition">Live Sandbox</a>
-        <a href="#download" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition">Download</a>
-        <a href="#layouts" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition">Layouts</a>
-        <a href="#cheatsheet" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition">Typing Rules</a>
-        <a href="#benchmarks" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition">Benchmarks</a>
-        <a href="#crates" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition">Rust Crates</a>
+      <div class="nav-links">
+        <a href="#sandbox" class="nav-link">Live Sandbox</a>
+        <a href="#download" class="nav-link">Download</a>
+        <a href="#layouts" class="nav-link">Layouts</a>
+        <a href="#cheatsheet" class="nav-link">Typing Rules</a>
+        <a href="#benchmarks" class="nav-link">Benchmarks</a>
+        <a href="#crates" class="nav-link">Rust Crates</a>
       </div>
 
-      <!-- Nav Actions -->
-      <div class="flex items-center gap-2">
-        <!-- Theme Toggle -->
-        <button type="button" class="theme-toggle-btn w-9 h-9 rounded-xl flex items-center justify-center bg-white/5 border border-white/10 text-slate-400 hover:text-emerald-400 hover:border-emerald-400/30 transition shrink-0" id="theme-toggle-btn" aria-label="Toggle Color Theme" title="Toggle dark/light theme">
+      <div class="nav-actions">
+        <button type="button" class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle Color Theme" title="Toggle dark/light theme">
           <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
           <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
         </button>
-
-        <!-- GitHub (Desktop) -->
-        <a href="https://github.com/sintaulsiam/lekhani" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/10 transition" aria-label="GitHub Repository">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <a href="https://github.com/sintaulsiam/lekhani" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm github-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
           </svg>
-          <span>GitHub</span>
+          <span class="desktop-only">GitHub</span>
         </a>
-
-        <!-- Download APK Button (Desktop) -->
-        <a href="#download" class="hidden sm:inline-flex items-center px-4 py-1.5 rounded-xl text-sm font-semibold bg-emerald-400 text-slate-950 hover:bg-emerald-300 shadow-sm shadow-emerald-400/20 transition">Download APK</a>
+        <a href="#download" class="btn btn-primary btn-sm desktop-only">Download APK</a>
 
         <!-- Mobile Hamburger Toggle -->
-        <button type="button" class="mobile-menu-toggle lg:hidden w-9 h-9 rounded-xl flex flex-col items-center justify-center gap-1 bg-white/5 border border-white/10 text-slate-300 hover:text-emerald-400 transition" id="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
-          <span class="w-4 h-0.5 bg-slate-300 rounded transition-all"></span>
-          <span class="w-4 h-0.5 bg-slate-300 rounded transition-all"></span>
-          <span class="w-4 h-0.5 bg-slate-300 rounded transition-all"></span>
+        <button type="button" class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span class="bar bar-1"></span>
+          <span class="bar bar-2"></span>
+          <span class="bar bar-3"></span>
         </button>
       </div>
     </nav>
 
     <!-- Mobile Drawer Menu -->
-    <div class="mobile-nav-drawer fixed inset-x-0 top-[57px] bottom-0 bg-[#080A0F]/95 backdrop-blur-2xl border-t border-white/10 z-40 p-5 overflow-y-auto" id="mobile-nav-drawer" aria-hidden="true">
-      <div class="max-w-md mx-auto flex flex-col gap-2">
-        <a href="#sandbox" class="mobile-nav-item flex items-center justify-between p-3.5 rounded-xl bg-slate-900/60 border border-white/5 text-slate-200 hover:text-emerald-400 hover:border-emerald-400/30 transition">
-          <span class="font-medium text-sm">Live Typing Sandbox</span>
-          <span class="text-slate-500 text-xs">&rarr;</span>
+    <div class="mobile-nav-drawer" id="mobile-nav-drawer" aria-hidden="true">
+      <div class="mobile-nav-list container">
+        <a href="#sandbox" class="mobile-nav-item">
+          <span>Live Typing Sandbox</span>
+          <span class="nav-arrow">&rarr;</span>
         </a>
-        <a href="#download" class="mobile-nav-item flex items-center justify-between p-3.5 rounded-xl bg-slate-900/60 border border-white/5 text-slate-200 hover:text-emerald-400 hover:border-emerald-400/30 transition">
-          <span class="font-medium text-sm">Download Releases</span>
-          <span class="text-slate-500 text-xs">&rarr;</span>
+        <a href="#download" class="mobile-nav-item">
+          <span>Download Releases</span>
+          <span class="nav-arrow">&rarr;</span>
         </a>
-        <a href="#layouts" class="mobile-nav-item flex items-center justify-between p-3.5 rounded-xl bg-slate-900/60 border border-white/5 text-slate-200 hover:text-emerald-400 hover:border-emerald-400/30 transition">
-          <span class="font-medium text-sm">Keyboard Layouts</span>
-          <span class="text-slate-500 text-xs">&rarr;</span>
+        <a href="#layouts" class="mobile-nav-item">
+          <span>Keyboard Layouts</span>
+          <span class="nav-arrow">&rarr;</span>
         </a>
-        <a href="#cheatsheet" class="mobile-nav-item flex items-center justify-between p-3.5 rounded-xl bg-slate-900/60 border border-white/5 text-slate-200 hover:text-emerald-400 hover:border-emerald-400/30 transition">
-          <span class="font-medium text-sm">Phonetic Typing Rules</span>
-          <span class="text-slate-500 text-xs">&rarr;</span>
+        <a href="#cheatsheet" class="mobile-nav-item">
+          <span>Phonetic Typing Rules</span>
+          <span class="nav-arrow">&rarr;</span>
         </a>
-        <a href="#benchmarks" class="mobile-nav-item flex items-center justify-between p-3.5 rounded-xl bg-slate-900/60 border border-white/5 text-slate-200 hover:text-emerald-400 hover:border-emerald-400/30 transition">
-          <span class="font-medium text-sm">Engineering Benchmarks</span>
-          <span class="text-slate-500 text-xs">&rarr;</span>
+        <a href="#benchmarks" class="mobile-nav-item">
+          <span>Engineering Benchmarks</span>
+          <span class="nav-arrow">&rarr;</span>
         </a>
-        <a href="#crates" class="mobile-nav-item flex items-center justify-between p-3.5 rounded-xl bg-slate-900/60 border border-white/5 text-slate-200 hover:text-emerald-400 hover:border-emerald-400/30 transition">
-          <span class="font-medium text-sm">Standalone Rust Crates</span>
-          <span class="text-slate-500 text-xs">&rarr;</span>
+        <a href="#crates" class="mobile-nav-item">
+          <span>Standalone Rust Crates</span>
+          <span class="nav-arrow">&rarr;</span>
         </a>
-
-        <div class="mt-4 pt-4 border-t border-white/10 flex flex-col gap-2.5">
-          <a href="https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-arm64-v8a-release.apk" class="w-full py-3 px-4 rounded-xl text-center font-bold text-slate-950 bg-emerald-400 hover:bg-emerald-300 shadow-md transition">
-            Download Android APK (ARM64 &bull; 31 MB)
-          </a>
-          <a href="https://github.com/sintaulsiam/lekhani" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl text-center font-medium text-slate-300 bg-white/5 hover:bg-white/10 border border-white/10 transition">
-            View on GitHub (Source Code)
+        <div class="mobile-nav-action-wrapper">
+          <a href="https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-arm64-v8a-release.apk" class="btn btn-primary btn-block">
+            Download Android APK (ARM64)
           </a>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main id="main-content" class="flex-1">
-
-    <!-- ── Hero Section ───────────────────────────────────────────────────────── -->
-    <section class="relative py-10 sm:py-16 md:py-20 overflow-hidden">
-      <!-- Ambient Glow -->
-      <div class="absolute -top-24 -left-24 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
-      <div class="absolute top-1/2 -right-24 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+  <!-- Hero Section -->
+  <main id="main-content">
+    <section class="hero-section container">
+      <div class="hero-layout">
+        <div class="hero-content">
+          <div class="hero-tag">
+            <span class="status-dot"></span>
+            <span>100% On-Device &bull; Pure Rust &bull; Zero Telemetry</span>
+          </div>
           
-          <!-- Hero Left Column -->
-          <div class="lg:col-span-7 flex flex-col items-start">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-semibold tracking-wide uppercase bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 shadow-sm shadow-emerald-500/10 mb-4 sm:mb-6">
-              <span class="pulse-dot"></span>
-              <span>100% On-Device &bull; Pure Rust &bull; Zero Telemetry</span>
-            </div>
-            
-            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.14] mb-4 sm:mb-5">
-              Deterministic.<br class="hidden sm:inline">
-              Sub-millisecond.<br class="hidden sm:inline">
-              <span class="gradient-text">Bengali Input Engine.</span>
-            </h1>
-            
-            <p class="text-sm sm:text-base md:text-lg text-slate-400 leading-relaxed max-w-2xl mb-6 sm:mb-8">
-              A high-performance input method suite for Android, Linux, and Windows. Built from scratch with zero runtime garbage collection on the typing hot-path, canonical Unicode NFC fidelity, and zero network calls.
-            </p>
+          <h1 class="hero-title">
+            Deterministic.<br>
+            Sub-millisecond.<br>
+            <span class="gradient-text">Bengali Input Engine.</span>
+          </h1>
+          
+          <p class="hero-lead">
+            A high-performance input method suite for Android, Linux, and Windows. Built from scratch with zero runtime garbage collection on the typing hot-path, canonical Unicode NFC fidelity, and zero network calls.
+          </p>
 
-            <!-- Dynamic OS CTA Area -->
-            <div class="w-full flex flex-col gap-3.5 mb-8">
-              <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full">
-                <a href="https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-arm64-v8a-release.apk" id="hero-download-btn" class="inline-flex items-center justify-center gap-3 px-6 py-3.5 rounded-xl font-bold text-slate-950 bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 shadow-lg shadow-emerald-500/25 transition transform active:scale-[0.98]">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                    <polyline points="7 10 12 15 17 10"/>
-                    <line x1="12" y1="15" x2="12" y2="3"/>
-                  </svg>
-                  <span class="btn-text">Download Android APK</span>
-                  <span class="cta-meta text-xs font-mono font-semibold opacity-90 px-2 py-0.5 rounded bg-black/15">v0.3.0 &bull; 31 MB</span>
-                </a>
-
-                <a href="#sandbox" class="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl font-semibold text-white bg-white/5 hover:bg-white/10 border border-white/10 backdrop-blur-md transition active:scale-[0.98]">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <rect x="2" y="4" width="20" height="16" rx="2"/>
-                    <path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M8 12h8M6 16h12"/>
-                  </svg>
-                  <span>Try Live Sandbox</span>
-                  <span class="font-mono text-slate-400">&darr;</span>
-                </a>
-              </div>
-
-              <!-- Desktop Linux Quick Curl -->
-              <div class="hidden md:flex items-center gap-2 p-2 px-3 rounded-xl bg-slate-900/70 border border-white/10 text-xs font-mono text-slate-300 max-w-fit">
-                <span class="font-bold text-emerald-400">Linux:</span>
-                <code class="text-slate-300" id="quick-curl-code">curl -fsSL https://raw.githubusercontent.com/sintaulsiam/lekhani/main/install.sh | bash</code>
-                <button type="button" class="ml-2 p-1 rounded hover:bg-white/10 text-slate-400 hover:text-emerald-400 transition" id="quick-curl-copy" aria-label="Copy install command" title="Copy to clipboard">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                </button>
-              </div>
-
-              <!-- Mobile/Cross-Platform Indicator -->
-              <div class="flex items-center flex-wrap gap-2 text-xs text-slate-400 pt-1">
-                <span>Available on:</span>
-                <a href="#download" class="inline-flex items-center gap-1 text-slate-300 hover:text-emerald-400 transition font-medium">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-                  Android
-                </a>
-                <span class="text-slate-600">&bull;</span>
-                <a href="#linux-card" class="inline-flex items-center gap-1 text-slate-300 hover:text-emerald-400 transition font-medium">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12.001 0c-4.14 0-7.5 3.36-7.5 7.5 0 1.25.31 2.43.85 3.47C4.52 11.96 4 13.42 4 15c0 3.31 2.69 6 6 6h4c3.31 0 6-2.69 6-6 0-1.58-.52-3.04-1.35-4.03.54-1.04.85-2.22.85-3.47 0-4.14-3.36-7.5-7.5-7.5z"/></svg>
-                  Linux (Fcitx5)
-                </a>
-                <span class="text-slate-600">&bull;</span>
-                <a href="#windows-card" class="inline-flex items-center gap-1 text-slate-300 hover:text-emerald-400 transition font-medium">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.802"/></svg>
-                  Windows
-                </a>
-              </div>
+          <!-- Dynamic OS CTA -->
+          <div class="hero-cta-wrapper">
+            <div class="hero-primary-cta">
+              <a href="https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-arm64-v8a-release.apk" id="hero-download-btn" class="btn btn-primary btn-lg">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                <span class="btn-text">Download APK v0.3.0 (ARM64)</span>
+                <span class="cta-meta">31.0 MB</span>
+              </a>
+              <a href="#sandbox" class="btn btn-secondary btn-lg">
+                <span class="btn-text">Try Live Sandbox</span>
+                <span class="kbd-hint">&darr;</span>
+              </a>
             </div>
 
-            <!-- Precision Hardware Metrics Grid -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full">
-              <div class="p-3.5 sm:p-4 rounded-xl bg-slate-900/60 border border-white/10 backdrop-blur-md transition hover:border-emerald-500/30">
-                <div class="font-mono text-lg sm:text-xl font-bold text-emerald-400 tracking-tight">&lt; 100 &mu;s</div>
-                <div class="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-400 mt-0.5">Keystroke Latency</div>
+            <div class="install-pill-quick">
+              <span class="pill-label">Linux:</span>
+              <div class="pill-code-scroll">
+                <code class="pill-code" id="quick-curl-code">curl -fsSL https://raw.githubusercontent.com/sintaulsiam/lekhani/main/install.sh | bash</code>
               </div>
-              <div class="p-3.5 sm:p-4 rounded-xl bg-slate-900/60 border border-white/10 backdrop-blur-md transition hover:border-emerald-500/30">
-                <div class="font-mono text-lg sm:text-xl font-bold text-emerald-400 tracking-tight">0 Bytes</div>
-                <div class="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-400 mt-0.5">Network Telemetry</div>
-              </div>
-              <div class="p-3.5 sm:p-4 rounded-xl bg-slate-900/60 border border-white/10 backdrop-blur-md transition hover:border-emerald-500/30">
-                <div class="font-mono text-lg sm:text-xl font-bold text-emerald-400 tracking-tight">120 FPS</div>
-                <div class="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-400 mt-0.5">Canvas Refresh</div>
-              </div>
-              <div class="p-3.5 sm:p-4 rounded-xl bg-slate-900/60 border border-white/10 backdrop-blur-md transition hover:border-emerald-500/30">
-                <div class="font-mono text-lg sm:text-xl font-bold text-emerald-400 tracking-tight">&lt; 55 MB</div>
-                <div class="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-400 mt-0.5">Active Typing RAM</div>
-              </div>
+              <button type="button" class="btn-copy-icon" id="quick-curl-copy" aria-label="Copy install command" title="Copy to clipboard">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              </button>
             </div>
           </div>
 
-          <!-- Hero Right Column: 3D Tactile Keycap Switch Plate Showcase -->
-          <div class="lg:col-span-5 w-full">
-            <div class="rounded-2xl p-4 sm:p-6 bg-[#0C0F17]/90 border border-slate-800 shadow-2xl backdrop-blur-xl relative overflow-hidden" id="hero-keycaps-showcase">
-              <div class="flex items-center justify-between pb-3 mb-4 border-b border-white/10">
-                <div class="flex items-center gap-2">
-                  <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#00E5B8]"></span>
-                  <span class="font-mono text-xs font-semibold tracking-wider text-slate-300">LEKHANI SWITCH PLATE &bull; 60%</span>
-                </div>
-                <span class="font-mono text-[10px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">PROBAHO &bull; FLOW</span>
-              </div>
-              
-              <div class="grid grid-cols-4 gap-2">
-                <button type="button" class="hero-keycap" data-char="অ" data-rom="o" title="Key অ (o)"><span class="hk-bn">অ</span><span class="hk-rom">O</span></button>
-                <button type="button" class="hero-keycap" data-char="আ" data-rom="a" title="Key আ (a)"><span class="hk-bn">আ</span><span class="hk-rom">A</span></button>
-                <button type="button" class="hero-keycap" data-char="ই" data-rom="i" title="Key ই (i)"><span class="hk-bn">ই</span><span class="hk-rom">I</span></button>
-                <button type="button" class="hero-keycap" data-char="উ" data-rom="u" title="Key উ (u)"><span class="hk-bn">উ</span><span class="hk-rom">U</span></button>
-                <button type="button" class="hero-keycap" data-char="ক" data-rom="k" title="Key ক (k)"><span class="hk-bn">ক</span><span class="hk-rom">K</span></button>
-                <button type="button" class="hero-keycap" data-char="খ" data-rom="kh" title="Key খ (kh)"><span class="hk-bn">খ</span><span class="hk-rom">KH</span></button>
-                <button type="button" class="hero-keycap" data-char="গ" data-rom="g" title="Key গ (g)"><span class="hk-bn">গ</span><span class="hk-rom">G</span></button>
-                <button type="button" class="hero-keycap" data-char="ঘ" data-rom="gh" title="Key ঘ (gh)"><span class="hk-bn">ঘ</span><span class="hk-rom">GH</span></button>
-                <button type="button" class="hero-keycap" data-char="চ" data-rom="c" title="Key চ (c)"><span class="hk-bn">চ</span><span class="hk-rom">C</span></button>
-                <button type="button" class="hero-keycap" data-char="ত" data-rom="t" title="Key ত (t)"><span class="hk-bn">ত</span><span class="hk-rom">T</span></button>
-                <button type="button" class="hero-keycap" data-char="দ" data-rom="d" title="Key দ (d)"><span class="hk-bn">দ</span><span class="hk-rom">D</span></button>
-                <button type="button" class="hero-keycap" data-char="ন" data-rom="n" title="Key ন (n)"><span class="hk-bn">ন</span><span class="hk-rom">N</span></button>
-                <button type="button" class="hero-keycap" data-char="প" data-rom="p" title="Key প (p)"><span class="hk-bn">প</span><span class="hk-rom">P</span></button>
-                <button type="button" class="hero-keycap" data-char="ব" data-rom="b" title="Key ব (b)"><span class="hk-bn">ব</span><span class="hk-rom">B</span></button>
-                <button type="button" class="hero-keycap" data-char="ম" data-rom="m" title="Key ম (m)"><span class="hk-bn">ম</span><span class="hk-rom">M</span></button>
-                <button type="button" class="hero-keycap" data-char="র" data-rom="r" title="Key র (r)"><span class="hk-bn">র</span><span class="hk-rom">R</span></button>
-              </div>
-
-              <div class="flex items-center justify-between pt-3 mt-4 border-t border-white/5 text-[10px] font-mono text-slate-500">
-                <span>TACTILE PBT DOUBLE-SHOT</span>
-                <span>CLICK TO TEST SWITCH</span>
-              </div>
+          <!-- Metric Badges -->
+          <div class="hero-metrics-grid">
+            <div class="metric-card">
+              <div class="metric-value">&lt; 100 &mu;s</div>
+              <div class="metric-label">Hot-path keystroke processing</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value">0 Bytes</div>
+              <div class="metric-label">Network data off the device</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value">120 FPS</div>
+              <div class="metric-label">Hardware canvas refresh</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value">&lt; 55 MB</div>
+              <div class="metric-label">Active typing RAM footprint</div>
             </div>
           </div>
+        </div>
 
+        <!-- 3D Tactile Keycap Matrix Plate Showcase -->
+        <div class="hero-keycaps-showcase" id="hero-keycaps-showcase">
+          <div class="plate-header">
+            <div class="plate-brand">
+              <span class="plate-led"></span>
+              <span class="plate-title">LEKHANI SWITCH PLATE &bull; 60%</span>
+            </div>
+            <span class="plate-layout-badge">PROBAHO &bull; FLOW</span>
+          </div>
+          
+          <div class="hero-keycaps-grid">
+            <button type="button" class="hero-keycap" data-char="অ" data-rom="o" title="Key অ (o)"><span class="hk-bn">অ</span><span class="hk-rom">O</span></button>
+            <button type="button" class="hero-keycap" data-char="আ" data-rom="a" title="Key আ (a)"><span class="hk-bn">আ</span><span class="hk-rom">A</span></button>
+            <button type="button" class="hero-keycap" data-char="ই" data-rom="i" title="Key ই (i)"><span class="hk-bn">ই</span><span class="hk-rom">I</span></button>
+            <button type="button" class="hero-keycap" data-char="উ" data-rom="u" title="Key উ (u)"><span class="hk-bn">উ</span><span class="hk-rom">U</span></button>
+            <button type="button" class="hero-keycap" data-char="ক" data-rom="k" title="Key ক (k)"><span class="hk-bn">ক</span><span class="hk-rom">K</span></button>
+            <button type="button" class="hero-keycap" data-char="খ" data-rom="kh" title="Key খ (kh)"><span class="hk-bn">খ</span><span class="hk-rom">KH</span></button>
+            <button type="button" class="hero-keycap" data-char="গ" data-rom="g" title="Key গ (g)"><span class="hk-bn">গ</span><span class="hk-rom">G</span></button>
+            <button type="button" class="hero-keycap" data-char="ঘ" data-rom="gh" title="Key ঘ (gh)"><span class="hk-bn">ঘ</span><span class="hk-rom">GH</span></button>
+            <button type="button" class="hero-keycap" data-char="চ" data-rom="c" title="Key চ (c)"><span class="hk-bn">চ</span><span class="hk-rom">C</span></button>
+            <button type="button" class="hero-keycap" data-char="ত" data-rom="t" title="Key ত (t)"><span class="hk-bn">ত</span><span class="hk-rom">T</span></button>
+            <button type="button" class="hero-keycap" data-char="দ" data-rom="d" title="Key দ (d)"><span class="hk-bn">দ</span><span class="hk-rom">D</span></button>
+            <button type="button" class="hero-keycap" data-char="ন" data-rom="n" title="Key ন (n)"><span class="hk-bn">ন</span><span class="hk-rom">N</span></button>
+            <button type="button" class="hero-keycap" data-char="প" data-rom="p" title="Key প (p)"><span class="hk-bn">প</span><span class="hk-rom">P</span></button>
+            <button type="button" class="hero-keycap" data-char="ব" data-rom="b" title="Key ব (b)"><span class="hk-bn">ব</span><span class="hk-rom">B</span></button>
+            <button type="button" class="hero-keycap" data-char="ম" data-rom="m" title="Key ম (m)"><span class="hk-bn">ম</span><span class="hk-rom">M</span></button>
+            <button type="button" class="hero-keycap" data-char="র" data-rom="r" title="Key র (r)"><span class="hk-bn">র</span><span class="hk-rom">R</span></button>
+          </div>
+
+          <div class="plate-footer">
+            <span>TACTILE PBT DOUBLE-SHOT</span>
+            <span>CLICK TO TEST SWITCH</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ── Interactive Live Bengali Typing Sandbox ───────────────────────────── -->
-    <section id="sandbox" class="py-12 sm:py-20 bg-slate-950/40 relative">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
-          <div class="inline-block px-3 py-1 rounded-full text-xs font-mono font-semibold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 mb-3">INTERACTIVE TESTBENCH</div>
-          <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">Type in the Browser</h2>
-          <p class="text-sm sm:text-base text-slate-400 mt-2">Real Avro transliteration engine, Sandhi rules, Reph, Ro-fala &amp; candidate prediction strip running live. Press keys on your keyboard or tap below.</p>
+    <!-- Interactive Live Bengali Typing Sandbox -->
+    <section id="sandbox" class="sandbox-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">INTERACTIVE TESTBENCH</div>
+          <h2 class="section-title">Type in the Browser</h2>
+          <p class="section-subtitle">Real Avro transliteration engine, Sandhi rules, Reph, Ro-fala &amp; candidate prediction strip running live. Press keys on your physical keyboard or tap the keycaps below.</p>
         </div>
 
-        <div class="rounded-2xl border border-white/10 bg-slate-900/70 backdrop-blur-xl overflow-hidden shadow-2xl">
-          <!-- Controls Bar -->
-          <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3.5 sm:p-4 bg-slate-900/90 border-b border-white/10">
-            <div class="flex items-center gap-2 overflow-x-auto no-scrollbar">
-              <span class="text-xs font-mono text-slate-400 shrink-0">Mode:</span>
-              <div class="flex items-center gap-1 p-1 rounded-xl bg-slate-950 border border-white/10" role="tablist">
-                <button type="button" class="layout-pill active px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 transition whitespace-nowrap cursor-pointer" data-layout="avro" role="tab" aria-selected="true">Avro Phonetic</button>
-                <button type="button" class="layout-pill px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 transition whitespace-nowrap cursor-pointer" data-layout="probaho" role="tab" aria-selected="false">Lekhani প্রবাহ (Flow)</button>
-                <button type="button" class="layout-pill px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 transition whitespace-nowrap cursor-pointer" data-layout="probhat" role="tab" aria-selected="false">Probhat (প্রভাত)</button>
+        <div class="sandbox-console">
+          <!-- Sandbox Controls Bar -->
+          <div class="sandbox-toolbar">
+            <div class="toolbar-group layout-group">
+              <span class="toolbar-label">Engine Mode:</span>
+              <div class="layout-toggle-group" role="tablist">
+                <button type="button" class="layout-pill active" data-layout="avro" role="tab" aria-selected="true">Avro Phonetic</button>
+                <button type="button" class="layout-pill" data-layout="probaho" role="tab" aria-selected="false">Lekhani প্রবাহ (Flow)</button>
+                <button type="button" class="layout-pill" data-layout="probhat" role="tab" aria-selected="false">Probhat (प्रभात)</button>
               </div>
             </div>
 
-            <div class="flex items-center justify-between sm:justify-end gap-4 shrink-0">
-              <label class="sound-toggle text-xs text-slate-400 cursor-pointer flex items-center gap-2" title="Toggle tactile mechanical switch click sound">
+            <div class="toolbar-group options-group">
+              <label class="sound-toggle" title="Toggle tactile mechanical switch click sound">
                 <input type="checkbox" id="sound-checkbox">
                 <span class="sound-toggle-slider"></span>
-                <span class="font-mono text-xs">Click Sound</span>
+                <span class="sound-toggle-text">Click Sound</span>
               </label>
-              <button type="button" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 transition" id="clear-sandbox-btn" title="Clear typed text">Clear</button>
+              <button type="button" class="btn btn-ghost btn-sm" id="clear-sandbox-btn" title="Clear typed text">Clear</button>
             </div>
           </div>
 
           <!-- Typing Area with Floating Candidate Strip -->
-          <div class="p-3.5 sm:p-5 flex flex-col gap-3">
+          <div class="sandbox-editor-wrapper">
             <!-- Candidate Popup Strip -->
-            <div class="p-2.5 rounded-xl bg-slate-950/80 border border-white/10 flex items-center gap-2.5 overflow-x-auto no-scrollbar" id="candidate-strip" aria-live="polite">
-              <div class="text-[10px] font-mono font-semibold uppercase tracking-wider text-slate-400 shrink-0">SUGGESTIONS [Space: 1]</div>
-              <div class="flex items-center gap-1.5 flex-1 overflow-x-auto no-scrollbar" id="candidate-list">
+            <div class="candidate-strip" id="candidate-strip" aria-live="polite">
+              <div class="candidate-badge">SUGGESTIONS [Space: 1 | 1-5 to Pick]</div>
+              <div class="candidate-list" id="candidate-list">
+                <!-- Dynamically injected candidates -->
                 <span class="candidate-item active"><span class="candidate-num">1</span> আমি</span>
                 <span class="candidate-item"><span class="candidate-num">2</span> আমির</span>
                 <span class="candidate-item"><span class="candidate-num">3</span> আমিতো</span>
               </div>
             </div>
 
-            <!-- Input Box -->
-            <div class="w-full">
+            <div class="editor-input-box">
               <textarea 
                 id="sandbox-input" 
                 rows="4" 
-                class="w-full p-4 sm:p-5 rounded-xl bg-slate-950/60 border border-white/10 text-base sm:text-xl text-white font-bengali placeholder:text-slate-600 focus:outline-none focus:border-emerald-400/50 resize-y min-h-[110px]" 
                 placeholder="Type phonetically here... (e.g. 'ami banglay gaan gai', 'amar sonar bangla', 'kormo', 'gram', 'bakyo', 'kortesi')" 
                 autocomplete="off" 
                 autocorrect="off" 
@@ -317,122 +270,117 @@
             </div>
 
             <!-- Quick Phrase Starters -->
-            <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
-              <span class="text-xs font-mono text-slate-500 shrink-0">Test phrases:</span>
-              <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
-                <button type="button" class="sample-chip px-2.5 py-1 rounded-lg text-xs font-medium bg-white/5 hover:bg-white/10 border border-white/5 text-slate-300 hover:text-emerald-400 transition whitespace-nowrap" data-phrase="ami banglay gaan gai">ami banglay gaan gai</button>
-                <button type="button" class="sample-chip px-2.5 py-1 rounded-lg text-xs font-medium bg-white/5 hover:bg-white/10 border border-white/5 text-slate-300 hover:text-emerald-400 transition whitespace-nowrap" data-phrase="amar sonar bangla">amar sonar bangla</button>
-                <button type="button" class="sample-chip px-2.5 py-1 rounded-lg text-xs font-medium bg-white/5 hover:bg-white/10 border border-white/5 text-slate-300 hover:text-emerald-400 transition whitespace-nowrap" data-phrase="lekhani khub druto">lekhani khub druto</button>
-                <button type="button" class="sample-chip px-2.5 py-1 rounded-lg text-xs font-medium bg-white/5 hover:bg-white/10 border border-white/5 text-slate-300 hover:text-emerald-400 transition whitespace-nowrap" data-phrase="kormo e shadhona">kormo e shadhona</button>
-                <button type="button" class="sample-chip px-2.5 py-1 rounded-lg text-xs font-medium bg-white/5 hover:bg-white/10 border border-white/5 text-slate-300 hover:text-emerald-400 transition whitespace-nowrap" data-phrase="biddut shomporke janun">biddut shomporke janun</button>
+            <div class="quick-samples">
+              <span class="samples-label">Quick test:</span>
+              <div class="samples-scroll-list">
+                <button type="button" class="sample-chip" data-phrase="ami banglay gaan gai">ami banglay gaan gai</button>
+                <button type="button" class="sample-chip" data-phrase="amar sonar bangla">amar sonar bangla</button>
+                <button type="button" class="sample-chip" data-phrase="lekhani khub druto">lekhani khub druto</button>
+                <button type="button" class="sample-chip" data-phrase="kormo e shadhona">kormo e shadhona</button>
+                <button type="button" class="sample-chip" data-phrase="biddut shomporke janun">biddut shomporke janun</button>
               </div>
             </div>
           </div>
 
           <!-- Live Performance HUD -->
-          <div class="grid grid-cols-2 sm:grid-cols-5 gap-2.5 p-3.5 bg-slate-950 text-xs font-mono border-t border-b border-white/10 text-slate-400">
-            <div class="flex items-center gap-1.5">
-              <span class="text-slate-500">Latency:</span>
-              <span class="font-bold text-emerald-400" id="hud-latency">0.0 &mu;s</span>
+          <div class="telemetry-hud">
+            <div class="hud-item">
+              <span class="hud-label">Parser Latency:</span>
+              <span class="hud-val text-accent" id="hud-latency">0.0 &mu;s</span>
             </div>
-            <div class="flex items-center gap-1.5">
-              <span class="text-slate-500">Alloc:</span>
-              <span class="font-semibold text-emerald-300">0 B (Hot-path)</span>
+            <div class="hud-item">
+              <span class="hud-label">Allocations:</span>
+              <span class="hud-val text-success">0 B (Hot-path)</span>
             </div>
-            <div class="flex items-center gap-1.5">
-              <span class="text-slate-500">Unicode:</span>
-              <span class="font-semibold text-slate-200">NFC Canonical</span>
+            <div class="hud-item">
+              <span class="hud-label">Unicode:</span>
+              <span class="hud-val">NFC Canonical</span>
             </div>
-            <div class="flex items-center gap-1.5">
-              <span class="text-slate-500">Keys:</span>
-              <span class="font-semibold text-slate-200" id="hud-keystrokes">0</span>
+            <div class="hud-item">
+              <span class="hud-label">Keystrokes:</span>
+              <span class="hud-val" id="hud-keystrokes">0</span>
             </div>
-            <div class="flex items-center gap-1.5">
-              <span class="text-slate-500">Speed:</span>
-              <span class="font-semibold text-slate-200" id="hud-wpm">0 WPM</span>
+            <div class="hud-item">
+              <span class="hud-label">Speed:</span>
+              <span class="hud-val" id="hud-wpm">0 WPM</span>
             </div>
           </div>
 
-          <!-- Tactile On-Screen Virtual Keyboard -->
-          <div class="p-2 sm:p-4 bg-[#0C0F17] flex flex-col gap-1 sm:gap-1.5 virtual-keyboard-container overflow-x-auto no-scrollbar" id="virtual-keyboard" aria-label="Interactive Virtual Keyboard">
-            <!-- Dynamically populated by app.js -->
+          <!-- Tactile On-Screen Keyboard -->
+          <div class="virtual-keyboard-container" id="virtual-keyboard" aria-label="Interactive Virtual Keyboard">
+            <!-- Dynamically generated rows of tactile keycaps -->
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ── Direct Download Hub ────────────────────────────────────────────────── -->
-    <section id="download" class="py-12 sm:py-20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
-          <div class="inline-block px-3 py-1 rounded-full text-xs font-mono font-semibold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 mb-3">OFFICIAL RELEASES</div>
-          <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">Direct GitHub Downloads</h2>
-          <p class="text-sm sm:text-base text-slate-400 mt-2">No app store walled gardens, zero telemetry wrappers. Download verified signed release binaries directly from GitHub.</p>
+    <!-- Direct Download Hub (GitHub Releases) -->
+    <section id="download" class="download-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">OFFICIAL RELEASES</div>
+          <h2 class="section-title">Direct GitHub Downloads</h2>
+          <p class="section-subtitle">No app store walled gardens, no telemetry wrappers. Download verified signed release binaries directly from GitHub.</p>
         </div>
 
-        <!-- Featured Primary Release: Android v0.3.0 -->
-        <div class="rounded-2xl bg-gradient-to-br from-emerald-500/10 via-slate-900/80 to-slate-900/60 border border-emerald-500/25 p-5 sm:p-8 backdrop-blur-xl shadow-xl mb-8" id="android-card">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
-            
-            <div class="lg:col-span-8 flex flex-col gap-4">
-              <div class="flex items-center gap-3">
-                <div class="w-12 h-12 rounded-xl bg-emerald-400/15 border border-emerald-400/30 flex items-center justify-center text-emerald-400 shrink-0">
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+        <!-- 1. Featured Primary Release: Android v0.3.0 -->
+        <div class="featured-release-card" id="android-card">
+          <div class="featured-release-grid">
+            <div class="featured-release-left">
+              <div class="platform-header">
+                <div class="platform-icon android-icon">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-1.0001s.4482-.9994.9993-.9994c.5518 0 1.0001.4479 1.0001.9994 0 .5515-.4483 1.0001-1.0001 1.0001m-11.046 0c-.5511 0-.9993-.4486-.9993-1.0001s.4482-.9994.9993-.9994c.5518 0 1.0001.4479 1.0001.9994 0 .5515-.4483 1.0001-1.0001 1.0001m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.4116 13.8533 8.125 12 8.125c-1.8533 0-3.5902.2866-5.1368.8247L4.8409 5.4467a.4161.4161 0 00-.5677-.1521.4157.4157 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.7997h24c-.3432-4.1408-2.6889-7.613-6.1185-9.4783"/>
                   </svg>
                 </div>
                 <div>
-                  <div class="flex items-center gap-2 flex-wrap">
-                    <h3 class="text-xl sm:text-2xl font-bold text-white">Android</h3>
-                    <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-emerald-400/20 text-emerald-400 border border-emerald-400/30">Recommended</span>
+                  <div class="platform-title-row">
+                    <h3 class="platform-name">Android</h3>
+                    <span class="chip-recommended">Production Ready &bull; Recommended</span>
                   </div>
-                  <span class="text-xs font-mono text-slate-400">v0.3.0 Latest &bull; Android 10+ (API 29+)</span>
+                  <span class="platform-ver">v0.3.0 Latest &bull; Android 10+ (API 29+)</span>
                 </div>
               </div>
 
-              <p class="text-sm text-slate-300 leading-relaxed">
+              <p class="platform-desc">
                 Hardware-accelerated 120 FPS canvas, 33 Theme Studio presets, offline speech recognition weights, and zero network permissions.
               </p>
 
-              <!-- Download Assets -->
-              <div class="flex flex-col gap-2.5">
-                <!-- ARM64 Primary -->
-                <a href="https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-arm64-v8a-release.apk" class="p-3.5 sm:p-4 rounded-xl bg-slate-950/80 hover:bg-slate-950 border border-emerald-500/30 hover:border-emerald-500/60 transition flex items-center justify-between gap-4 group">
-                  <div class="flex flex-col">
-                    <span class="text-sm font-bold text-white flex items-center gap-2">
-                      ARM64-v8a APK 
-                      <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-semibold">Most Modern Phones</span>
-                    </span>
-                    <span class="text-xs text-slate-400 mt-0.5">Pixel, Samsung, Xiaomi, OnePlus, Realme &bull; 31.0 MB</span>
+              <div class="download-assets-list">
+                <!-- ARM64 -->
+                <a href="https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-arm64-v8a-release.apk" class="asset-download-btn primary-asset">
+                  <div class="asset-info">
+                    <span class="asset-name">ARM64-v8a APK <span class="badge-sub">Most Modern Phones</span></span>
+                    <span class="asset-details">Pixel, Samsung, Xiaomi, OnePlus, Realme &bull; 31.0 MB</span>
                   </div>
-                  <span class="px-3.5 py-2 rounded-lg text-xs font-bold bg-emerald-400 text-slate-950 group-hover:bg-emerald-300 transition shrink-0">&darr; Download</span>
+                  <span class="btn-download-action">&darr; Download APK</span>
                 </a>
 
                 <!-- Universal -->
-                <a href="https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-universal-release.apk" class="p-3.5 sm:p-4 rounded-xl bg-slate-950/50 hover:bg-slate-950/80 border border-white/10 hover:border-white/20 transition flex items-center justify-between gap-4 group">
-                  <div class="flex flex-col">
-                    <span class="text-sm font-semibold text-white">Universal APK</span>
-                    <span class="text-xs text-slate-400 mt-0.5">Compatible with all Android CPUs &bull; 34.1 MB</span>
+                <a href="https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-universal-release.apk" class="asset-download-btn">
+                  <div class="asset-info">
+                    <span class="asset-name">Universal APK</span>
+                    <span class="asset-details">Compatible with all Android CPUs &bull; 34.1 MB</span>
                   </div>
-                  <span class="px-3 py-1.5 rounded-lg text-xs font-medium bg-white/5 group-hover:bg-white/10 text-slate-300 transition shrink-0">&darr; Download</span>
+                  <span class="btn-download-action">&darr; Download APK</span>
                 </a>
 
-                <!-- Other Archs -->
-                <div class="flex items-center flex-wrap gap-2 text-xs text-slate-400 pt-1">
-                  <span>Other Architectures:</span>
-                  <a href="https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-armeabi-v7a-release.apk" class="text-slate-300 hover:text-emerald-400 underline transition">armeabi-v7a (32-bit &bull; 31 MB)</a>
-                  <span>&bull;</span>
-                  <a href="https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-x86_64-release.apk" class="text-slate-300 hover:text-emerald-400 underline transition">x86_64 (Emulators &bull; 31 MB)</a>
+                <!-- Other archs -->
+                <div class="secondary-assets">
+                  <span class="arch-label">Other Architectures:</span>
+                  <a href="https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-armeabi-v7a-release.apk" class="asset-sublink">armeabi-v7a (32-bit &bull; 31 MB)</a>
+                  <span class="dot-sep">&bull;</span>
+                  <a href="https://github.com/sintaulsiam/lekhani-android/releases/download/v0.3.0/app-x86_64-release.apk" class="asset-sublink">x86_64 (Emulators &bull; 31 MB)</a>
                 </div>
               </div>
 
               <!-- SHA-256 Accordion -->
-              <details class="mt-2 p-3.5 rounded-xl bg-slate-950/60 border border-white/5 text-xs">
-                <summary class="font-mono text-xs font-medium text-slate-300 flex items-center justify-between cursor-pointer">
+              <details class="checksums-accordion">
+                <summary>
                   <span>Release SHA-256 Checksums</span>
-                  <button type="button" class="px-2 py-1 rounded bg-white/5 hover:bg-white/10 text-emerald-400 font-mono text-[11px] transition" id="copy-checksums-btn" aria-label="Copy SHA-256 checksums">Copy All</button>
+                  <button type="button" class="btn-copy-checksum" id="copy-checksums-btn" aria-label="Copy SHA-256 checksums">Copy All</button>
                 </summary>
-                <pre class="mt-3 p-3 rounded-lg bg-black/40 text-[11px] font-mono text-slate-400 overflow-x-auto"><code id="release-checksums-code"># ARM64-v8a
+                <pre class="checksum-pre"><code id="release-checksums-code"># ARM64-v8a
 b34ee6b80001576e0c6d740fcf1341cf86a67460e0960cd2813d6b807d665697  app-arm64-v8a-release.apk
 
 # Universal
@@ -446,524 +394,511 @@ b34ee6b80001576e0c6d740fcf1341cf86a67460e0960cd2813d6b807d665697  app-arm64-v8a-
               </details>
             </div>
 
-            <!-- Right Column: Scan on Phone Card -->
-            <div class="lg:col-span-4 w-full">
-              <div class="p-5 rounded-xl bg-slate-950/80 border border-white/10 text-center flex flex-col items-center">
-                <div class="flex items-center gap-2 text-xs font-medium text-slate-300 mb-3">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <!-- Right Column: Dedicated Phone Install Card with QR Code -->
+            <div class="featured-release-right">
+              <div class="qr-install-card">
+                <div class="qr-install-header">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
                     <line x1="12" y1="18" x2="12.01" y2="18"></line>
                   </svg>
-                  <span>Direct QR Install</span>
+                  <span>Scan to Install on Phone</span>
                 </div>
-                <div class="p-3 rounded-xl bg-white mb-3">
-                  <img src="assets/icons/apk-qr.svg" alt="Direct APK Download QR Code" width="130" height="130" class="w-32 h-32">
+                <div class="qr-canvas-wrapper">
+                  <img src="assets/icons/apk-qr.svg" alt="Direct APK Download QR Code" width="140" height="140" class="qr-svg-img">
                 </div>
-                <p class="text-xs text-slate-400">Open your phone camera to download the verified signed APK directly.</p>
-                <div class="mt-3 flex items-center gap-1.5 text-[11px] font-mono text-emerald-400">
-                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                  <span>GitHub Release CDN</span>
+                <p class="qr-sub">Open your phone camera to download the verified signed ARM64 APK directly (31 MB).</p>
+                <div class="qr-badge-status">
+                  <span class="status-indicator-dot"></span>
+                  <span>Direct GitHub Release CDN</span>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
 
-        <!-- 2. Desktop Platforms: Linux & Windows -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- 2. Desktop Platforms: Linux & Windows (Balanced 2-Column Grid) -->
+        <div class="desktop-platforms-grid">
           <!-- Linux Card -->
-          <div class="p-5 sm:p-6 rounded-2xl bg-slate-900/60 border border-white/10 backdrop-blur-md flex flex-col justify-between" id="linux-card">
-            <div>
-              <div class="flex items-center gap-3 mb-3">
-                <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-200">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12.001 0c-4.14 0-7.5 3.36-7.5 7.5 0 1.25.31 2.43.85 3.47C4.52 11.96 4 13.42 4 15c0 3.31 2.69 6 6 6h4c3.31 0 6-2.69 6-6 0-1.58-.52-3.04-1.35-4.03.54-1.04.85-2.22.85-3.47 0-4.14-3.36-7.5-7.5-7.5z"/>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="text-lg font-bold text-white">Linux</h3>
-                  <span class="text-xs font-mono text-slate-400">Fcitx5 Native &bull; All Distros</span>
-                </div>
+          <div class="platform-card" id="linux-card">
+            <div class="platform-header">
+              <div class="platform-icon linux-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.001 0c-4.14 0-7.5 3.36-7.5 7.5 0 1.25.31 2.43.85 3.47C4.52 11.96 4 13.42 4 15c0 3.31 2.69 6 6 6h4c3.31 0 6-2.69 6-6 0-1.58-.52-3.04-1.35-4.03.54-1.04.85-2.22.85-3.47 0-4.14-3.36-7.5-7.5-7.5zm0 2c3.04 0 5.5 2.46 5.5 5.5 0 .84-.19 1.63-.53 2.34-.33-.53-.78-.97-1.31-1.3-.2-.12-.42-.22-.66-.29-.2-.72-.6-1.36-1.15-1.85-.8-.71-1.85-1.1-2.95-.9-1.22.22-2.23.99-2.73 2.1-.38.09-.73.25-1.04.47-.64.44-1.13 1.05-1.39 1.77-.38-.72-.59-1.53-.59-2.34C4.65 4.46 7.11 2 12.001 2z"/>
+                </svg>
               </div>
-              <p class="text-sm text-slate-400 leading-relaxed mb-4">
-                Zero-allocation input method daemon for Fcitx5 with sub-100 &mu;s latency, memory interned $O(1)$ window sessions, and Wayland/X11 compatibility.
-              </p>
+              <div>
+                <h3 class="platform-name">Linux</h3>
+                <span class="platform-ver">Fcitx5 Native &bull; All Distros</span>
+              </div>
             </div>
 
-            <div>
-              <div class="p-3 rounded-xl bg-slate-950 border border-white/10 flex items-center justify-between gap-2 mb-3">
-                <code class="text-xs font-mono text-slate-300 truncate" id="linux-curl-code">curl -fsSL https://raw.githubusercontent.com/sintaulsiam/lekhani/main/install.sh | bash</code>
-                <button type="button" class="px-2.5 py-1 rounded bg-white/5 hover:bg-white/10 text-emerald-400 text-xs font-mono font-medium transition shrink-0" id="linux-curl-copy">Copy</button>
+            <p class="platform-desc">
+              Zero-allocation input method daemon for Fcitx5 with sub-100 &mu;s latency, memory interned $O(1)$ window sessions, and Wayland/X11 compatibility.
+            </p>
+
+            <div class="terminal-install-box">
+              <div class="terminal-bar">
+                <span class="term-dot red"></span>
+                <span class="term-dot yellow"></span>
+                <span class="term-dot green"></span>
+                <span class="term-title">Automated Install</span>
               </div>
-              <div class="flex items-center gap-3 text-xs text-slate-500 font-mono">
-                <span>Arch: AUR</span>
-                <span>&bull;</span>
-                <span>Ubuntu/Debian: .deb</span>
-                <span>&bull;</span>
-                <span>Fedora: RPM</span>
+              <div class="terminal-body">
+                <pre><code><span class="term-prompt">$</span> curl -fsSL https://raw.githubusercontent.com/sintaulsiam/lekhani/main/install.sh | bash</code></pre>
+                <button type="button" class="btn-terminal-copy" id="linux-curl-copy" aria-label="Copy Linux curl command">Copy</button>
+              </div>
+            </div>
+
+            <div class="distro-pills">
+              <div class="distro-entry">
+                <span class="distro-name">Source Build</span>
+                <code>cargo install --git https://github.com/sintaulsiam/lekhani</code>
+              </div>
+              <div class="distro-entry">
+                <span class="distro-name">Packaging Scripts</span>
+                <code>packaging/ (Debian / RPM / Arch)</code>
               </div>
             </div>
           </div>
 
           <!-- Windows Card -->
-          <div class="p-5 sm:p-6 rounded-2xl bg-slate-900/60 border border-white/10 backdrop-blur-md flex flex-col justify-between" id="windows-card">
-            <div>
-              <div class="flex items-center gap-3 mb-3">
-                <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-200">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="text-lg font-bold text-white">Windows</h3>
-                  <span class="text-xs font-mono text-slate-400">Desktop Hook &bull; Source Preview</span>
-                </div>
+          <div class="platform-card" id="windows-card">
+            <div class="platform-header">
+              <div class="platform-icon windows-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/>
+                </svg>
               </div>
-              <p class="text-sm text-slate-400 leading-relaxed mb-4">
-                Native Low-Level Keyboard Hook (<code>WH_KEYBOARD_LL</code>) &amp; System Tray Suite. Active desktop port tracking upstream engine crates.
-              </p>
+              <div>
+                <h3 class="platform-name">Windows</h3>
+                <span class="platform-ver">Desktop Hook &bull; Source Preview</span>
+              </div>
             </div>
 
-            <div class="flex flex-col gap-2.5">
-              <div class="flex items-center gap-2 text-xs text-slate-400">
-                <span class="text-emerald-400">&check;</span> Native Unicode SendInput synthesis
+            <p class="platform-desc">
+              Native Low-Level Keyboard Hook (<code>WH_KEYBOARD_LL</code>) &amp; System Tray Suite. Active desktop port tracking upstream engine crates.
+            </p>
+
+            <div class="windows-status-box">
+              <div class="feature-checklist">
+                <div class="check-item">&check; Native Unicode <code>SendInput</code> synthesis</div>
+                <div class="check-item">&check; System tray switcher &amp; hotkey toggling</div>
+                <div class="check-item">&check; Full Inno Setup installer script in repo</div>
               </div>
-              <a href="https://github.com/sintaulsiam/lekhani" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl text-center text-xs font-semibold text-slate-200 bg-white/5 hover:bg-white/10 border border-white/10 transition">
+
+              <a href="https://github.com/sintaulsiam/lekhani" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-block">
                 View Desktop Source on GitHub &rarr;
               </a>
             </div>
           </div>
         </div>
-
       </div>
     </section>
 
-    <!-- ── Keyboard Layouts Showcase ─────────────────────────────────────────── -->
-    <section id="layouts" class="py-12 sm:py-20 bg-slate-950/40">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
-          <div class="inline-block px-3 py-1 rounded-full text-xs font-mono font-semibold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 mb-3">ERGONOMICS &amp; TYPOGRAPHY</div>
-          <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">Designed for Your Muscle Memory</h2>
-          <p class="text-sm sm:text-base text-slate-400 mt-2">Whether you prefer classic phonetic typing, official government standards, or an innovative two-thumb mobile flow.</p>
+    <!-- Ergonomic Layouts Showcase -->
+    <section id="layouts" class="layouts-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">ERGONOMICS & TYPOGRAPHY</div>
+          <h2 class="section-title">Designed for Your Muscle Memory</h2>
+          <p class="section-subtitle">Whether you prefer classic phonetic typing, official government standards, or an innovative two-thumb mobile flow.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="layouts-showcase-grid">
           <!-- Probaho Card -->
-          <div class="layout-card p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-emerald-500/10 via-slate-900/80 to-slate-900 border border-emerald-500/30 flex flex-col justify-between">
-            <div>
-              <div class="overflow-hidden rounded-xl border border-white/10 mb-4 bg-black/40">
-                <img src="assets/screenshots/keyboard_probaho.png" alt="Lekhani Probaho Layout Screenshot" loading="lazy" class="w-full h-auto object-cover">
-              </div>
-              <div class="text-[10px] font-mono font-bold tracking-wider text-emerald-400 uppercase mb-1">ERGONOMIC TWO-THUMB FLOW</div>
-              <h3 class="text-lg font-bold text-white mb-2">Lekhani প্রবাহ (Probaho)</h3>
-              <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
-                Tailored specifically for Bengali script ergonomics. Left thumb commands high-frequency vowel stems, while right thumb governs consonants, reducing finger travel distance by 38%.
-              </p>
+          <div class="layout-card highlight-card">
+            <div class="layout-visual">
+              <img src="assets/screenshots/keyboard_probaho.png" alt="Lekhani Probaho Layout Screenshot" loading="lazy" class="layout-screenshot">
             </div>
-            <ul class="text-xs text-slate-300 space-y-1.5 border-t border-white/5 pt-3 font-medium">
-              <li class="flex items-center gap-1.5"><span class="text-emerald-400">&bull;</span> স্বরবর্ণ (Vowels &amp; Kars) cluster on left</li>
-              <li class="flex items-center gap-1.5"><span class="text-emerald-400">&bull;</span> ব্যঞ্জনবর্ণ (Consonants) matrix on right</li>
-              <li class="flex items-center gap-1.5"><span class="text-emerald-400">&bull;</span> Instant thumb conjunct modifier</li>
-            </ul>
+            <div class="layout-body">
+              <div class="layout-tag">ERGONOMIC TWO-THUMB FLOW</div>
+              <h3 class="layout-title">Lekhani প্রবাহ (Probaho)</h3>
+              <p class="layout-description">
+                Tailored specifically for Bengali script ergonomics. Left thumb commands high-frequency vowel stems, while right thumb governs the consonant matrix, dramatically reducing finger travel distance by 38%.
+              </p>
+              <ul class="layout-points">
+                <li>Left hand: স্বরবর্ণ (Vowels &amp; Kars) cluster</li>
+                <li>Right hand: ব্যঞ্জনবর্ণ (Consonants) matrix</li>
+                <li>Instant thumb-accessible conjunct modifier</li>
+              </ul>
+            </div>
           </div>
 
           <!-- Avro Phonetic Card -->
-          <div class="layout-card p-5 sm:p-6 rounded-2xl bg-slate-900/60 border border-white/10 backdrop-blur-md flex flex-col justify-between">
-            <div>
-              <div class="overflow-hidden rounded-xl border border-white/10 mb-4 bg-black/40">
-                <img src="assets/screenshots/keyboard_avro.png" alt="Avro Phonetic Layout Screenshot" loading="lazy" class="w-full h-auto object-cover">
-              </div>
-              <div class="text-[10px] font-mono font-bold tracking-wider text-slate-400 uppercase mb-1">CLASSIC STANDARD</div>
-              <h3 class="text-lg font-bold text-white mb-2">Avro Phonetic</h3>
-              <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
+          <div class="layout-card">
+            <div class="layout-visual">
+              <img src="assets/screenshots/keyboard_avro.png" alt="Avro Phonetic Layout Screenshot" loading="lazy" class="layout-screenshot">
+            </div>
+            <div class="layout-body">
+              <div class="layout-tag">CLASSIC STANDARD</div>
+              <h3 class="layout-title">Avro Phonetic</h3>
+              <p class="layout-description">
                 100% compliant with standard Avro muscle memory. Type in English letters to output accurate, grammatically correct Bengali text with intelligent conjunct resolving.
               </p>
+              <ul class="layout-points">
+                <li>Exact Avro phonetic keystroke mappings</li>
+                <li>Context-aware Sandhi and spoken verb stems</li>
+                <li>English loanword auto-preservation</li>
+              </ul>
             </div>
-            <ul class="text-xs text-slate-300 space-y-1.5 border-t border-white/5 pt-3 font-medium">
-              <li class="flex items-center gap-1.5"><span class="text-emerald-400">&bull;</span> Exact Avro phonetic keystroke mappings</li>
-              <li class="flex items-center gap-1.5"><span class="text-emerald-400">&bull;</span> Context-aware Sandhi rules &amp; verb stems</li>
-              <li class="flex items-center gap-1.5"><span class="text-emerald-400">&bull;</span> English loanword auto-preservation</li>
-            </ul>
           </div>
 
           <!-- Probhat Layout Card -->
-          <div class="layout-card p-5 sm:p-6 rounded-2xl bg-slate-900/60 border border-white/10 backdrop-blur-md flex flex-col justify-between">
-            <div>
-              <div class="overflow-hidden rounded-xl border border-white/10 mb-4 bg-black/40">
-                <img src="assets/screenshots/keyboard_probhat.png" alt="Probhat Layout Screenshot" loading="lazy" class="w-full h-auto object-cover">
-              </div>
-              <div class="text-[10px] font-mono font-bold tracking-wider text-slate-400 uppercase mb-1">TRADITIONAL FIXED</div>
-              <h3 class="text-lg font-bold text-white mb-2">প্রভাত (Probhat) &amp; জাতীয়</h3>
-              <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
+          <div class="layout-card">
+            <div class="layout-visual">
+              <img src="assets/screenshots/keyboard_probhat.png" alt="Probhat Layout Screenshot" loading="lazy" class="layout-screenshot">
+            </div>
+            <div class="layout-body">
+              <div class="layout-tag">TRADITIONAL FIXED</div>
+              <h3 class="layout-title">প্রভাত (Probhat) &amp; জাতীয় (National)</h3>
+              <p class="layout-description">
                 For users trained on official Bangladesh BBS / Probhat standards. Full support for Shift and AltGr modifier layers with zero learning curve.
               </p>
+              <ul class="layout-points">
+                <li>BBS National standard key mapping</li>
+                <li>Dedicated dead-key combinations</li>
+                <li>Seamless Shift and AltGr layer toggling</li>
+              </ul>
             </div>
-            <ul class="text-xs text-slate-300 space-y-1.5 border-t border-white/5 pt-3 font-medium">
-              <li class="flex items-center gap-1.5"><span class="text-emerald-400">&bull;</span> BBS National standard key mapping</li>
-              <li class="flex items-center gap-1.5"><span class="text-emerald-400">&bull;</span> Dedicated dead-key combinations</li>
-              <li class="flex items-center gap-1.5"><span class="text-emerald-400">&bull;</span> Seamless Shift &amp; AltGr layer toggling</li>
-            </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ── Interactive Phonetic Rules Cheatsheet ─────────────────────────────── -->
-    <section id="cheatsheet" class="py-12 sm:py-20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
-          <div class="inline-block px-3 py-1 rounded-full text-xs font-mono font-semibold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 mb-3">QUICK REFERENCE</div>
-          <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">Phonetic Typing Cheatsheet</h2>
-          <p class="text-sm sm:text-base text-slate-400 mt-2">Search any English combination or Bengali character to see the exact keystroke.</p>
+    <!-- Interactive Phonetic Rules Cheatsheet -->
+    <section id="cheatsheet" class="cheatsheet-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">QUICK REFERENCE</div>
+          <h2 class="section-title">Phonetic Typing Cheatsheet</h2>
+          <p class="section-subtitle">Search any English combination or Bengali character to see the exact keystroke.</p>
         </div>
 
-        <div class="rounded-2xl border border-white/10 bg-slate-900/60 p-4 sm:p-6 backdrop-blur-xl">
-          <!-- Toolbar & Filter Tabs -->
-          <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 mb-6">
-            <div class="relative flex-1 max-w-md">
-              <input type="text" id="cheatsheet-search" placeholder="Search (e.g. 'kkh', 'ক্ষ', 'rri', 'ঋ', 'sh')..." class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-950 border border-white/10 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-400 transition" autocomplete="off">
-              <svg class="absolute left-3.5 top-3 text-slate-500" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <div class="cheatsheet-container">
+          <div class="cheatsheet-toolbar">
+            <div class="search-input-wrapper">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" id="cheatsheet-search" placeholder="Search (e.g. 'kkh', 'ক্ষ', 'rri', 'ঋ', 'sh', 'ঙ')..." autocomplete="off">
             </div>
 
-            <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
-              <button type="button" class="filter-btn active px-3 py-1.5 rounded-lg text-xs font-medium bg-white/5 border border-white/10 text-slate-300 transition whitespace-nowrap" data-category="all">All</button>
-              <button type="button" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-white/5 border border-white/10 text-slate-300 transition whitespace-nowrap" data-category="vowels">Vowels (স্বরবর্ণ)</button>
-              <button type="button" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-white/5 border border-white/10 text-slate-300 transition whitespace-nowrap" data-category="kars">Kars (কার)</button>
-              <button type="button" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-white/5 border border-white/10 text-slate-300 transition whitespace-nowrap" data-category="consonants">Consonants (ব্যঞ্জনবর্ণ)</button>
-              <button type="button" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-white/5 border border-white/10 text-slate-300 transition whitespace-nowrap" data-category="juktoborno">Juktoborno (যুক্তবর্ণ)</button>
-              <button type="button" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-white/5 border border-white/10 text-slate-300 transition whitespace-nowrap" data-category="special">Special (চিহ্ন)</button>
+            <div class="filter-tabs">
+              <button type="button" class="filter-btn active" data-category="all">All</button>
+              <button type="button" class="filter-btn" data-category="vowels">Vowels (স্বরবর্ণ)</button>
+              <button type="button" class="filter-btn" data-category="kars">Kars (কার)</button>
+              <button type="button" class="filter-btn" data-category="consonants">Consonants (ব্যঞ্জনবর্ণ)</button>
+              <button type="button" class="filter-btn" data-category="juktoborno">Juktoborno (যুক্তবর্ণ)</button>
+              <button type="button" class="filter-btn" data-category="special">Special (চিহ্ন)</button>
             </div>
           </div>
 
-          <!-- Responsive Table Container (Zero mobile blowout) -->
-          <div class="overflow-x-auto rounded-xl border border-white/10 bg-slate-950/60">
-            <table class="rules-table w-full text-left" id="rules-table">
+          <div class="table-responsive">
+            <table class="rules-table" id="rules-table">
               <thead>
-                <tr class="border-b border-white/10 bg-white/5 text-slate-400 font-mono text-xs uppercase tracking-wider">
-                  <th class="p-3 sm:p-4">Keystroke</th>
-                  <th class="p-3 sm:p-4">Bengali</th>
-                  <th class="p-3 sm:p-4">Category</th>
-                  <th class="p-3 sm:p-4">Example</th>
-                  <th class="p-3 sm:p-4">Output</th>
+                <tr>
+                  <th>Keystroke</th>
+                  <th>Bengali Character</th>
+                  <th>Category</th>
+                  <th>Example Usage</th>
+                  <th>Result</th>
                 </tr>
               </thead>
-              <tbody id="rules-tbody" class="divide-y divide-white/5 text-sm text-slate-300 font-bengali">
+              <tbody id="rules-tbody">
                 <!-- Dynamically populated via app.js -->
               </tbody>
             </table>
           </div>
-          <div id="no-rules-found" class="p-8 text-center text-slate-500 text-sm hidden">No matching rules found. Try searching by letter or keystroke.</div>
+          <div id="no-rules-found" class="no-results hidden">No matching rules found. Try searching by letter or keystroke.</div>
         </div>
       </div>
     </section>
 
-    <!-- ── Engineering Benchmarks ────────────────────────────────────────────── -->
-    <section id="benchmarks" class="py-12 sm:py-20 bg-slate-950/40">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
-          <div class="inline-block px-3 py-1 rounded-full text-xs font-mono font-semibold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 mb-3">ENGINEERING INTEGRITY</div>
-          <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">Hard Numbers. Zero Fluff.</h2>
-          <p class="text-sm sm:text-base text-slate-400 mt-2">Comparing Lekhani's pure Rust headless engine against legacy Python and C++ implementations.</p>
+    <!-- Hard Benchmarks & Architecture Specs -->
+    <section id="benchmarks" class="benchmarks-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">ENGINEERING INTEGRITY</div>
+          <h2 class="section-title">Hard Numbers. Zero Fluff.</h2>
+          <p class="section-subtitle">Comparing Lekhani's pure Rust headless engine against legacy Python and C++ implementations.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <div class="p-5 sm:p-6 rounded-2xl bg-slate-900/60 border border-white/10 backdrop-blur-md">
-            <h3 class="text-lg font-bold text-white mb-1">Keystroke Processing Latency</h3>
-            <p class="text-xs text-slate-400 mb-5">Measured across 100,000 synthetic keystrokes on modern x86_64.</p>
+        <div class="benchmarks-grid">
+          <div class="bench-card">
+            <h3 class="bench-title">Keystroke Processing Latency</h3>
+            <p class="bench-sub">Measured across 100,000 synthetic keystrokes on modern x86_64.</p>
             
-            <div class="space-y-4">
-              <div>
-                <div class="flex justify-between text-xs font-mono mb-1.5">
-                  <span class="text-slate-300 font-medium">Lekhani (Pure Rust)</span>
-                  <span class="font-bold text-emerald-400">0.078 ms (&lt; 100 &mu;s)</span>
+            <div class="bar-chart-group">
+              <div class="bar-item">
+                <div class="bar-meta">
+                  <span class="bar-label">Lekhani (Pure Rust)</span>
+                  <span class="bar-val text-accent">0.078 ms (&lt; 100 &mu;s)</span>
                 </div>
-                <div class="w-full h-2 rounded-full bg-slate-950 overflow-hidden">
-                  <div class="bar-fill h-full bg-emerald-400 rounded-full" style="width: 8%;"></div>
-                </div>
-              </div>
-
-              <div>
-                <div class="flex justify-between text-xs font-mono mb-1.5">
-                  <span class="text-slate-400">Rupantor (Python-based)</span>
-                  <span class="text-slate-400">1.280 ms</span>
-                </div>
-                <div class="w-full h-2 rounded-full bg-slate-950 overflow-hidden">
-                  <div class="bar-fill h-full bg-slate-600 rounded-full" style="width: 85%;"></div>
+                <div class="bar-track">
+                  <div class="bar-fill fill-accent" style="width: 8%;"></div>
                 </div>
               </div>
 
-              <div>
-                <div class="flex justify-between text-xs font-mono mb-1.5">
-                  <span class="text-slate-400">Traditional Electron/C++ IMEs</span>
-                  <span class="text-slate-400">3.450 ms</span>
+              <div class="bar-item">
+                <div class="bar-meta">
+                  <span class="bar-label">Rupantor (Python-based)</span>
+                  <span class="bar-val">1.280 ms</span>
                 </div>
-                <div class="w-full h-2 rounded-full bg-slate-950 overflow-hidden">
-                  <div class="bar-fill h-full bg-slate-600 rounded-full" style="width: 100%;"></div>
+                <div class="bar-track">
+                  <div class="bar-fill fill-muted" style="width: 85%;"></div>
+                </div>
+              </div>
+
+              <div class="bar-item">
+                <div class="bar-meta">
+                  <span class="bar-label">Traditional Electron/C++ IMEs</span>
+                  <span class="bar-val">3.450 ms</span>
+                </div>
+                <div class="bar-track">
+                  <div class="bar-fill fill-muted" style="width: 100%;"></div>
                 </div>
               </div>
             </div>
-            <div class="mt-4 pt-3 border-t border-white/5 text-xs font-mono text-emerald-400">&gt; 16&times; faster execution than classic Python Avro implementations.</div>
+            <span class="bench-conclusion">&gt; 16&times; faster execution than classic Python Avro implementations.</span>
           </div>
 
-          <div class="p-5 sm:p-6 rounded-2xl bg-slate-900/60 border border-white/10 backdrop-blur-md">
-            <h3 class="text-lg font-bold text-white mb-1">Resident Memory Usage (RSS)</h3>
-            <p class="text-xs text-slate-400 mb-5">Private dirty memory consumption during active bilingual typing.</p>
+          <div class="bench-card">
+            <h3 class="bench-title">Resident Memory Usage (RSS)</h3>
+            <p class="bench-sub">Private dirty memory consumption during active bilingual typing.</p>
             
-            <div class="space-y-4">
-              <div>
-                <div class="flex justify-between text-xs font-mono mb-1.5">
-                  <span class="text-slate-300 font-medium">Lekhani Android</span>
-                  <span class="font-bold text-emerald-400">42 MB (Private Dirty)</span>
+            <div class="bar-chart-group">
+              <div class="bar-item">
+                <div class="bar-meta">
+                  <span class="bar-label">Lekhani Android</span>
+                  <span class="bar-val text-accent">42 MB (Private Dirty)</span>
                 </div>
-                <div class="w-full h-2 rounded-full bg-slate-950 overflow-hidden">
-                  <div class="bar-fill h-full bg-emerald-400 rounded-full" style="width: 13%;"></div>
-                </div>
-              </div>
-
-              <div>
-                <div class="flex justify-between text-xs font-mono mb-1.5">
-                  <span class="text-slate-300 font-medium">Lekhani Linux Daemon</span>
-                  <span class="font-bold text-emerald-400">28 MB</span>
-                </div>
-                <div class="w-full h-2 rounded-full bg-slate-950 overflow-hidden">
-                  <div class="bar-fill h-full bg-emerald-400 rounded-full" style="width: 9%;"></div>
+                <div class="bar-track">
+                  <div class="bar-fill fill-accent" style="width: 13%;"></div>
                 </div>
               </div>
 
-              <div>
-                <div class="flex justify-between text-xs font-mono mb-1.5">
-                  <span class="text-slate-400">Standard Keyboard Apps</span>
-                  <span class="text-slate-400">180 MB - 320 MB</span>
+              <div class="bar-item">
+                <div class="bar-meta">
+                  <span class="bar-label">Lekhani Linux Daemon</span>
+                  <span class="bar-val text-accent">28 MB</span>
                 </div>
-                <div class="w-full h-2 rounded-full bg-slate-950 overflow-hidden">
-                  <div class="bar-fill h-full bg-slate-600 rounded-full" style="width: 90%;"></div>
+                <div class="bar-track">
+                  <div class="bar-fill fill-accent" style="width: 9%;"></div>
+                </div>
+              </div>
+
+              <div class="bar-item">
+                <div class="bar-meta">
+                  <span class="bar-label">Standard Keyboard Apps</span>
+                  <span class="bar-val">180 MB - 320 MB</span>
+                </div>
+                <div class="bar-track">
+                  <div class="bar-fill fill-muted" style="width: 90%;"></div>
                 </div>
               </div>
             </div>
-            <div class="mt-4 pt-3 border-t border-white/5 text-xs font-mono text-emerald-400">Resilient against Android LMK (Low Memory Killer) pressure.</div>
+            <span class="bench-conclusion">Resilient against Android LMK (Low Memory Killer) pressure.</span>
           </div>
         </div>
 
-        <!-- Privacy & System Principles Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="p-5 rounded-xl bg-slate-900/40 border border-white/5">
-            <h4 class="font-bold text-white text-sm mb-1.5 flex items-center gap-2">
-              <span class="text-emerald-400">&check;</span> Zero Telemetry Promise
-            </h4>
-            <p class="text-xs text-slate-400 leading-relaxed">The Android manifest does not request <code>INTERNET</code> permission. Keystrokes, clipboard, and dictionary data cannot leave the phone.</p>
+        <!-- Privacy & System Principles Table -->
+        <div class="principles-grid">
+          <div class="principle-card">
+            <div class="principle-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <h4 class="principle-title">Zero Telemetry Promise</h4>
+            <p class="principle-text">The Android manifest does not request <code>android.permission.INTERNET</code>. Keystrokes, clipboard, and dictionary data physically cannot leave the phone.</p>
           </div>
-          <div class="p-5 rounded-xl bg-slate-900/40 border border-white/5">
-            <h4 class="font-bold text-white text-sm mb-1.5 flex items-center gap-2">
-              <span class="text-emerald-400">&check;</span> Direct Boot Readiness
-            </h4>
-            <p class="text-xs text-slate-400 leading-relaxed">Enabled with <code>directBootAware="true"</code>. Type passwords and unlock credentials immediately after reboot before user storage decryption.</p>
+
+          <div class="principle-card">
+            <div class="principle-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            </div>
+            <h4 class="principle-title">Direct Boot Readiness</h4>
+            <p class="principle-text">Enabled with <code>android:directBootAware="true"</code>. Type passwords and unlock credentials immediately after reboot before user storage decryption.</p>
           </div>
-          <div class="p-5 rounded-xl bg-slate-900/40 border border-white/5">
-            <h4 class="font-bold text-white text-sm mb-1.5 flex items-center gap-2">
-              <span class="text-emerald-400">&check;</span> Zero-GC Touch Path
-            </h4>
-            <p class="text-xs text-slate-400 leading-relaxed">Pre-allocated memory pools, scratchpad buffers, and hardware canvas matrices prevent garbage collector micro-stutters during typing.</p>
+
+          <div class="principle-card">
+            <div class="principle-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+            </div>
+            <h4 class="principle-title">Zero-GC Touch Path</h4>
+            <p class="principle-text">Pre-allocated memory pools, scratchpad buffers, and hardware canvas matrices prevent garbage collector micro-stutters during typing.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ── App Gallery & Theme Studio ────────────────────────────────────────── -->
-    <section class="py-12 sm:py-20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
-          <div class="inline-block px-3 py-1 rounded-full text-xs font-mono font-semibold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 mb-3">NATIVE POLISH</div>
-          <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">Built for Modern Android</h2>
-          <p class="text-sm sm:text-base text-slate-400 mt-2">Pure Material 3 Expressive UI, dynamic Chroma wave animations, dedicated D-pad text editor, and ephemeral clipboard vault.</p>
+    <!-- App Gallery & Theme Studio -->
+    <section class="gallery-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">NATIVE POLISH</div>
+          <h2 class="section-title">Built for Modern Android</h2>
+          <p class="section-subtitle">Pure Material 3 Expressive UI, dynamic Chroma wave animations, dedicated D-pad text editor, and ephemeral clipboard vault.</p>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-          <figure class="rounded-xl overflow-hidden bg-slate-900/60 border border-white/10 flex flex-col">
-            <img src="assets/screenshots/settings_themes.png" alt="Lekhani Theme Studio Screenshot" loading="lazy" class="w-full h-auto object-cover border-b border-white/5">
-            <figcaption class="p-3 text-xs text-slate-400">
-              <strong class="text-white block mb-0.5">Theme Studio</strong> 33 curated presets across 5 aesthetic categories with 120 FPS chromatic wave engines.
+        <div class="gallery-grid">
+          <figure class="gallery-item">
+            <img src="assets/screenshots/settings_themes.png" alt="Lekhani Theme Studio Screenshot" loading="lazy" class="gallery-img">
+            <figcaption class="gallery-caption">
+              <strong>Theme Studio</strong> &mdash; 33 curated presets across 5 aesthetic categories, custom wallpapers, and dynamic 120 FPS chromatic wave engines.
             </figcaption>
           </figure>
 
-          <figure class="rounded-xl overflow-hidden bg-slate-900/60 border border-white/10 flex flex-col">
-            <img src="assets/screenshots/feature_tool_vault.png" alt="Lekhani Tool Vault Screenshot" loading="lazy" class="w-full h-auto object-cover border-b border-white/5">
-            <figcaption class="p-3 text-xs text-slate-400">
-              <strong class="text-white block mb-0.5">Tool Vault</strong> Quick popup sheet for height resizing, one-handed mode, floating window &amp; split keyboard.
+          <figure class="gallery-item">
+            <img src="assets/screenshots/feature_tool_vault.png" alt="Lekhani Tool Vault Screenshot" loading="lazy" class="gallery-img">
+            <figcaption class="gallery-caption">
+              <strong>Tool Vault</strong> &mdash; Quick popup sheet for height resizing, one-handed mode, floating window, split keyboard, and dictionary management.
             </figcaption>
           </figure>
 
-          <figure class="rounded-xl overflow-hidden bg-slate-900/60 border border-white/10 flex flex-col">
-            <img src="assets/screenshots/settings_layouts.png" alt="Lekhani Layout Switcher Screenshot" loading="lazy" class="w-full h-auto object-cover border-b border-white/5">
-            <figcaption class="p-3 text-xs text-slate-400">
-              <strong class="text-white block mb-0.5">Layout Switcher</strong> Configure and reorder layout priorities with one-tap spacebar gesture transitions.
+          <figure class="gallery-item">
+            <img src="assets/screenshots/settings_layouts.png" alt="Lekhani Layout Switcher Screenshot" loading="lazy" class="gallery-img">
+            <figcaption class="gallery-caption">
+              <strong>Layout Switcher</strong> &mdash; Configure and reorder layout priorities with one-tap spacebar gesture transitions.
             </figcaption>
           </figure>
 
-          <figure class="rounded-xl overflow-hidden bg-slate-900/60 border border-white/10 flex flex-col">
-            <img src="assets/screenshots/settings_clipboard.png" alt="Lekhani Clipboard Vault Screenshot" loading="lazy" class="w-full h-auto object-cover border-b border-white/5">
-            <figcaption class="p-3 text-xs text-slate-400">
-              <strong class="text-white block mb-0.5">Clipboard Vault</strong> Local, ephemeral clipboard history with pin support and zero network communication.
+          <figure class="gallery-item">
+            <img src="assets/screenshots/settings_clipboard.png" alt="Lekhani Clipboard Vault Screenshot" loading="lazy" class="gallery-img">
+            <figcaption class="gallery-caption">
+              <strong>Clipboard Vault</strong> &mdash; Local, ephemeral clipboard history with pin support and zero network communication.
             </figcaption>
           </figure>
         </div>
       </div>
     </section>
 
-    <!-- ── Standalone Crates Hub ──────────────────────────────────────────────── -->
-    <section id="crates" class="py-12 sm:py-20 bg-slate-950/40">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
-          <div class="inline-block px-3 py-1 rounded-full text-xs font-mono font-semibold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 mb-3">RUST ECOSYSTEM</div>
-          <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">Modular Rust Crates on Crates.io</h2>
-          <p class="text-sm sm:text-base text-slate-400 mt-2">Embed Lekhani's grammar engine or statistical language models into your own Rust, WebAssembly, or desktop software.</p>
+    <!-- Standalone Crates Hub for Developers -->
+    <section id="crates" class="crates-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">RUST ECOSYSTEM</div>
+          <h2 class="section-title">Modular Rust Crates on Crates.io</h2>
+          <p class="section-subtitle">Embed Lekhani's grammar engine or statistical language models into your own Rust, WebAssembly, or desktop software.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="p-5 sm:p-6 rounded-2xl bg-slate-900/60 border border-white/10 backdrop-blur-md flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between mb-2">
-                <span class="font-mono font-bold text-white text-base">lekhani-parser</span>
-                <a href="https://crates.io/crates/lekhani-parser" target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">crates.io</a>
-              </div>
-              <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">Zero-allocation pure Rust Avro phonetic grammar parser with 11 ns/char throughput and optional WASM bindings.</p>
+        <div class="crates-grid">
+          <div class="crate-card">
+            <div class="crate-header">
+              <span class="crate-name">lekhani-parser</span>
+              <a href="https://crates.io/crates/lekhani-parser" target="_blank" rel="noopener noreferrer" class="crate-badge">crates.io</a>
             </div>
-            <div class="p-2.5 rounded-xl bg-slate-950 border border-white/10 flex items-center justify-between gap-2">
-              <code class="text-xs font-mono text-slate-300">lekhani-parser = "0.3"</code>
-              <button type="button" class="btn-crate-copy px-2 py-1 rounded bg-white/5 hover:bg-white/10 text-emerald-400 text-xs font-mono transition" data-copy='lekhani-parser = "0.3"'>Copy</button>
-            </div>
-          </div>
-
-          <div class="p-5 sm:p-6 rounded-2xl bg-slate-900/60 border border-white/10 backdrop-blur-md flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between mb-2">
-                <span class="font-mono font-bold text-white text-base">lekhani-ai</span>
-                <a href="https://crates.io/crates/lekhani-ai" target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">crates.io</a>
-              </div>
-              <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">On-device statistical N-gram language model, contextual candidate scorer, and next-word predictor under 6 MB.</p>
-            </div>
-            <div class="p-2.5 rounded-xl bg-slate-950 border border-white/10 flex items-center justify-between gap-2">
-              <code class="text-xs font-mono text-slate-300">lekhani-ai = "0.3"</code>
-              <button type="button" class="btn-crate-copy px-2 py-1 rounded bg-white/5 hover:bg-white/10 text-emerald-400 text-xs font-mono transition" data-copy='lekhani-ai = "0.3"'>Copy</button>
+            <p class="crate-desc">Zero-allocation pure Rust Avro phonetic grammar parser with 11 ns/char throughput and optional WASM bindings.</p>
+            <div class="code-snippet-box">
+              <pre><code>[dependencies]
+lekhani-parser = "0.3"</code></pre>
+              <button type="button" class="btn-terminal-copy btn-crate-copy" data-copy='lekhani-parser = "0.3"' aria-label="Copy Cargo dependency snippet">Copy</button>
             </div>
           </div>
 
-          <div class="p-5 sm:p-6 rounded-2xl bg-slate-900/60 border border-white/10 backdrop-blur-md flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between mb-2">
-                <span class="font-mono font-bold text-white text-base">lekhani-core</span>
-                <a href="https://crates.io/crates/lekhani-core" target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">crates.io</a>
-              </div>
-              <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">Headless Bengali IME state machine, candidate ranking, compact prefix Trie, and autocorrect pipeline.</p>
+          <div class="crate-card">
+            <div class="crate-header">
+              <span class="crate-name">lekhani-ai</span>
+              <a href="https://crates.io/crates/lekhani-ai" target="_blank" rel="noopener noreferrer" class="crate-badge">crates.io</a>
             </div>
-            <div class="p-2.5 rounded-xl bg-slate-950 border border-white/10 flex items-center justify-between gap-2">
-              <code class="text-xs font-mono text-slate-300">lekhani-core = "0.3"</code>
-              <button type="button" class="btn-crate-copy px-2 py-1 rounded bg-white/5 hover:bg-white/10 text-emerald-400 text-xs font-mono transition" data-copy='lekhani-core = "0.3"'>Copy</button>
+            <p class="crate-desc">On-device statistical N-gram language model, contextual candidate scorer, and next-word predictor under 6 MB.</p>
+            <div class="code-snippet-box">
+              <pre><code>[dependencies]
+lekhani-ai = "0.3"</code></pre>
+              <button type="button" class="btn-terminal-copy btn-crate-copy" data-copy='lekhani-ai = "0.3"' aria-label="Copy Cargo dependency snippet">Copy</button>
+            </div>
+          </div>
+
+          <div class="crate-card">
+            <div class="crate-header">
+              <span class="crate-name">lekhani-core</span>
+              <a href="https://crates.io/crates/lekhani-core" target="_blank" rel="noopener noreferrer" class="crate-badge">crates.io</a>
+            </div>
+            <p class="crate-desc">Headless Bengali IME state machine, candidate ranking, compact prefix Trie, and autocorrect pipeline.</p>
+            <div class="code-snippet-box">
+              <pre><code>[dependencies]
+lekhani-core = "0.3"</code></pre>
+              <button type="button" class="btn-terminal-copy btn-crate-copy" data-copy='lekhani-core = "0.3"' aria-label="Copy Cargo dependency snippet">Copy</button>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ── Frequently Asked Questions ────────────────────────────────────────── -->
-    <section class="py-12 sm:py-20">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
-          <div class="inline-block px-3 py-1 rounded-full text-xs font-mono font-semibold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 mb-3">QUESTIONS &amp; ANSWERS</div>
-          <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">Frequently Asked Questions</h2>
+    <!-- Frequently Asked Questions -->
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">QUESTIONS & ANSWERS</div>
+          <h2 class="section-title">Frequently Asked Questions</h2>
         </div>
 
-        <div class="space-y-3">
-          <details class="faq-item p-4 sm:p-5 rounded-2xl bg-slate-900/60 border border-white/10 backdrop-blur-md transition group">
-            <summary class="font-bold text-white text-sm sm:text-base flex items-center justify-between cursor-pointer">
-              <span>How does Lekhani differ from standard Avro Keyboard?</span>
-              <span class="faq-icon text-slate-400 text-xs transition-transform font-mono group-open:rotate-180">&darr;</span>
-            </summary>
-            <p class="mt-3 text-xs sm:text-sm text-slate-400 leading-relaxed">
-              Lekhani retains 100% muscle-memory compatibility with official Avro rules, but is rewritten completely from scratch in pure Rust. Unlike legacy tools, Lekhani incorporates an on-device contextual homophone ranker, verbal conjugation peeling (e.g. <code>kortesi</code> &rarr; করছি/করতেছি), and a sub-millisecond hardware canvas on Android.
-            </p>
+        <div class="faq-accordion-list">
+          <details class="faq-item">
+            <summary class="faq-question">How does Lekhani differ from standard Avro Keyboard?</summary>
+            <div class="faq-answer">
+              <p>Lekhani retains 100% muscle-memory compatibility with official Avro Phonetic rules, but is rewritten completely from scratch in pure Rust. Unlike legacy tools, Lekhani incorporates an on-device contextual homophone ranker, modern verbal conjugation peeling (e.g. <code>kortesi</code> &rarr; করছি/করতেছি), and a sub-millisecond hardware-accelerated canvas on Android.</p>
+            </div>
           </details>
 
-          <details class="faq-item p-4 sm:p-5 rounded-2xl bg-slate-900/60 border border-white/10 backdrop-blur-md transition group">
-            <summary class="font-bold text-white text-sm sm:text-base flex items-center justify-between cursor-pointer">
-              <span>Does Lekhani collect or transmit any typing data?</span>
-              <span class="faq-icon text-slate-400 text-xs transition-transform font-mono group-open:rotate-180">&darr;</span>
-            </summary>
-            <p class="mt-3 text-xs sm:text-sm text-slate-400 leading-relaxed">
-              <strong class="text-emerald-400">Absolutely zero.</strong> The Android app does not even request the <code>INTERNET</code> permission in its manifest. The desktop Linux and Windows engines contain no analytics, no telemetry, and zero outbound network calls. Everything runs 100% locally.
-            </p>
+          <details class="faq-item">
+            <summary class="faq-question">Does Lekhani collect or transmit any typing data?</summary>
+            <div class="faq-answer">
+              <p><strong>Absolutely zero.</strong> The Android app does not even request the <code>INTERNET</code> permission in its manifest. The desktop Linux and Windows engines contain no analytics, no crash reporters, and zero outbound network calls. Everything runs 100% locally on your machine.</p>
+            </div>
           </details>
 
-          <details class="faq-item p-4 sm:p-5 rounded-2xl bg-slate-900/60 border border-white/10 backdrop-blur-md transition group">
-            <summary class="font-bold text-white text-sm sm:text-base flex items-center justify-between cursor-pointer">
-              <span>Can I use Lekhani completely offline?</span>
-              <span class="faq-icon text-slate-400 text-xs transition-transform font-mono group-open:rotate-180">&darr;</span>
-            </summary>
-            <p class="mt-3 text-xs sm:text-sm text-slate-400 leading-relaxed">
-              Yes. The entire language model, Trie dictionary, phonetic grammars, and theme presets are packaged directly into the installation binaries. It operates completely independently of internet access.
-            </p>
+          <details class="faq-item">
+            <summary class="faq-question">Can I use Lekhani completely offline?</summary>
+            <div class="faq-answer">
+              <p>Yes. The entire language model, Trie dictionary, phonetic grammars, and theme presets are packaged directly into the installation binaries. It operates completely independently of network access.</p>
+            </div>
           </details>
 
-          <details class="faq-item p-4 sm:p-5 rounded-2xl bg-slate-900/60 border border-white/10 backdrop-blur-md transition group">
-            <summary class="font-bold text-white text-sm sm:text-base flex items-center justify-between cursor-pointer">
-              <span>How do I install Lekhani on Linux?</span>
-              <span class="faq-icon text-slate-400 text-xs transition-transform font-mono group-open:rotate-180">&darr;</span>
-            </summary>
-            <p class="mt-3 text-xs sm:text-sm text-slate-400 leading-relaxed">
-              On any Linux distribution with Fcitx5, run our official one-liner: <code>curl -fsSL https://raw.githubusercontent.com/sintaulsiam/lekhani/main/install.sh | bash</code>, or build directly with <code>cargo install --git https://github.com/sintaulsiam/lekhani</code>.
-            </p>
+          <details class="faq-item">
+            <summary class="faq-question">How do I install Lekhani on Linux?</summary>
+            <div class="faq-answer">
+              <p>On any Linux distribution with Fcitx5, run our official one-liner script: <code>curl -fsSL https://raw.githubusercontent.com/sintaulsiam/lekhani/main/install.sh | bash</code>, or build directly with <code>cargo install --git https://github.com/sintaulsiam/lekhani</code>.</p>
+            </div>
           </details>
         </div>
       </div>
     </section>
-
   </main>
 
-  <!-- ── Footer ─────────────────────────────────────────────────────────────── -->
-  <footer class="border-t border-white/10 bg-slate-950 py-12 sm:py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-10">
-        
-        <div class="md:col-span-6 flex flex-col items-start gap-3">
-          <div class="flex items-center gap-2.5">
-            <img src="assets/icons/logo.svg" alt="Lekhani Logo" class="w-7 h-7" width="28" height="28">
-            <span class="font-display font-bold text-lg text-white">Lekhani (লেখনী)</span>
-          </div>
-          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-sm">
-            Sovereign Bengali input method and desktop suite. Engineered with pure Rust for uncompromising performance, privacy, and typography.
-          </p>
-          <div class="flex items-center gap-2 text-xs text-slate-500 font-mono">
-            <span>GPL-3.0 Licensed</span>
-            <span>&bull;</span>
-            <span>By <a href="https://github.com/sintaulsiam" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition">Sintatul Siam</a></span>
-          </div>
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-brand-col">
+        <div class="brand-link">
+          <img src="assets/icons/logo.svg" alt="Lekhani Logo" width="28" height="28">
+          <span class="brand-name">Lekhani (লেখনী)</span>
         </div>
-
-        <div class="md:col-span-3 flex flex-col gap-2.5">
-          <h4 class="font-bold text-xs uppercase tracking-wider text-slate-300 font-mono">Repositories</h4>
-          <ul class="space-y-1.5 text-xs text-slate-400">
-            <li><a href="https://github.com/sintaulsiam/lekhani-android" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition">lekhani-android</a></li>
-            <li><a href="https://github.com/sintaulsiam/lekhani" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition">lekhani (desktop)</a></li>
-            <li><a href="https://github.com/sintaulsiam/lekhani-engine" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition">lekhani-engine</a></li>
-            <li><a href="https://github.com/sintaulsiam/lekhani-web" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition">lekhani-web</a></li>
-          </ul>
+        <p class="footer-copy">
+          Sovereign Bengali input method and desktop suite. Engineered with pure Rust for uncompromising performance, privacy, and typography.
+        </p>
+        <div class="footer-meta">
+          <span>Licensed under <a href="https://github.com/sintaulsiam/lekhani/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GNU GPL-3.0</a></span>
+          <span class="dot-sep">&bull;</span>
+          <span>Crafted by <a href="https://github.com/sintaulsiam" target="_blank" rel="noopener noreferrer">Sintatul Siam</a></span>
         </div>
-
-        <div class="md:col-span-3 flex flex-col gap-2.5">
-          <h4 class="font-bold text-xs uppercase tracking-wider text-slate-300 font-mono">Documentation</h4>
-          <ul class="space-y-1.5 text-xs text-slate-400">
-            <li><a href="https://github.com/sintaulsiam/lekhani/blob/main/docs/TYPING_GUIDE.md" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition">Typing Guide</a></li>
-            <li><a href="https://github.com/sintaulsiam/lekhani-android/blob/main/LAYOUT_PROBAHO.md" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition">Probaho Layout Spec</a></li>
-            <li><a href="https://github.com/sintaulsiam/lekhani/blob/main/ARCHITECTURE.md" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition">System Architecture</a></li>
-            <li><a href="https://github.com/sintaulsiam/lekhani/issues" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition">Report an Issue</a></li>
-          </ul>
-        </div>
-
       </div>
 
-      <div class="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
-        <p>&copy; 2026 Lekhani Open Source Contributors. All rights reserved.</p>
-        <p class="font-mono text-[11px]">100% On-Device &bull; Zero Telemetry</p>
+      <div class="footer-links-col">
+        <h4 class="footer-heading">Repositories</h4>
+        <ul class="footer-ul">
+          <li><a href="https://github.com/sintaulsiam/lekhani-android" target="_blank" rel="noopener noreferrer">lekhani-android</a></li>
+          <li><a href="https://github.com/sintaulsiam/lekhani" target="_blank" rel="noopener noreferrer">lekhani (desktop)</a></li>
+          <li><a href="https://github.com/sintaulsiam/lekhani-engine" target="_blank" rel="noopener noreferrer">lekhani-engine</a></li>
+          <li><a href="https://github.com/sintaulsiam/lekhani-web" target="_blank" rel="noopener noreferrer">lekhani-web</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h4 class="footer-heading">Documentation</h4>
+        <ul class="footer-ul">
+          <li><a href="https://github.com/sintaulsiam/lekhani/blob/main/docs/TYPING_GUIDE.md" target="_blank" rel="noopener noreferrer">Typing Guide</a></li>
+          <li><a href="https://github.com/sintaulsiam/lekhani-android/blob/main/LAYOUT_PROBAHO.md" target="_blank" rel="noopener noreferrer">Probaho Layout Spec</a></li>
+          <li><a href="https://github.com/sintaulsiam/lekhani/blob/main/ARCHITECTURE.md" target="_blank" rel="noopener noreferrer">System Architecture</a></li>
+          <li><a href="https://github.com/sintaulsiam/lekhani/issues" target="_blank" rel="noopener noreferrer">Report an Issue</a></li>
+        </ul>
       </div>
     </div>
   </footer>
